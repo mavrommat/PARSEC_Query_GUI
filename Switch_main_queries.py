@@ -2,6 +2,7 @@ from PySide6.QtCore import QObject, Signal #
 from MainWindowFunc import MainWindow
 from ObjectID.SearchByObjectIdFanc import SearchByObjectIdWidget
 from Coordinates.CoordinatesSearchFanc import SearchByCoordinatesWidget
+from Bibliographic.BibliographicSearchFanc import BibliographicSearch
 
 class SwitchMainQueries(QObject): 
 
@@ -19,6 +20,7 @@ class SwitchMainQueries(QObject):
         # Query Modes
         self.ObjectID = SearchByObjectIdWidget()
         self.Coordinates = SearchByCoordinatesWidget()
+        self.Bibliography = BibliographicSearch()
 
     def Signal_Separation(self, Databases, Query):
         self.Databases = Databases
@@ -31,5 +33,7 @@ class SwitchMainQueries(QObject):
             self.main_window.SwitchQueryWidget(self.ObjectID)
         elif Query == "Coordinates":
             self.main_window.SwitchQueryWidget(self.Coordinates)
+        elif Query == "Bibliography":
+            self.main_window.SwitchQueryWidget(self.Bibliography)
 
         self.Query_signal.emit(str(Query)) 

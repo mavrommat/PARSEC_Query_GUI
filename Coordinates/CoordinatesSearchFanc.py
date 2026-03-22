@@ -4,6 +4,7 @@ from Coordinates.CoordinateSearchUI import Ui_CoordinatesSearch
 class SearchByCoordinatesWidget(QWidget):
 
     Sub_coord_signal = Signal(str)
+    area_deleted_signal = Signal() 
 
     def __init__(self):
         super().__init__()
@@ -63,9 +64,9 @@ class SearchByCoordinatesWidget(QWidget):
         row_widget = QWidget() # main row widget
         row_layout = QGridLayout(row_widget) 
         
-        target = settings_dict.get("ObjectId_coords", "N/A")
+        target = settings_dict.get("Target", "N/A")
         shape = settings_dict.get("Shape", "N/A")
-        dist = settings_dict.get("Dist_val", 0)
+        dist = settings_dict.get("Distance", 0) 
         units = settings_dict.get("Units", "")
         
         search_mode_label = QLabel("Search Mode: Coordinate Area")
@@ -97,6 +98,8 @@ class SearchByCoordinatesWidget(QWidget):
             if widget_to_delete:
                 widget_to_delete.deleteLater()
                 print("Deleted the bottom coordinate row!")
+                
+                self.area_deleted_signal.emit() 
         else:
             print("No rows left to delete!")
 

@@ -45,8 +45,9 @@ class Polygon(QWidget):
         current_units = self.ui.units_label.text()
 
         settings_info = {
-            "dist": poly_dist,
-            "units": current_units,
+            "Advanced": False,
+            "Distance": poly_dist,
+            "Units": current_units,
             "Vertices": vertices
             }
         

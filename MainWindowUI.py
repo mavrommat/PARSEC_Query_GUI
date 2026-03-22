@@ -105,11 +105,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_3.addWidget(self.B_coordinates_search)
 
-        self.B_paper_authors_search = QPushButton(self.search_by_gb)
-        self.B_paper_authors_search.setObjectName(u"B_paper_authors_search")
-        self.B_paper_authors_search.setFont(font1)
+        self.B_bibliographic_search = QPushButton(self.search_by_gb)
+        self.B_bibliographic_search.setObjectName(u"B_bibliographic_search")
+        self.B_bibliographic_search.setFont(font1)
 
-        self.horizontalLayout_3.addWidget(self.B_paper_authors_search)
+        self.horizontalLayout_3.addWidget(self.B_bibliographic_search)
 
         self.B_advanced_search = QPushButton(self.search_by_gb)
         self.B_advanced_search.setObjectName(u"B_advanced_search")
@@ -215,7 +215,7 @@ class Ui_MainWindow(object):
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"Search by:", None))
         self.B_objectid_search.setText(QCoreApplication.translate("MainWindow", u"Object ID", None))
         self.B_coordinates_search.setText(QCoreApplication.translate("MainWindow", u"Coordinates", None))
-        self.B_paper_authors_search.setText(QCoreApplication.translate("MainWindow", u"Paper/Authors", None))
+        self.B_bibliographic_search.setText(QCoreApplication.translate("MainWindow", u"Bibliography", None))
         self.B_advanced_search.setText(QCoreApplication.translate("MainWindow", u"Advanced Search", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"Welcome to PARSEC!", None))
         self.main_query_gb.setTitle("")

@@ -36,7 +36,17 @@ class SwitchSubSubQueries:
         # Connect the deepest signal
         self.AroundObject.Sub_Sub_coord_signal.connect(self.SwitchToSubSubQuery)
         self.AdvancedCoords.Sub_Sub_coord_signal.connect(self.SwitchToSubSubQuery)
+     
 
+        self.Radius = self.AroundObject.Radius
+        self.Rectangle = self.AroundObject.Rectangle
+        self.Polygon = self.AroundObject.Polygon
+        
+        self.AdvancedRadius = self.AdvancedCoords.AdvancedRadius
+        self.AdvancedRectangle = self.AdvancedCoords.AdvancedRectangle
+        self.AdvancedCustom = self.AdvancedCoords.AdvancedCustom
+
+    
     def update_main_query(self, query_name):
         self.current_main_query = query_name
         print(f"Main Level: {query_name}")

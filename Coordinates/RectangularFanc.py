@@ -42,9 +42,10 @@ class Rectagular(QWidget):
         current_units = self.ui.units_label.text()
 
         settings_info = {
-            "dist": rectangular_dist,
-            "units": current_units,
-            "vertices": 4
+            "Advanced": False,
+            "Distance": rectangular_dist,
+            "Units": current_units,
+            "Vertices": 4
             }
         
         self.validate_input_data(rectangular_dist, settings_info)

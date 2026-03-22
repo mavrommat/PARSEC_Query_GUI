@@ -2,14 +2,15 @@ from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QLineEd
 from PySide6.QtCore import Qt, Signal
 from Coordinates.AdvancedCoordsSearchUI import Ui_AdvancedCoordsSearch
 
-
-
-
+from Coordinates.AdvRadiusFanc import AdvancedRadius
+from Coordinates.AdvancedRectangleFanc import AdvancedRectangle
+from Coordinates.AdvancedCustomFanc import AdvancedCustom
 
 class AdvancedCoordsSearch(QWidget):
 
-    shape_area_combo_boxes_signal = Signal(dict)
     Sub_Sub_coord_signal = Signal(str)
+    final_coords_query_signal = Signal(dict) 
+
     def __init__(self):
         super().__init__()
         
@@ -37,7 +38,18 @@ class AdvancedCoordsSearch(QWidget):
         self.ui.B_Radius_Search.clicked.connect(self.broadcast_selection)
         self.ui.B_Rect_Search.clicked.connect(self.broadcast_selection)
         self.ui.B_Custom_Search.clicked.connect(self.broadcast_selection)
-        #self.ui.coords_id_input.returnPressed.connect(self.broadcast_selection) 
+
+        # 2. Add an instance variable to remember the target/frame/epoch settings
+        self.current_info_settings = {}
+
+        self.AdvancedRadius = AdvancedRadius()
+        self.AdvancedRectangle = AdvancedRectangle()
+        self.AdvancedCustom = AdvancedCustom()
+
+        # Connect the confirm buttons from the shape widgets
+        self.AdvancedRadius.settings_info_signal.connect(self.shape_info_process)
+        self.AdvancedRectangle.settings_info_signal.connect(self.shape_info_process)
+        self.AdvancedCustom.settings_info_signal.connect(self.shape_info_process)
 
     def broadcast_selection(self):
         clicked_button = self.sender()
@@ -56,7 +68,35 @@ class AdvancedCoordsSearch(QWidget):
             "Epoch": epoch_choice,
             "Equinox": equinox_choice
             }
-        self.shape_area_combo_boxes_signal.emit(info_settings)
+        
+        self.current_info_settings = info_settings # save the settings 
+
         self.Sub_Sub_coord_signal.emit(info_settings["Shape"])
 
-    
+    def shape_info_process(self, settings_info):
+            if settings_info["Advanced"] is False:
+                CoordsQuerySelections = {
+                    "Target": self.current_info_settings.get("Target", "N/A"),
+                    "Shape": self.current_info_settings.get("Shape", "N/A"),
+                    "Vertices": settings_info.get("Vertices", "N/A"), 
+                    "Distance": settings_info.get("Distance", 0),      
+                    "Units": self.current_info_settings.get("Units", ""),       
+                    "Frame": self.current_info_settings.get("Frame", "N/A"),
+                    "Epoch": self.current_info_settings.get("Epoch", "N/A"),
+                    "Equinox": self.current_info_settings.get("Equinox", "N/A")
+                }
+                print(f"Broadcasting Final Selection: {CoordsQuerySelections}") 
+                self.final_coords_query_signal.emit(CoordsQuerySelections)
+            elif settings_info["Advanced"] is True:
+                CoordsQuerySelections = {
+                    "Target": settings_info.get("Target", "N/A"),
+                    "Shape": self.current_info_settings.get("Shape", "N/A"),
+                    "Vertices": settings_info.get("Vertices", "N/A"), 
+                    "Distance": settings_info.get("Distance", 0),      
+                    "Units": self.current_info_settings.get("Units", ""),       
+                    "Frame": self.current_info_settings.get("Frame", "N/A"),
+                    "Epoch": self.current_info_settings.get("Epoch", "N/A"),
+                    "Equinox": self.current_info_settings.get("Equinox", "N/A")
+                }
+                print(f"Broadcasting Final Selection: {CoordsQuerySelections}") 
+                self.final_coords_query_signal.emit(CoordsQuerySelections)

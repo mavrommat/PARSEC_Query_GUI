@@ -41,9 +41,10 @@ class AdvancedRadius(QWidget):
         current_units = self.ui.units_label.text()
 
         settings_info = {
-            "Coodrs": Coords,
-            "dist": radius_val,
-            "units": current_units,
+            "Advanced": True,
+            "Target": Coords,
+            "Distance": radius_val,
+            "Units": current_units,
             "Vertices": 1
             }
         

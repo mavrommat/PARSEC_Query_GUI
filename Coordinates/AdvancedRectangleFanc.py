@@ -56,8 +56,9 @@ class AdvancedRectangle(QWidget):
         current_units = self.ui.units_label.text()
 
         settings_info = {
-            "dist": vertices_list,
-            "units": current_units,
+            "Advanced": True,
+            "Distance": vertices_list,
+            "Units": current_units,
             "Vertices": 4
         }
         

@@ -91,7 +91,7 @@ class MainWindow(QMainWindow):
         # Search selection (Only one allowed)
         self.ui.B_objectid_search.clicked.connect(self.set_selected_one)
         self.ui.B_coordinates_search.clicked.connect(self.set_selected_one)
-        self.ui.B_paper_authors_search.clicked.connect(self.set_selected_one)
+        self.ui.B_bibliographic_search.clicked.connect(self.set_selected_one)
         self.ui.B_advanced_search.clicked.connect(self.set_selected_one)
 
         self.query_layout = QVBoxLayout(self.ui.query_widget)
@@ -117,7 +117,7 @@ class MainWindow(QMainWindow):
     def set_selected_one(self):
         self.ui.B_objectid_search.setStyleSheet("")
         self.ui.B_coordinates_search.setStyleSheet("")
-        self.ui.B_paper_authors_search.setStyleSheet("")
+        self.ui.B_bibliographic_search.setStyleSheet("")
         self.ui.B_advanced_search.setStyleSheet("")
         
         clicked_button = self.sender()
