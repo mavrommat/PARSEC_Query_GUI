@@ -8,6 +8,8 @@ from Bibliographic.JournalFanc import Journal
 from Bibliographic.ReferenceQueryFanc import Reference
 from Bibliographic.BibcodeSearchFanc import Bibcode
 from Bibliographic.AdvancedBibliographicFanc import AdvancedBibliographic
+
+from Advanced.ConstraintsFanc import Constraints
 class SwitchSubQueries:
     def __init__(self, window, main_handler):
         self.main_window = window
@@ -32,6 +34,44 @@ class SwitchSubQueries:
         self.Reference = Reference()
         self.Bibcode = Bibcode()
         self.AdvancedBibl = AdvancedBibliographic()
+        
+
+        #  ADVANCED FLOW DUPLICATION 
+        # Yes/No signal
+        self.QueryHandler.CoordQuestion.Answer_Signal.connect(self.route_adv_question)
+
+        # duplicate main panel 
+        self.AdvFlow_Coordinates = self.QueryHandler.AdvFlow_Coordinates
+        self.AdvFlow_Coordinates.Sub_coord_signal.connect(self.SwitchToAdvFlowSubQuery)
+
+        self.AdvFlow_Coordinates.ui.B_submit_coord_search.setText("Confirm areas: Next Process")
+
+        # independent duplicates of the sub-panels
+        self.AdvFlow_AroundObject = SearchAround()
+        self.AdvFlow_AdvancedCoords = AdvancedCoordsSearch()
+        self.Constraints = Constraints()
+
+        # signals back to the duplicate main panel
+        self.AdvFlow_AroundObject.final_coords_query_signal.connect(self.handle_adv_flow_completed)
+        self.AdvFlow_AdvancedCoords.final_coords_query_signal.connect(self.handle_adv_flow_completed)
+
+    def route_adv_question(self, wants_coords):
+        if wants_coords:
+            self.main_window.SwitchQueryWidget(self.AdvFlow_Coordinates)
+
+    def SwitchToAdvFlowSubQuery(self, SubQuery):
+        print(f"AdvFlow SubQuery triggered: {SubQuery}")
+        if SubQuery == "Searching around an object/Specified coordinates":
+            self.main_window.SwitchQueryWidget(self.AdvFlow_AroundObject)
+        elif SubQuery == "Advanced coordinate search":
+            self.main_window.SwitchQueryWidget(self.AdvFlow_AdvancedCoords)
+
+    def handle_adv_flow_completed(self, final_dict):
+        # Add the completed area to the DUPLICATE scroll widget, then switch back
+        self.AdvFlow_Coordinates.add_area_to_scroll_widget(final_dict)
+        self.main_window.SwitchQueryWidget(self.AdvFlow_Coordinates)
+
+    # --- 
 
     def update_main_query(self, query_name):
         self.current_main_query = query_name
@@ -69,3 +109,12 @@ class SwitchSubQueries:
         
         # 2. Switch the screen BACK to the main Coordinates widget!
         self.main_window.SwitchQueryWidget(self.Coordinates)
+    
+    def route_adv_question(self, wants_coords):
+        if wants_coords:
+            # User clicked "Yes"
+            self.main_window.SwitchQueryWidget(self.AdvFlow_Coordinates)
+        else:
+            # User clicked "No" -> Route straight to Constraints
+            print("Skipping Coordinates. Routing to next advanced step...")
+            self.main_window.SwitchQueryWidget(self.Constraints)

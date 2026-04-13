@@ -46,6 +46,59 @@ class SwitchSubSubQueries:
         self.AdvancedRectangle = self.AdvancedCoords.AdvancedRectangle
         self.AdvancedCustom = self.AdvancedCoords.AdvancedCustom
 
+        # --- NEW CODE: ADVANCED FLOW SUB-SUB DUPLICATION ---
+        
+        # Track sub-queries from the duplicate main panel
+        self.SubHandler.AdvFlow_Coordinates.Sub_coord_signal.connect(self.update_sub_query)
+
+        # Grab the duplicate sub-panels
+        self.AdvFlow_AroundObject = self.SubHandler.AdvFlow_AroundObject
+        self.AdvFlow_AdvancedCoords = self.SubHandler.AdvFlow_AdvancedCoords
+
+        # Instantiate brand new shape widgets for the Advanced Flow
+        self.AdvFlow_Radius = Radius()
+        self.AdvFlow_Rectangle = Rectagular()
+        self.AdvFlow_Polygon = Polygon()
+
+        self.AdvFlow_Adv_Radius = AdvancedRadius()
+        self.AdvFlow_Adv_Rectangle = AdvancedRectangle()
+        self.AdvFlow_Adv_Custom = AdvancedCustom()
+
+        # 1. Grab the standard shapes from the AdvFlow version of AroundObject
+        self.AdvFlow_Radius = self.AdvFlow_AroundObject.Radius
+        self.AdvFlow_Rectangle = self.AdvFlow_AroundObject.Rectangle
+        self.AdvFlow_Polygon = self.AdvFlow_AroundObject.Polygon
+
+        # 2. Grab the advanced shapes from the AdvFlow version of AdvancedCoords
+        self.AdvFlow_Adv_Radius = self.AdvFlow_AdvancedCoords.AdvancedRadius
+        self.AdvFlow_Adv_Rectangle = self.AdvFlow_AdvancedCoords.AdvancedRectangle
+        self.AdvFlow_Adv_Custom = self.AdvFlow_AdvancedCoords.AdvancedCustom
+
+        # Connect the deepest signals for the Advanced flow
+        self.AdvFlow_AroundObject.Sub_Sub_coord_signal.connect(self.SwitchToAdvFlowSubSubQuery)
+        self.AdvFlow_AdvancedCoords.Sub_Sub_coord_signal.connect(self.SwitchToAdvFlowSubSubQuery)
+
+    # --- NEW METHOD FOR ADVANCED FLOW ROUTING ---
+    def SwitchToAdvFlowSubSubQuery(self, SubSubQuery):
+        # Note: When the user is in this flow, current_main_query is "Advanced Search"
+        print(f"AdvFlow Path Check -> Target: {SubSubQuery}")
+        
+        if self.current_main_query == "Advanced Search" and "Searching around" in self.current_sub_query:
+            if SubSubQuery == "Radius search":
+                self.main_window.SwitchQueryWidget(self.AdvFlow_Radius)
+            elif SubSubQuery == "Rectangle search":
+                self.main_window.SwitchQueryWidget(self.AdvFlow_Rectangle)
+            elif SubSubQuery == "Polygon search":
+                self.main_window.SwitchQueryWidget(self.AdvFlow_Polygon)
+        
+        elif self.current_main_query == "Advanced Search" and "Advanced" in self.current_sub_query:
+            if SubSubQuery == "Radius search":
+                self.main_window.SwitchQueryWidget(self.AdvFlow_Adv_Radius)
+            elif SubSubQuery == "Rectangle search":
+                self.main_window.SwitchQueryWidget(self.AdvFlow_Adv_Rectangle)
+            elif SubSubQuery == "Custom shape search":
+                self.main_window.SwitchQueryWidget(self.AdvFlow_Adv_Custom)
+
     
     def update_main_query(self, query_name):
         self.current_main_query = query_name

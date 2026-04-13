@@ -63,6 +63,11 @@ class SearchAround(QWidget):
         units_choice = self.ui.units_cb.currentText()
         epoch_choice = self.ui.epoch_cb.currentText()
         equinox_choice = self.ui.equinox_cb.currentText()
+
+        # Pushing the unit text to the child widgets 
+        self.Radius.ui.units_label.setText(units_choice)
+        self.Rectangle.ui.units_label.setText(units_choice)
+        self.Polygon.ui.units_label.setText(units_choice)
         
         info_settings = {
             "Target": coords_id_input,

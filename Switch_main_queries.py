@@ -3,7 +3,7 @@ from MainWindowFunc import MainWindow
 from ObjectID.SearchByObjectIdFanc import SearchByObjectIdWidget
 from Coordinates.CoordinatesSearchFanc import SearchByCoordinatesWidget
 from Bibliographic.BibliographicSearchFanc import BibliographicSearch
-
+from Advanced.QuestionCoordinatesFanc import AdvancedQuestion
 class SwitchMainQueries(QObject): 
 
     Query_signal = Signal(str)
@@ -21,6 +21,10 @@ class SwitchMainQueries(QObject):
         self.ObjectID = SearchByObjectIdWidget()
         self.Coordinates = SearchByCoordinatesWidget()
         self.Bibliography = BibliographicSearch()
+        self.CoordQuestion = AdvancedQuestion()
+
+        self.CoordQuestion = AdvancedQuestion()
+        self.AdvFlow_Coordinates = SearchByCoordinatesWidget()
 
     def Signal_Separation(self, Databases, Query):
         self.Databases = Databases
@@ -35,5 +39,7 @@ class SwitchMainQueries(QObject):
             self.main_window.SwitchQueryWidget(self.Coordinates)
         elif Query == "Bibliography":
             self.main_window.SwitchQueryWidget(self.Bibliography)
+        elif Query == "Advanced Search":
+            self.main_window.SwitchQueryWidget(self.CoordQuestion)
 
         self.Query_signal.emit(str(Query)) 
