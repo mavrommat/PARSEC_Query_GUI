@@ -1,0 +1,136 @@
+,Description,Suggested Description for LLM,Synonyms,Category,Notes,LLM_concept_only,,
+ID,identifier,Identifier,,ID,,yes,,
+Region,"Region of Supernova Remnant (SNR). Regions can be named arbitrary or according to their orientation, i.e. North, N, South, S, NW, NS,SE etc. ","Region of Supernova Remnant (SNR). Regions can be named arbitrary or according to their orientation, i.e. North, N, South, S, NW, NS,SE etc. ",,ID,,yes,,
+RA,"the celestial equivalent of longitude. RA can be expressed in degrees, but it is more common to specify it in hours, minutes, and seconds of time. ",Right Ascension,"Right Ascension, α, RADeg,RAdeg, RAhour, RAm, RAh, RAs, ra, RAJhour, RABhour",Coordinates,https://cdsarc.cds.unistra.fr/ftp/IV/30/ReadMe,,,
+DEC,"the celestial sphere's equivalent of latitude and it is expressed in degrees, as is latitude.",Declination,"Declination, δ, Dec, DECdeg, DE-, DEd, DEm, DEs, dec, DEh, DEDeg, DEdeg, DEJdeg, DEBdeg",Coordinates,,,,
+Equatorial_Coordinates,if RA+DEC are given in a single column,if RA+DEC are given in a single column,Equatorial Coordinates,Coordinates,,,,
+Epoch,"a specific date and time used as a reference point for the equatorial coordinate system, which defines the positions of celestial objects. ",The reference date used to define the precise coordinates,"J2000, B1950, J2000fk5, B1950fk4, fk5, fk4, 1950",Coordinates,https://cdsarc.cds.unistra.fr/ftp/VIII/49/ReadMe https://cdsarc.cds.unistra.fr/ftp/ftp/catj/I/92/ReadMe https://cdsarc.cds.unistra.fr/ftp/ftp/catj/I/42/ReadMe https://cdsarc.cds.unistra.fr/ftp/I/210/ReadMe,,,
+l,"Longitude (symbol l) measures the angular distance of an object eastward along the galactic equator from the Galactic Center. Analogous to terrestrial longitude, galactic longitude is usually measured in degrees (°).",Galactic longitude l in degrees,"GLAT, GLat, Galactic Latitude",Coordinates,,,,
+b,"Latitude (symbol b) measures the angle of an object northward of the galactic equator (or midplane) as viewed from Earth. Analogous to terrestrial latitude, galactic latitude is usually measured in degrees. ",Galactic latidude b in degrees,"GLONG, GLong, Galactic Longitude",Coordinates,,,,
+Proper_Motion,The proper motion of a star is its apparent angular movement across the celestial sphere relative to distant background stars,The observed angular change in the position of a celestial object over time,"pm, pm_RA, pm_Dec, proper motion",Velocity,,,,
+Heliocentric_Velocity,"Heliocentric velocity is the speed and direction of an object, such as a spacecraft or a celestial body, relative to the Sun as the unmoving center",The velocity of a celestial object measured relative to the Sun.,,Velocity,,,,
+Shock_Velocity,"Shock velocity of a supernova remnant (SNR), is the speed at which the shock wave, formed by the explosive expulsion of stellar material during a supernova, propagates through the surrounding interstellar medium.","Shock velocity of a supernova remnant (SNR), is the speed at which the shock wave, formed by the explosive expulsion of stellar material during a supernova, propagates through the surrounding interstellar medium.",,Velocity,,,,
+Expansion_Velocity,A supernova remnant's expansion velocity describes how fast the ejected stellar material and the resulting shock wave are moving outwards,A supernova remnant's expansion velocity describes how fast the ejected stellar material and the resulting shock wave are moving outwards,,Velocity,,,,
+Recession_Velocity,Recessional velocity is the rate at which an extragalactic astronomical object recedes (becomes more distant) from an observer as a result of the expansion of the universe,The velocity at which an object recedes from an observer as a result of the expansion of the universe.,,Velocity,,,,
+Radial_Velocity,The speed with which the object moves with resct to us along the line of light,The velocity component that is directed along the line of sight between the object and the observer.,,Velocity,"Generally is the speed with which the object moves with resct to us along the line of ight , ",, previous: the speed of an object in a specific direction,Radial Velocity. (Νομίζω είχαμε πει ότι σκέτο velocity σημαίνει radial.)
+Tangential_Velocity,Velocity perpendicular to radial velocity,The velocity component that is directed perpendicular to the observer's line of sight. (Perpendicular to the radial velocity),,Velocity,,,,
+Velocity_Dispersion,"quantifies the spread or scatter of velocities of stars, gas, or other objects within a gravitationally bound system, such as a galaxy or star cluster. It is a measure of the random motion of these objects around their average velocity and provides insights into the system's internal dynamics, gravitational potential, and dark matter content. ","The standard deviation of the distribution of the velocities of a systems, typically measured from the broadening of spectral lines. ","V, Vdisp, σ",Velocity,,,,
+Redshift,"The phenomenon where light from a distant object has its wavelength stretched, shifting it toward the red end of the spectrum.","When an object is moving away from us, the light from the object is known as redshift",z,Distance,,TOCHECK,,
+D,refers to distance,Distance measurement,"Dist, d, Distance",Distance,,,,
+Dist_mod,"is the difference between an object's apparent magnitude (m) and its absolute magnitude (M). It is a metric of distance in logarithmic units
+",The difference between the apparent and the absolute magnitude of an astronomical object. It iequivalent to a metric of distance in logarithmic units,"distance modulus, m-M",Distance,It is a metric of distance in logarithmic units,,,
+FUV,Flux in the GALEX FUV flux,Apparent magnitude or flux measured in the GALEX FUV band.,"F_FUV, FUV",Flux,"Τα όνομα των fluxes στην οντολογία είναι σκέτο FUV, NUV, U κτλπ",,,
+NUV,Flux in the GALEX NUV flux,Apparent magnitude or flux measured  in the  GALEX NUV band.,"F_NUV, NUV",Flux,,,,
+U,U-band (uppercase)  --(Capitalization is important ),Apparent magnitude or flux measured  in the  U-band in Jonshon system (UBVRI system) (Capitalization is important ),"U U_mag, U_t, mag_U, UMag",Flux,Capitalization is important  -- UV part of the spectrum (~350nm)  - UBVRI system,,,
+B,B-band (uppercase)  --(Capitalization is important ),Apparent magnitude or flux measured  in the B-band in Jonshon system (UBVRI system) (Capitalization is important ),"B B_mag, B_t, mag_B, BMag",Flux,Capitalization is important,,,
+V ,V-band (uppercase)  --(Capitalization is important ),Apparent magnitude or flux measured  in the  V-band in Jonshon system  (UBVRI system) (Capitalization is important ),"V, V_mag, V_t,mag_V, VMag",Flux,Capitalization is important -- Visible part of the spectrum ~550nm - UBVRI system,,,
+R,R-band Johnson apparent magnitude (mag). Capitalization is important.,Apparent magnitude  or flux measured  in the R-band in Jonshon system  (UBVRI system) (Capitalization is important ),"R, R_mag, R_t,mag_R,RMag",Flux,Capitalization is important  - UBVRI system,,,
+I,I-band (uppercase)  --(Capitalization is important ),Apparent magnitude or flux measured  in the  I-band in Jonshon system (UBVRI system) (Capitalization is important ),"I, I_mag, I_t,mag_I, IMag",Flux,,,,
+u,u-band SDSS apparent magnitude (mag) (Capitalization is important)  OR   Flux or magnitude measured in the SDSS u-band,Apparent magnitude or flux measured  in the  SDSS u-band  (Capitalization is important) ,"u, u_mag, u_t,mag_u, uMag",Flux,,,,
+g,g-band SDSS apparent magnitude (mag) (Capitalization is important),Apparent magnitude or flux measured  in the  SDSS g-band in AB magnitude system (Capitalization is important) ,"g, g_mag, g_t,mag_g, gMag",Flux,Capitalization is important - SDSS system,,,
+r,r-band SDSS apparent magnitude (mag) (Capitalization is important),Apparent magnitude or flux measured  in the  SDSS r-band in AB magnitude system (Capitalization is important) ,"r, r_mag, r_t,mag_r, rMag",Flux,Capitalization is important  --- SDSS system,,,
+i,i-band SDSS apparent magnitude (mag) (Capitalization is important),Apparent magnitude or flux measured  in the SDSS i-band in AB magnitude system (Capitalization is important) ,"i, i_mag, i_t,mag_i, iMag",Flux,,,,
+z,z-band SDSS apparent magnitude (mag) (Capitalization is important ),Apparent magnitude or flux measured  in the SDSS z-band in AB magnitude system (Capitalization is important) ,"z, z_mag, z_t,mag_z, zMag",Flux,,,,
+y,y-band SDSS apparent magnitude (mag) (Capitalization is important ),Apparent magnitude or flux measured  in the  SDSS y-band in AB magnitude system (Capitalization is important) ,"y, y_mag, y_t,mag_y, yMag",Flux,,,,
+W1,W1-band WISE apparent magnitude (mag),Apparent magnitude or flux measured  in the  WISE W1 band (3.4 μm) in Vega system,"W1, W1_mag, W1_t,mag_W1, W1Mag",Flux,,,,
+W2,W2-band WISE apparent magnitude (mag),Apparent magnitude or flux measured  in the  WISE W2 band (4.6 μm) in Vega system,"W2, W2_mag, W2_t,mag_W2, W2Mag",Flux,,,,
+W3,W3-band WISE apparent magnitude (mag),Apparent magnitude or flux measured  in the  WISE W3 band (12 μm) in Vega system,"W3, W3_mag, W3_t,mag_W3, W3Mag",Flux,,,,
+W4,W4-band WISE apparent magnitude (mag),Apparent magnitude or flux measured  in the WISE W4 band (24 μm) in Vega system,"W4, W4_mag, W4_t,mag_W4, W4Mag",Flux,,,,
+J,J-band  apparent magnitude (mag) from 2MASS (Capitalization is important ),Apparent magnitude or flux measured  in the  2MASS J-band  in Vega system (Capitalization is important ),"J, J_mag, J_t,mag_J, JMag",Flux,,,,
+H,H-band  apparent magnitude (mag) from 2MASS (Capitalization is important ),Apparent magnitude or flux measured  in the  2MASS H-band  in Vega system (Capitalization is important ),"H, H_mag, H_t,mag_H, HMag",Flux,,,,
+K,K-band  apparent magnitude (mag) from 2MASS (Capitalization is important ),Apparent magnitude in 2MASS K-band  in Vega system (Capitalization is important ),"K, K_mag, K_t,mag_K, KMag",Flux,,,,
+S12,12μm-band flux from IRAS (Jy),Flux in IRAS 12μm-band  ,"S12, S12_mag, S12_t,mag_S12, S12Mag",Flux,,,,
+S25,25μm-band flux from IRAS (Jy),Flux in IRAS 25μm-band ,,Flux,,,,
+S60,60μm-band flux from IRAS (Jy),Flux in IRAS 60μm-band ,,Flux,,,,
+S100,100μm-band flux from IRAS (Jy),Flux in IRAS 100μm-band ,,Flux,,,,
+H_alpha(6563),Flux measured at a wavelength of 6563 Angstroms from Ha.,Flux measured at a wavelength of 6563 Angstroms from the Ha spectral line.,"H-alpha, Hα",Flux,"Name in ontology : Halpha_6563
+",,,
+SI[I](6716),Flux measured at a wavelength of 6717 Angstroms from SII.,Flux measured at a wavelength of 6717 Angstroms from the SII spectral line.,,Flux,"Name in ontology : SI_I_6716
+
+",,,
+SI[I](6731),Flux measured at a wavelength of 6731 Angstroms from SII.,Flux measured at a wavelength of 6731 Angstroms from the SII spectral line.,,Flux,Name in ontology : SI_I_6731,,,
+O[III](5007),Flux measured at a wavelength of 5007 Angstroms from OIII.,Flux measured at a wavelength of 5007 Angstroms from the OIII spectral line.,,Flux,"Name in ontology : O_III_5007
+",,,
+O[III](4959),Flux measured at a wavelength of 4959 Angstroms from OIII.,Flux measured at a wavelength of 4959 Angstroms from the OIII spectral line.,,Flux,"Name in ontology : O_III_4959
+",,,
+N[II](6548),Flux measured at a wavelength of 6548 Angstroms from NII.,Flux measured at a wavelength of 6548 Angstroms from the NII spectral line.,,Flux,"Name in ontology : N_II_6548
+
+",,,
+N[II](6583),Flux measured at a wavelength of 6583 Angstroms from NII.,Flux measured at a wavelength of 6583 Angstroms from the NII spectral line.,,Flux,Name in ontology : N_II_6583,,,
+H_beta(4863),Flux measured at a wavelength of 4863 Angstroms from Hβ.,Flux measured at a wavelength of 4863 Angstroms from the Hbeta spectral line.,,Flux,"Name in ontology : Hbeta_4863
+",,,
+O[II](3727),Flux measured at a wavelength of 3227 Angstroms. OII stands for singly Ionized Oxygen.,Flux measured at a wavelength of 3227 Angstroms from the OII spectral line.,,Flux,"Name in ontology : O_II_3727
+
+",,,
+O[II](3729),Flux measured at a wavelength of 3729 Angstroms from OII.,Flux measured at a wavelength of 3729 Angstroms from the OII spectral line.,,Flux,Name in ontology : O_II_3729,,,
+O[I](6364),Flux measured at a wavelength of 6364 Angstroms from OI.,Flux measured at a wavelength of 6364 Angstroms from the OI spectral line.,,Flux,"Name in ontology : O_I_6364
+
+",,,
+O[I](6300),Flux measured at a wavelength of 6300 Angstroms. OI stands for neutral oxygen.,Flux measured at a wavelength of 6364 Angstroms from the OI spetctral line.,,Flux,Name in ontology : O_I_6300,,,
+X-ray,High energy flux between 0.01-12nm wavelength on average,X-ray flux between the 0.1 keV to 100 keV energy range ,"X-ray flux, broad band, X-ray soft, X-ray medium, X-ray hard",Flux,,,,
+Radio,Low energy flux between 1mm-100km wavelengths,Radio flux with typical wavelengths higher than 1mm or frequencies higher than 30 MHz,,Flux,"*** Here we can have an huge variety of synonyms  like f_20, F_1440, where the numbers are any of the standard wavelegths or frequences *** Not sure how to address this ",,,
+Hardness_Ratio,Ratio of the difference over the sum of the intensity of a source in two bands,Ratio of the difference over the sum of the intensity of a source in two X-ray bands,"HR1, HR_1",Spectral_Information,,,,
+Spectral_Normalization,continuum normalization,Normalization of the spectral model,"Norm, A, EM",Spectral_Information,"Norm, A, EM",,,
+Spectral_chi_square,The chi squared value of the fit,"The chi squared value of the fit. It can also be the value of the Cash statistic, or C-statistic. ","xi2, x^2, x2, chi^2, cstat, wstat",Spectral_Information,,,,
+Spectral_Shape,"refers to the specific characteristics or pattern of a spectrum, which can be a distribution of wavelengths, frequencies, or eigenvalues",Refers to the model used to describe the spectrum of a source over a range of wavelengths or frequencies.,"Power-law, Thermal, Spectrum, PO, APEC",Spectral_Information,"Power-law, Thermal, Spectrum, PO, APEC  --  This is the same as spectrum type ",,,
+Spectral_Index,A spectral parameter. See photon index explanation. Usually accompanied by x^2 and normalization,A spectral parameter. A measure of the spectral slope of a power-law spectral distribution expressed as flux against frequency.  Usually accompanied by x^2 and normalization,"α, Spectral Index",Spectral_Information,,,,
+Photon_Index,"A spectral parameter. A measure of the spectral slope of a power-law distribution in astrophysics. Photon index, α, spectral index  -- the photon index Γ is different from the spectral index  α their relation is α= Γ +1, but bοth describe a power-law spectrum (in different units) 
+  Usually accompanied by x^2 and normalization","A spectral parameter. A measure of the spectral slope of a power-law spectral distribution in astrophysics. 
+  Usually accompanied by x^2 and normalization","Γ, Photon Index",Spectral_Information,"Photon index, α, spectral index  -- the photon index Γ is different from the spectral index  α their relation is α= Γ +1, but bοth describe a power-law spectrum (in different units) ",,,
+Flux_Density,Flux per unit wavelength or per unit frequency,Flux per unit wavelength or per unit frequency,"F_nu, f_lamda, F_n, Fn, Spectral_Energy_Density
+",Spectral_Information,,,,
+Spectral_Temperature,"A spectral parameter, usually found without other parameters","A spectral parameter, descibind the temparature of a  thermal  or blackbody spectral model. ","T, Temperature, Temp.",Spectral_Information,,,,
+Spectral_Temperature,"A spectral parameter, usually found without other parameters","A spectral parameter, descibind the temparature of gas or the temperature of a thermal  or blackbody spectral model. ","T, Temperature, Temp.",Temperature,,,,
+Electron_Temperature,temperature of any celestial body. ,Temperature of the electrons in a gas. ,"kT, Temp., T, T_e",Temperature,"kT, Temp. Temperature  --- Does not refer only to a star it can be any celestial body",,,
+Dust_Temperature,temperature of interstellar dust in space ,Temperature of interstellar dust in space ,T_d,Temperature,,,,
+Density,the mass per unit volume of an object or region,The mass per unit volume of an object or region,"ρ, n ",Density,,,,
+Hydrogen_Column_Density,Hydrogen column density ,"Hydrogen column density,  *** Do we need to give a proper defintion here ? ",N_H,Density,,,,
+Electron_Density,Electron density of the gas,Electron density of the gas,n_e,Density,,,,
+Incl,"In the case of galaxies inclination is the angle of the line of sight with respect to the normal (i.e. perpendicular) axis on the plane of the galaxy. effectively it is the tilt of the plane of the galaxy with respect to the line of sight (0 deg = no tilt, 90 deg = edge-on) ","The angle between the galaxy's actual equatorial plane and the plane of the sky (0 deg corresponds to a face-on object, 90 deg corresponds to an edge-on object)","Inclination, incl.",Morphology,"In the case of galaxies inclination is the angle of the line of sight with respect to the normal (i.e. perpendicular) axis on the plane of the galaxy. effectively it is the tilt of the plane of the galaxy with respect to the line of sight (0 deg = no tilt, 90 deg = edge-on) ",,,
+R1,"D corresponds to diameter while R1 corresponds to semi-major axis, i.e. radius. ",A metric of the galaxy projected angular  size which corresponds to the semi-major axis of the D25 ellipse ,"semi-major axis, D25",Morphology,"In our case the first definition is not relevant. The D25 is the relevant one. D corresponds to diameter while R1 corresponds to semi-major axis, i.e. radius. In case of SNRs, this may also be seen as ""size""",It marks the point where the galaxy's surface brightness reaches 25 magnitudes per square arcsecond. ,,
+Axis_Ratio,describes the shape of an object by taking the ratio of its shortest axis to its longest axis. Sometimes in publications the axis ratio is given instead or R2,Ratio of the semi-minor to semi-major axis of the D25 ellipse,,Morphology,Sometimes in publications the axis ratio is given instead or R2,,,
+R2,D25 semi-minor axis (arcmin).,A metric of the galaxy projected angular  size which corresponds to the semi-minor axis of the D25 ellipse ,semi-minor axis,"Morphology
+",Same comments as for R1,,,
+PA,"is the angle measured clockwise from the north celestial pole to a specific object, feature, or axis of a celestial body. In the case of D25 is the angle from the north to the major axis
+","The angle measured from North toward the direction of the galaxy's apparent major axis of the D25 ellipse.
+",position angle,Morphology,In the case of D25 is the angle from the north to the major axis,,,
+Hubble_Type,refers to the Hubble classification system for the categorization of galaxies based on their visual appearance.  ,The Hubble classification system for the categorization of galaxies based on their morphology.  ,Morphological Hubble Type,Morphology,,,,
+DeV_Type,"refers to a detailed galaxy classification scheme developed by the French-American astronomer Gérard de Vaucouleurs, which expands on the basic Hubble sequence. It introduces a more complex coding system to describe various morphological features, including the presence and prominence of a central bar (SA, SAB, SB), spiral arm structure (a, b, c, m for late types), and additional details like rings or lenses.",Morphological classification of galaxies according to the  De Vaucouleurs classification scheme,deVaucoulers Type,"Morphology
+",,,,
+Activity_Class,"nuclear properties of celestial objects by classifying their energy production. Instead of units it should has interger values or stings indicating the activity class.
+","Nuclear activity classification of a galaxy. Usually it is provided in the form of  integer values or stings indicating the different activity classes.
+",,Nuclear_Properties,,,,
+M_BH,The Mass of the Black Hole in the center of a Galaxy.,The mass of the Black Hole in the center of a Galaxy.,Black_Hole_Mass,Nuclear_Properties,,,,
+Velocity_Dispersion,"quantifies the spread or scatter of velocities of stars, gas, or other objects within a gravitationally bound system, such as a galaxy or star cluster. It is a measure of the random motion of these objects around their average velocity and provides insights into the system's internal dynamics, gravitational potential, and dark matter content. ","The standard deviation of the distribution of the velocities of a systems, typically measured from the broadening of spectral lines. ","V, Vdisp, σ",Nuclear_Properties,,,,
+logSFR,"logarithm of the Star Formation Rate (SFR), a quantity that astronomers use to measure the rate at which stars are forming within a galaxy. It can be in linear units (SFR) or its logarithm (logSFR)
+","Logarithm of the star-formation rate, i.e. the rate at which stars are forming in a galaxy.  It can also be in linear units.","SFR, logSFR , star-formation rate, SF rate",Stellar_Population_Parameters,Ίσως θα έπρεπε να υπάρχουν δύο κλάσσεις για logSFR και SFR. Το συζητάμε με τους αστροφυσικούς. It can be in linear units (SFR) or its logarithm (logSFR),,,
+logM*,"the logarithm of a galaxy's stellar mass, representing the total mass of stars within that galaxy. It can be in linear units (Mstar) or its logarithm (logMstar)
+","Logarithm of the Stellar Mass (M*) of a galaxy.  It can also be in linear units (M*) 
+","M*, logM*, Stellar mass, Mass, M, M_star, Mstar",Stellar_Population_Parameters,It can be in linear units (Mstar) or its logarithm (logMstar),,,
+SNR_Age,age of Supernova Remnant,age of Supernova Remnant,,Age_Supernova_Remnant,,,,
+Exposure_Time,Exposure time in seconds,Exposure time in seconds,"exp time, exposure time",Time,,,,
+Metallicity_(12+logO/H),"the oxygen abundance (metallicity) of a celestial object, particularly in the gas phase of galaxies and nebulae.",Gas phase metallicity of a galaxy or a nebulae. Usually it is measured in terms of the oxygen abundance.,"12+log(O/H), Metallicity, Metal, gas-phase metallicity, Metallicity 12+log(O\H) 
+",Metalicity,,,,
+Z_Metallicity,measure of the fraction of a star or gas cloud’s mass that is made of elements heavier than hydrogen (H) and helium (He).,Metallicy of a galaxy. It is often defined as the mass fraction of all elements heavier than hydrogen (H) or Helium (He),"Z, Metallicity, Metal, gas-phase metallicity ",Metalicity,,,,
+"SI[I](6716,6731)/H_alpha",Ratio of sulfur forbidden lines compared to Hα,Ratio of  the sum of the SII forbidden lines at 6716 and 6731 Angsstrom  compared to Hα,"[SII](6716, 6731) / Hα, [SII](λλ6716, 6731) / Hα, ",Emission line ratio,Names in ontology : SI_I_6716_per_Hα,,,
+SI[I](6716)/H_alpha,Ratio of sulfur forbidden line 6716 compared to Hα,Ratio of  the SII forbidden line at 6716 angstrom compared to Hα,"[SII](6716) / Hα,  [SII](λ6716) / Hα",Emission line ratio,SI_I_6731_per_Hα,,,
+SI[I](6731)/H_alpha,Ratio of sulfur forbidden line 6731 compared to Hα,Ratio of the sulfur forbidden line  at 6731 compared to Hα,"[SII](6731) / Hα, [SII](λ6731) / Hα",Emission line ratio,SI_I_6716_and_6731_per_Hα,,,
+O[III](4959)/H_beta,Ratio of oxygen forbidden line 4959 compared to Hβ,Ratio of the OIII  forbidden line at 4959 Angstron compared to Hbeta,"O[III] (4959)/Ηβ, O[III] (λ4959)/Ηβ",Emission line ratio,O_III_4959_per_Hβ,,,
+O[III](5007)/H_beta,Ratio of oxygen forbidden line 5007 compared to Hβ,Ratio of the OIII  forbidden line at 5007 angstrom compared to Hbeta,"O[III] (5007)/Ηβ, O[III] (λ5007)/Ηβ",Emission line ratio,O_III_5007_per_Hβ,,,
+"O[III](4959,5007)/H_beta",Ratio of oxygen forbidden lines compared to Hβ,Ratio of the sum of the OIII  forbidden lines at 5007 and 4959 angstrom compared to Hbeta,"O[III] (4959, 5007)/Ηβ,  O[III] (λλ4959, 5007)/Ηβ",Emission line ratio,O_III_4959_and_5007_per_Hβ,,,
+SI[I](6716)/SI[I](6731),Ratio of sulfur forbidden line 6716 compared sulfur forbidden line 6731,Ratio of the SII forbidden line 6716 compared the SII forbidden line 6731 angstrom,"[SII](6716) / [SII] (6731),  [SII](λ6716) / [SII] (λ6731)",Emission line ratio,SI_I_6716_per_SI_I_6731,,,
+"N[II](6548,6584)/H_alpha",Ratio of nitrogen forbidden lines compared to Hα,Ratio of the sum of the NII forbidden lines at 6548 and 6584 angstrom compared to the Halpha,"N[II] (6548, 6584)/ Hα, N[II] (λλ6548, 6584)/ Hα",Emission line ratio,N_II_6548_per_Hα,,,
+N[II](6548)/H_alpha,Ratio of nitrogen forbidden line 6548 compared to Hα,Ratio of the NII forbidden line at 6548 angstrom compared to Halpha,"N[II] (6548)/ Hα,  N[II] (λ6548)/ Hα",Emission line ratio,N_II_6584_per_Hα,,,
+N[II](6584)/H_alpha,Ratio of nitrogen forbidden line 6584 compared to Hα,Ratio of the NII forbidden line at 6584 angstrom compared to Halpha,"N[II] (6584)/ Hα, N[II] (λ6584)/ Hα",Emission line ratio,N_II_6548_and 6584_per_Hα,,,
+H_alpha/H_beta,Hα/Hβ line ratio,Ratio of the flux of the Halpha and the Hbeta hydrogen lines. ,"Ηα/Ηβ, Balmer decrement",Emission line ratio,Hα_per_Ηβ,,,
+E(B-V),,,Color Excess,Extinction,,,,
+Av,,,,Extinction,,,,
+c(F_H_alpha),,,,Extinction,,,,
+c(F_H_beta),,,,Extinction,,,,
+log(H_alpha/H_beta),,,Balmer Decriment,Extinction,,,,
+M_BH,"The Mass of the Black Hole in the center of a Galaxy
+","The mass of the Black Hole in the center of a Galaxy
+","Black_Hole_Mass, Black Hole Mass",Mass,,,,
+logM*,"the logarithm of a galaxy's stellar mass, representing the total mass of stars within that galaxy. It can be in linear units (Mstar) or its logarithm (logMstar)
+","The logarithm of a galaxy's stellar mass,. It can be in linear units (Mstar) or its logarithm (logMstar)
+","M*, logM*, Stellar mass, Mass, M, M_star, Mstar",Mass,,,,

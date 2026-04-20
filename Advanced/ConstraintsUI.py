@@ -55,68 +55,35 @@ class Ui_Constraints(object):
         self.opper_gb.setObjectName(u"opper_gb")
         self.gridLayout_4 = QGridLayout(self.opper_gb)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.Confirm_constrains_next_step = QPushButton(self.opper_gb)
+        self.Confirm_constrains_next_step.setObjectName(u"Confirm_constrains_next_step")
 
-        self.gridLayout_4.addItem(self.horizontalSpacer_6, 1, 2, 9, 1)
+        self.gridLayout_4.addWidget(self.Confirm_constrains_next_step, 8, 4, 1, 3)
 
-        self.menu_categories_features = QToolButton(self.opper_gb)
-        self.menu_categories_features.setObjectName(u"menu_categories_features")
+        self.B_add_manual = QPushButton(self.opper_gb)
+        self.B_add_manual.setObjectName(u"B_add_manual")
 
-        self.gridLayout_4.addWidget(self.menu_categories_features, 5, 0, 1, 1)
-
-        self.delete_last_constrain = QPushButton(self.opper_gb)
-        self.delete_last_constrain.setObjectName(u"delete_last_constrain")
-
-        self.gridLayout_4.addWidget(self.delete_last_constrain, 1, 7, 1, 1)
-
-        self.logical_gb = QGroupBox(self.opper_gb)
-        self.logical_gb.setObjectName(u"logical_gb")
-        self.gridLayout_5 = QGridLayout(self.logical_gb)
-        self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.B_AND = QPushButton(self.logical_gb)
-        self.B_AND.setObjectName(u"B_AND")
-
-        self.gridLayout_5.addWidget(self.B_AND, 1, 2, 1, 1)
-
-        self.B_OR = QPushButton(self.logical_gb)
-        self.B_OR.setObjectName(u"B_OR")
-
-        self.gridLayout_5.addWidget(self.B_OR, 1, 3, 1, 1)
-
-        self.label_2 = QLabel(self.logical_gb)
-        self.label_2.setObjectName(u"label_2")
-
-        self.gridLayout_5.addWidget(self.label_2, 1, 1, 1, 1)
-
-        self.B_NOT = QPushButton(self.logical_gb)
-        self.B_NOT.setObjectName(u"B_NOT")
-
-        self.gridLayout_5.addWidget(self.B_NOT, 1, 4, 1, 1)
-
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.gridLayout_5.addItem(self.horizontalSpacer_4, 1, 0, 1, 1)
-
-
-        self.gridLayout_4.addWidget(self.logical_gb, 6, 0, 1, 2)
-
-        self.Manual_constrain_Input = QPlainTextEdit(self.opper_gb)
-        self.Manual_constrain_Input.setObjectName(u"Manual_constrain_Input")
-
-        self.gridLayout_4.addWidget(self.Manual_constrain_Input, 1, 0, 4, 2)
+        self.gridLayout_4.addWidget(self.B_add_manual, 4, 0, 1, 1)
 
         self.groupBox = QGroupBox(self.opper_gb)
         self.groupBox.setObjectName(u"groupBox")
         self.gridLayout_6 = QGridLayout(self.groupBox)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.menu_units = QComboBox(self.groupBox)
+        self.menu_units.addItem("")
+        self.menu_units.setObjectName(u"menu_units")
 
-        self.gridLayout_6.addItem(self.horizontalSpacer_5, 2, 5, 1, 1)
+        self.gridLayout_6.addWidget(self.menu_units, 2, 4, 1, 1)
 
         self.right_constrain = QLineEdit(self.groupBox)
         self.right_constrain.setObjectName(u"right_constrain")
 
         self.gridLayout_6.addWidget(self.right_constrain, 2, 3, 1, 1)
+
+        self.left_constrain = QLineEdit(self.groupBox)
+        self.left_constrain.setObjectName(u"left_constrain")
+
+        self.gridLayout_6.addWidget(self.left_constrain, 2, 1, 1, 1)
 
         self.relation_cb = QComboBox(self.groupBox)
         self.relation_cb.addItem("")
@@ -125,50 +92,124 @@ class Ui_Constraints(object):
         self.relation_cb.addItem("")
         self.relation_cb.addItem("")
         self.relation_cb.addItem("")
+        self.relation_cb.addItem("")       
         self.relation_cb.setObjectName(u"relation_cb")
 
         self.gridLayout_6.addWidget(self.relation_cb, 2, 2, 1, 1)
 
-        self.left_constrain = QLineEdit(self.groupBox)
-        self.left_constrain.setObjectName(u"left_constrain")
+        self.menu_categories_features = QToolButton(self.groupBox)
+        self.menu_categories_features.setObjectName(u"menu_categories_features")
 
-        self.gridLayout_6.addWidget(self.left_constrain, 2, 1, 1, 1)
+        self.gridLayout_6.addWidget(self.menu_categories_features, 2, 0, 1, 1)
 
-        self.menu_units = QComboBox(self.groupBox)
-        self.menu_units.setObjectName(u"menu_units")
+        self.add_constrain = QPushButton(self.groupBox)
+        self.add_constrain.setObjectName(u"add_constrain")
 
-        self.gridLayout_6.addWidget(self.menu_units, 2, 4, 1, 1)
+        self.gridLayout_6.addWidget(self.add_constrain, 3, 4, 1, 1)
 
 
-        self.gridLayout_4.addWidget(self.groupBox, 7, 0, 1, 2)
+        self.gridLayout_4.addWidget(self.groupBox, 7, 0, 1, 1)
 
         self.constrains_scroll_area = QScrollArea(self.opper_gb)
         self.constrains_scroll_area.setObjectName(u"constrains_scroll_area")
         self.constrains_scroll_area.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 644, 1033))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 494, 919))
         self.constrains_scroll_area.setWidget(self.scrollAreaWidgetContents)
 
-        self.gridLayout_4.addWidget(self.constrains_scroll_area, 2, 5, 6, 3)
+        self.gridLayout_4.addWidget(self.constrains_scroll_area, 2, 4, 6, 3)
 
-        self.add_constrain = QPushButton(self.opper_gb)
-        self.add_constrain.setObjectName(u"add_constrain")
+        self.Manual_constrain_Input = QPlainTextEdit(self.opper_gb)
+        self.Manual_constrain_Input.setObjectName(u"Manual_constrain_Input")
 
-        self.gridLayout_4.addWidget(self.add_constrain, 8, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.Manual_constrain_Input, 1, 0, 3, 2)
 
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.groupBox_2 = QGroupBox(self.opper_gb)
+        self.groupBox_2.setObjectName(u"groupBox_2")
+        self.gridLayout_7 = QGridLayout(self.groupBox_2)
+        self.gridLayout_7.setObjectName(u"gridLayout_7")
+        self.B_del_group = QPushButton(self.groupBox_2)
+        self.B_del_group.setObjectName(u"B_del_group")
 
-        self.gridLayout_4.addItem(self.horizontalSpacer_3, 8, 0, 2, 1)
+        self.gridLayout_7.addWidget(self.B_del_group, 2, 2, 1, 1)
+
+        self.comboBox_2 = QComboBox(self.groupBox_2)
+        self.comboBox_2.addItem("")
+        self.comboBox_2.setObjectName(u"comboBox_2")
+
+        self.gridLayout_7.addWidget(self.comboBox_2, 2, 0, 1, 2)
+
+        self.B_del_last_constrain = QPushButton(self.groupBox_2)
+        self.B_del_last_constrain.setObjectName(u"B_del_last_constrain")
+
+        self.gridLayout_7.addWidget(self.B_del_last_constrain, 2, 3, 1, 1)
+
+        self.groupBox_3 = QGroupBox(self.groupBox_2)
+        self.groupBox_3.setObjectName(u"groupBox_3")
+        self.gridLayout_8 = QGridLayout(self.groupBox_3)
+        self.gridLayout_8.setObjectName(u"gridLayout_8")
+        self.B_or_gr = QPushButton(self.groupBox_3)
+        self.B_or_gr.setObjectName(u"B_or_gr")
+
+        self.gridLayout_8.addWidget(self.B_or_gr, 0, 2, 1, 1)
+
+        self.B_and_gr = QPushButton(self.groupBox_3)
+        self.B_and_gr.setObjectName(u"B_and_gr")
+
+        self.gridLayout_8.addWidget(self.B_and_gr, 0, 1, 1, 1)
+
+        self.B_not_gr = QPushButton(self.groupBox_3)
+        self.B_not_gr.setObjectName(u"B_not_gr")
+
+        self.gridLayout_8.addWidget(self.B_not_gr, 0, 3, 1, 1)
+
+        self.label_3 = QLabel(self.groupBox_3)
+        self.label_3.setObjectName(u"label_3")
+
+        self.gridLayout_8.addWidget(self.label_3, 0, 0, 1, 1)
+
+        self.B_add_group = QPushButton(self.groupBox_3)
+        self.B_add_group.setObjectName(u"B_add_group")
+
+        self.gridLayout_8.addWidget(self.B_add_group, 1, 0, 1, 1)
+
+
+        self.gridLayout_7.addWidget(self.groupBox_3, 3, 0, 1, 4)
+
+
+        self.gridLayout_4.addWidget(self.groupBox_2, 1, 4, 1, 3)
+
+        self.logical_gb = QGroupBox(self.opper_gb)
+        self.logical_gb.setObjectName(u"logical_gb")
+        self.gridLayout_5 = QGridLayout(self.logical_gb)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.B_NOT = QPushButton(self.logical_gb)
+        self.B_NOT.setObjectName(u"B_NOT")
+
+        self.gridLayout_5.addWidget(self.B_NOT, 0, 4, 1, 1)
+
+        self.B_OR = QPushButton(self.logical_gb)
+        self.B_OR.setObjectName(u"B_OR")
+
+        self.gridLayout_5.addWidget(self.B_OR, 0, 3, 1, 1)
+
+        self.B_AND = QPushButton(self.logical_gb)
+        self.B_AND.setObjectName(u"B_AND")
+
+        self.gridLayout_5.addWidget(self.B_AND, 0, 2, 1, 1)
+
+        self.label_2 = QLabel(self.logical_gb)
+        self.label_2.setObjectName(u"label_2")
+
+        self.gridLayout_5.addWidget(self.label_2, 0, 1, 1, 1)
+
+
+        self.gridLayout_4.addWidget(self.logical_gb, 6, 0, 1, 1)
 
         self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout_4.addItem(self.horizontalSpacer, 1, 6, 1, 1)
-
-        self.Confirm_constrains_next_step = QPushButton(self.opper_gb)
-        self.Confirm_constrains_next_step.setObjectName(u"Confirm_constrains_next_step")
-
-        self.gridLayout_4.addWidget(self.Confirm_constrains_next_step, 9, 6, 1, 2)
+        self.gridLayout_4.addItem(self.horizontalSpacer, 5, 0, 1, 1)
 
 
         self.gridLayout_2.addWidget(self.opper_gb, 1, 0, 1, 1)
@@ -189,23 +230,42 @@ class Ui_Constraints(object):
         self.title_gb.setTitle("")
         self.label.setText(QCoreApplication.translate("Constraints", u"Set Constraints", None))
         self.opper_gb.setTitle("")
-        self.Manual_constrain_Input.setPlaceholderText("Enter manual your constraints in this format: (flux.K_4 <=> [0.1, 0.5] counts) AND (temperature.T_eff > 5000 K) Note: By pressing the Add Constrain/s button while having text in manual input will bypass the button options and add the manual constrain directly to the scroll widget)")
-        self.menu_categories_features.setText(QCoreApplication.translate("Constraints", u"Categories/Features", None))
-        self.delete_last_constrain.setText(QCoreApplication.translate("Constraints", u"Delete last constraint", None))
-        self.logical_gb.setTitle("")
-        self.B_AND.setText(QCoreApplication.translate("Constraints", u"AND", None))
-        self.B_OR.setText(QCoreApplication.translate("Constraints", u"OR", None))
-        self.label_2.setText(QCoreApplication.translate("Constraints", u"Logical Operator:", None))
-        self.B_NOT.setText(QCoreApplication.translate("Constraints", u"NOT", None))
+        self.Confirm_constrains_next_step.setText(QCoreApplication.translate("Constraints", u"Confirm constraints: Next Step", None))
+        self.B_add_manual.setText(QCoreApplication.translate("Constraints", u"Add manual contraints", None))
         self.groupBox.setTitle("")
+        self.menu_units.setItemText(0, QCoreApplication.translate("Constraints", u"Independent of units", None))
+        self.Manual_constrain_Input.setPlaceholderText(
+    QCoreApplication.translate(
+        "Constraints",
+        "Enter manual constraint: e.g. { ( flux.H > 0.1 counts ) AND ( flux.V IN [0.1, 0.2] indep_units )} OR {  ( flux.U > 0.4 counts ) AND NOT ( flux.I IN [0.5, 0.7] indep_units ) }",
+        None
+    )
+)
         self.relation_cb.setItemText(0, QCoreApplication.translate("Constraints", u">", None))
         self.relation_cb.setItemText(1, QCoreApplication.translate("Constraints", u"<", None))
         self.relation_cb.setItemText(2, QCoreApplication.translate("Constraints", u">=", None))
         self.relation_cb.setItemText(3, QCoreApplication.translate("Constraints", u"<=", None))
         self.relation_cb.setItemText(4, QCoreApplication.translate("Constraints", u"<=>", None))
         self.relation_cb.setItemText(5, QCoreApplication.translate("Constraints", u"=!", None))
+        self.relation_cb.setItemText(5, QCoreApplication.translate("Constraints", u"==", None))
 
-        self.add_constrain.setText(QCoreApplication.translate("Constraints", u"Add Constraint/s", None))
-        self.Confirm_constrains_next_step.setText(QCoreApplication.translate("Constraints", u"Confirm Constraints: Next Step", None))
+        self.menu_categories_features.setText(QCoreApplication.translate("Constraints", u"Categories/Features", None))
+        self.add_constrain.setText(QCoreApplication.translate("Constraints", u"Add constrain", None))
+        self.groupBox_2.setTitle("")
+        self.B_del_group.setText(QCoreApplication.translate("Constraints", u"Delete Group", None))
+        self.comboBox_2.setItemText(0, QCoreApplication.translate("Constraints", u"Group 1", None))
+
+        self.B_del_last_constrain.setText(QCoreApplication.translate("Constraints", u"Delete last constraint", None))
+        self.groupBox_3.setTitle("")
+        self.B_or_gr.setText(QCoreApplication.translate("Constraints", u"OR", None))
+        self.B_and_gr.setText(QCoreApplication.translate("Constraints", u"AND", None))
+        self.B_not_gr.setText(QCoreApplication.translate("Constraints", u"NOT", None))
+        self.label_3.setText(QCoreApplication.translate("Constraints", u"Logical Operation with last group:", None))
+        self.B_add_group.setText(QCoreApplication.translate("Constraints", u"Add Group", None))
+        self.logical_gb.setTitle("")
+        self.B_NOT.setText(QCoreApplication.translate("Constraints", u"NOT", None))
+        self.B_OR.setText(QCoreApplication.translate("Constraints", u"OR", None))
+        self.B_AND.setText(QCoreApplication.translate("Constraints", u"AND", None))
+        self.label_2.setText(QCoreApplication.translate("Constraints", u"Logical Operator:", None))
     # retranslateUi
 
