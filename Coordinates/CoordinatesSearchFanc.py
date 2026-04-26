@@ -4,7 +4,8 @@ from Coordinates.CoordinateSearchUI import Ui_CoordinatesSearch
 class SearchByCoordinatesWidget(QWidget):
 
     Sub_coord_signal = Signal(str)
-    area_deleted_signal = Signal() 
+    area_deleted_signal = Signal()
+    Next_step_signal = Signal(str) 
 
     def __init__(self):
         super().__init__()
@@ -49,6 +50,9 @@ class SearchByCoordinatesWidget(QWidget):
         # scroll area
         self.scroll_layout = QVBoxLayout(self.ui.scrollAreaWidgetContents)
         self.scroll_layout.setAlignment(Qt.AlignmentFlag.AlignTop) 
+
+        # Confirm button
+        self.ui.B_submit_coord_search.clicked.connect(self.broadcast_next_step)
     
     # Determine UX activation
     def sub_coord_query_activation(self):
@@ -61,28 +65,25 @@ class SearchByCoordinatesWidget(QWidget):
 
 
     def add_area_to_scroll_widget(self, settings_dict):
-        row_widget = QWidget() # main row widget
-        row_layout = QGridLayout(row_widget) 
-        
         target = settings_dict.get("Target", "N/A")
         shape = settings_dict.get("Shape", "N/A")
         dist = settings_dict.get("Distance", 0) 
         units = settings_dict.get("Units", "")
         
-        search_mode_label = QLabel("Search Mode: Coordinate Area")
-        details_text = f"Target: {target} | {shape}: {dist} {units}"
-        details_label = QLabel(details_text)
+        display_text = f"Coordinate Area -> Target: {target} | {shape}: {dist} {units}"
         
-        # Styling
-        search_mode_label.setStyleSheet("color: white; font-weight: bold; padding: 2px;")
-        details_label.setStyleSheet("color: hsla(210, 80%, 70%, 255); font-style: italic; padding: 2px;")
+        row_label = QLabel(display_text)
+        row_label.setStyleSheet("""
+            QLabel { 
+                background-color: hsla(248, 24%, 38%, 150); 
+                color: white; 
+                padding: 5px; 
+                border-radius: 4px; 
+                margin-top: 5px;
+            }
+        """)
         
-        # Add to layout
-        row_layout.addWidget(search_mode_label, 0, 0)
-        row_layout.addWidget(details_label, 1, 0)
-        
-        # Add the row 
-        self.scroll_layout.addWidget(row_widget)
+        self.scroll_layout.addWidget(row_label) # Add to scroll layout
         
         self.ui.B_add_search_area.setChecked(False) # uncheck the Add button
         
@@ -103,4 +104,5 @@ class SearchByCoordinatesWidget(QWidget):
         else:
             print("No rows left to delete!")
 
-    
+    def broadcast_next_step(self):
+        self.Next_step_signal.emit("Coord Search Completed")

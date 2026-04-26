@@ -10,6 +10,7 @@ from Bibliographic.BibcodeSearchFanc import Bibcode
 from Bibliographic.AdvancedBibliographicFanc import AdvancedBibliographic
 
 from Advanced.ConstraintsFanc import Constraints
+from Advanced.InfoViewSelectionFanc import InfoViewSelection
 class SwitchSubQueries:
     def __init__(self, window, main_handler):
         self.main_window = window
@@ -45,11 +46,18 @@ class SwitchSubQueries:
         self.AdvFlow_Coordinates.Sub_coord_signal.connect(self.SwitchToAdvFlowSubQuery)
 
         self.AdvFlow_Coordinates.ui.B_submit_coord_search.setText("Confirm areas: Next Process")
-
+        
+        #--- 1. CONNECT THE COORDS COMPLETION SIGNAL
+        self.AdvFlow_Coordinates.Next_step_signal.connect(self.handle_adv_coords_completed)
+        
         # independent duplicates of the sub-panels
         self.AdvFlow_AroundObject = SearchAround()
         self.AdvFlow_AdvancedCoords = AdvancedCoordsSearch()
         self.Constraints = Constraints()
+        self.ViewSelection = InfoViewSelection()
+
+        #--- 2. CONNECT THE CONSTRAINTS COMPLETION SIGNAL
+        self.Constraints.Constraints_query_signal.connect(self.handle_constraints_completed)
 
         # signals back to the duplicate main panel
         self.AdvFlow_AroundObject.final_coords_query_signal.connect(self.handle_adv_flow_completed)
@@ -118,3 +126,15 @@ class SwitchSubQueries:
             # User clicked "No" -> Route straight to Constraints
             print("Skipping Coordinates. Routing to next advanced step...")
             self.main_window.SwitchQueryWidget(self.Constraints)
+    
+    def handle_adv_coords_completed(self, status_string):
+        """Catches the Next_step_signal from AdvFlow_Coordinates."""
+        if status_string == "Coord Search Completed":
+            print("AdvFlow Coordinates finished! Routing to Constraints...")
+            self.main_window.SwitchQueryWidget(self.Constraints)
+
+    def handle_constraints_completed(self, groups_data):
+        """Catches the Constraints_query_signal from Constraints."""
+        print(f"Constraints finished with data: {groups_data}")
+        print("Routing to the Next Step...")
+        self.main_window.SwitchQueryWidget(self.ViewSelection)

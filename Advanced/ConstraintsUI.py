@@ -134,11 +134,11 @@ class Ui_Constraints(object):
 
         self.gridLayout_7.addWidget(self.B_del_group, 2, 2, 1, 1)
 
-        self.comboBox_2 = QComboBox(self.groupBox_2)
-        self.comboBox_2.addItem("")
-        self.comboBox_2.setObjectName(u"comboBox_2")
+        self.Categories_features = QComboBox(self.groupBox_2)
+        self.Categories_features.addItem("")
+        self.Categories_features.setObjectName(u"Categories_features")
 
-        self.gridLayout_7.addWidget(self.comboBox_2, 2, 0, 1, 2)
+        self.gridLayout_7.addWidget(self.Categories_features, 2, 0, 1, 2)
 
         self.B_del_last_constrain = QPushButton(self.groupBox_2)
         self.B_del_last_constrain.setObjectName(u"B_del_last_constrain")
@@ -253,7 +253,7 @@ class Ui_Constraints(object):
         self.add_constrain.setText(QCoreApplication.translate("Constraints", u"Add constrain", None))
         self.groupBox_2.setTitle("")
         self.B_del_group.setText(QCoreApplication.translate("Constraints", u"Delete Group", None))
-        self.comboBox_2.setItemText(0, QCoreApplication.translate("Constraints", u"Group 1", None))
+        self.Categories_features.setItemText(0, QCoreApplication.translate("Constraints", u"Group 1", None))
 
         self.B_del_last_constrain.setText(QCoreApplication.translate("Constraints", u"Delete last constraint", None))
         self.groupBox_3.setTitle("")

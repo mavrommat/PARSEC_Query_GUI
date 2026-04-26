@@ -40,7 +40,7 @@ class Constraints(QWidget):
         self.scroll_layout = QVBoxLayout(self.ui.scrollAreaWidgetContents)
         self.scroll_layout.setAlignment(Qt.AlignTop)
 
-        self.ui.comboBox_2.clear()
+        self.ui.Categories_features.clear()
         self.add_new_group()
 
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
@@ -202,8 +202,8 @@ class Constraints(QWidget):
         self.group_layouts[new_group_name] = group_layout
         self.group_ui_elements[new_group_name] = {'box': group_box, 'logic_label': logic_label}
         
-        self.ui.comboBox_2.addItem(new_group_name)
-        self.ui.comboBox_2.setCurrentText(new_group_name)
+        self.ui.Categories_features.addItem(new_group_name)
+        self.ui.Categories_features.setCurrentText(new_group_name)
 
     def collect_constraints(self):
         if not hasattr(self, 'valid_concepts') or not self.valid_concepts:
@@ -218,7 +218,7 @@ class Constraints(QWidget):
         concept = self.current_concept 
         units = self.ui.menu_units.currentText() 
         
-        current_group = self.ui.comboBox_2.currentText()
+        current_group = self.ui.Categories_features.currentText()
         
         if not concept:
             print("Please select a concept from the menu or type a manual constraint!")
@@ -240,8 +240,6 @@ class Constraints(QWidget):
         self.add_constraint_to_ui(current_group, f_string)
         self.groups_data.setdefault(current_group, []).append(dropdown_dict)
         
-        # --- FIX 1: Emit update to parent app ---
-        self.emit_updates()
 
     def add_constraint_to_ui(self, group_name, constraint_string):
         if group_name not in self.group_layouts:
@@ -278,7 +276,7 @@ class Constraints(QWidget):
                     if i > 0:
                         self.set_group_logic("OR")
                     
-                    current_group = self.ui.comboBox_2.currentText()
+                    current_group = self.ui.Categories_features.currentText()
                     
                     if i == 0 and current_group and len(self.groups_data.get(current_group, [])) == 0:
                         target_group = current_group
@@ -298,8 +296,6 @@ class Constraints(QWidget):
                     
             self.ui.Manual_constrain_Input.clear() 
             
-            # --- FIX 1: Emit update to parent app ---
-            self.emit_updates()
 
         except Exception as e:
             print(f"Syntax Error in Manual Constraint: {e}")
@@ -318,9 +314,9 @@ class Constraints(QWidget):
         if last_group_name in self.group_constraint_widgets:
             del self.group_constraint_widgets[last_group_name]
         
-        index = self.ui.comboBox_2.findText(last_group_name)
+        index = self.ui.Categories_features.findText(last_group_name)
         if index >= 0:
-            self.ui.comboBox_2.removeItem(index)
+            self.ui.Categories_features.removeItem(index)
             
         elements = self.group_ui_elements.pop(last_group_name)
         
@@ -333,11 +329,10 @@ class Constraints(QWidget):
             self.scroll_layout.removeWidget(logic_label)
             logic_label.deleteLater()
             
-        # --- FIX 1: Emit update to parent app ---
-        self.emit_updates()
+    
 
     def delete_last_constraint(self):
-        group_name = self.ui.comboBox_2.currentText()
+        group_name = self.ui.Categories_features.currentText()
 
         widgets = self.group_constraint_widgets.get(group_name, [])
         data = self.groups_data.get(group_name, [])
@@ -352,5 +347,4 @@ class Constraints(QWidget):
         data.pop()
         self.group_layouts[group_name].removeWidget(last_widget)
 
-        # --- FIX 1: Emit update to parent app ---
-        self.emit_updates()
+        

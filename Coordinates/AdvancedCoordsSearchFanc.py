@@ -62,7 +62,7 @@ class AdvancedCoordsSearch(QWidget):
 
         # Push the unit text to the child widgets
         self.AdvancedRadius.ui.units_label.setText(units_choice)
-        self.AdvancedRectangle.ui.unit_label.setText(units_choice)
+        self.AdvancedRectangle.ui.units_label.setText(units_choice)
         self.AdvancedCustom.ui.units_label.setText(units_choice)
 
         print(f"Sending -> Shape: {shape_name}, Frame: {frame_choice}, Units: {units_choice}, Epoch: {epoch_choice}, Equinox: {equinox_choice}")
