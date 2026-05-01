@@ -7,7 +7,7 @@ The application provides predefined queries and an interactive UI for accessing 
 
 ##  Requirements
 
-- Python **3.14+**
+- Python stable versions so far: **3.11.3** and **3.14.3**
 - pip package manager
 
 All dependencies are listed in `requirements.txt`.
