@@ -53,10 +53,15 @@ class Ui_BibliographicSearch(object):
 
         self.gridLayout_2.addWidget(self.B_bibcode_search, 0, 2, 1, 1)
 
+        self.B_advanced_semantic_search = QPushButton(self.buttons_gb)
+        self.B_advanced_semantic_search.setObjectName(u"B_advanced_semantic_search")
+
+        self.gridLayout_2.addWidget(self.B_advanced_semantic_search, 0, 3, 1, 1)
+
         self.B_advanced_bib_search = QPushButton(self.buttons_gb)
         self.B_advanced_bib_search.setObjectName(u"B_advanced_bib_search")
 
-        self.gridLayout_2.addWidget(self.B_advanced_bib_search, 1, 0, 1, 3)
+        self.gridLayout_2.addWidget(self.B_advanced_bib_search, 1, 0, 1, 4)
 
 
         self.gridLayout.addWidget(self.buttons_gb, 2, 0, 1, 1)
@@ -102,6 +107,7 @@ class Ui_BibliographicSearch(object):
         self.B_journal_search.setText(QCoreApplication.translate("BibliographySearch", u"Journal Search", None))
         self.B_bibcode_search.setText(QCoreApplication.translate("BibliographySearch", u"Bibcode Search", None))
         self.B_advanced_bib_search.setText(QCoreApplication.translate("BibliographySearch", u"Advanced Bibliographic Search", None))
+        self.B_advanced_semantic_search.setText(QCoreApplication.translate("BibliographySearch", u"Advanced Semantic Search", None))
         self.title_gb_2.setTitle("")
         self.label.setText(QCoreApplication.translate("BibliographySearch", u"Bibliographic Search", None))
     # retranslateUi

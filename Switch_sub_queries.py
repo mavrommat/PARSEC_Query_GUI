@@ -8,6 +8,7 @@ from Bibliographic.JournalFanc import Journal
 from Bibliographic.ReferenceQueryFanc import Reference
 from Bibliographic.BibcodeSearchFanc import Bibcode
 from Bibliographic.AdvancedBibliographicFanc import AdvancedBibliographic
+from Bibliographic.AdvancedSemanticFanc import AdvancedSemantic
 
 from Advanced.ConstraintsFanc import Constraints
 from Advanced.InfoViewSelectionFanc import InfoViewSelection
@@ -35,6 +36,7 @@ class SwitchSubQueries:
         self.Reference = Reference()
         self.Bibcode = Bibcode()
         self.AdvancedBibl = AdvancedBibliographic()
+        self.AdvancedSemantic = AdvancedSemantic()
         
 
         #  ADVANCED FLOW DUPLICATION 
@@ -110,6 +112,10 @@ class SwitchSubQueries:
         elif self.current_main_query == "Bibliography" and \
            SubQuery == "Advanced Bibliographic Search":
             self.main_window.SwitchQueryWidget(self.AdvancedBibl)
+        
+        elif self.current_main_query == "Bibliography" and \
+           SubQuery == "Advanced Semantic Search":
+            self.main_window.SwitchQueryWidget(self.AdvancedSemantic)
 
     def handle_completed_search_area(self, final_dict):
         # 1. Send the dictionary to the scroll widget to update the UI

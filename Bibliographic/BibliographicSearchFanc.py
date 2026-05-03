@@ -33,6 +33,7 @@ class BibliographicSearch(QWidget):
         self.ui.B_reference_search.clicked.connect(self.trigger_search)
         self.ui.B_bibcode_search.clicked.connect(self.trigger_search)
         self.ui.B_advanced_bib_search.clicked.connect(self.trigger_search)
+        self.ui.B_advanced_semantic_search.clicked.connect(self.trigger_search)
 
     def trigger_search(self):
         clicked_button = self.sender()
