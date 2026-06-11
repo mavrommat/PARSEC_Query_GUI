@@ -42,7 +42,8 @@ class SearchByCoordinatesWidget(QWidget):
 
         # Connect coord mode
         self.ui.B_coord_mode_search_around_object_specified_coords.clicked.connect(self.sub_coord_query_activation)
-        self.ui.B_coord_mode_advanced_search.clicked.connect(self.sub_coord_query_activation)
+        self.ui.B_manual_coordinates.clicked.connect(self.sub_coord_query_activation)
+        self.ui.B_draw_on_sky.clicked.connect(self.sub_coord_query_activation)
         
         # delete buttons
         self.ui.B_delete_search_area.clicked.connect(self.delete_area_to_scroll_widget) 

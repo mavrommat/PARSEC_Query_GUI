@@ -47,7 +47,6 @@ class Ui_SearchAround(object):
 
         self.verticalLayout_2.addWidget(self.label)
 
-
         self.verticalLayout.addWidget(self.title_gb)
 
         self.input_text_frames_shape_gb = QGroupBox(self.main_gb)
@@ -56,15 +55,32 @@ class Ui_SearchAround(object):
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.input_text_gb = QGroupBox(self.input_text_frames_shape_gb)
         self.input_text_gb.setObjectName(u"input_text_gb")
-        self.verticalLayout_4 = QVBoxLayout(self.input_text_gb)
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        
+        # CHANGED: Switched to QHBoxLayout to place the button next to the input
+        self.horizontalLayout_input = QHBoxLayout(self.input_text_gb)
+        self.horizontalLayout_input.setObjectName(u"horizontalLayout_input")
+        
         self.coords_id_input = QLineEdit(self.input_text_gb)
         self.coords_id_input.setObjectName(u"coords_id_input")
 
-        self.verticalLayout_4.addWidget(self.coords_id_input)
+        self.horizontalLayout_input.addWidget(self.coords_id_input)
 
+        # ADDED: Resolve Input Button
+        self.B_resolved = QPushButton(self.input_text_gb)
+        self.B_resolved.setObjectName(u"B_resolved")
+        self.horizontalLayout_input.addWidget(self.B_resolved)
 
         self.verticalLayout_3.addWidget(self.input_text_gb)
+
+        # ADDED: New Group Box for resolved outputs
+        self.resolved_output_gb = QGroupBox(self.input_text_frames_shape_gb)
+        self.resolved_output_gb.setObjectName(u"resolved_output_gb")
+        self.verticalLayout_resolved = QVBoxLayout(self.resolved_output_gb)
+        self.verticalLayout_resolved.setObjectName(u"verticalLayout_resolved")
+        
+        # This group box is structurally ready. You can dynamically add labels 
+        # to self.verticalLayout_resolved in your main application logic.
+        self.verticalLayout_3.addWidget(self.resolved_output_gb)
 
         self.shape_frames_gb = QGroupBox(self.input_text_frames_shape_gb)
         self.shape_frames_gb.setObjectName(u"shape_frames_gb")
@@ -152,14 +168,12 @@ class Ui_SearchAround(object):
 
         self.gridLayout_2.addWidget(self.label_5, 1, 2, 1, 1)
 
-
         self.horizontalLayout.addWidget(self.frame_gb)
 
         self.horizontalLayout.setStretch(0, 1)
         self.horizontalLayout.setStretch(1, 2)
 
         self.verticalLayout_3.addWidget(self.shape_frames_gb)
-
 
         self.verticalLayout.addWidget(self.input_text_frames_shape_gb)
 
@@ -172,14 +186,12 @@ class Ui_SearchAround(object):
 
         self.gridLayout_3.addWidget(self.WidgetCoordsShapeInfo, 0, 0, 1, 1)
 
-
         self.verticalLayout.addWidget(self.widget_gb)
 
         self.verticalLayout.setStretch(1, 1)
         self.verticalLayout.setStretch(2, 1)
 
         self.gridLayout.addWidget(self.main_gb, 1, 0, 1, 1)
-
 
         self.retranslateUi(SearchAroundAnObject)
 
@@ -194,6 +206,13 @@ class Ui_SearchAround(object):
         self.input_text_frames_shape_gb.setTitle("")
         self.input_text_gb.setTitle("")
         self.coords_id_input.setPlaceholderText(QCoreApplication.translate("SearchAroundAnObject", u"Provide Identification (i.e. M32, ...)/Coordinates (i.e. 20 54 05.689 +37 01 17.38)", None))
+        
+        # ADDED: Button text
+        self.B_resolved.setText(QCoreApplication.translate("SearchAroundAnObject", u"Resolve Input", None))
+        
+        # ADDED: Optional title for the new group box (you can set to empty string if you prefer it hidden initially)
+        self.resolved_output_gb.setTitle(QCoreApplication.translate("SearchAroundAnObject", u"Resolved Information", None))
+        
         self.shape_frames_gb.setTitle("")
         self.shape_gb.setTitle("")
         self.B_Radius_Search.setText(QCoreApplication.translate("SearchAroundAnObject", u"Radius search", None))
@@ -228,4 +247,3 @@ class Ui_SearchAround(object):
         self.label_5.setText(QCoreApplication.translate("SearchAroundAnObject", u"Frame:", None))
         self.widget_gb.setTitle("")
     # retranslateUi
-

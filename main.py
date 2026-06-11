@@ -12,7 +12,7 @@ def main():
     app = QApplication(sys.argv)
     window = MainWindow()
     
-    # 1. Create the main handler
+    # main handler
     MainQueryHandler = SwitchMainQueries(window) 
     SubQueryHandler = SwitchSubQueries(window, MainQueryHandler)
     SubSubQueryHandler = SwitchSubSubQueries(window, MainQueryHandler, SubQueryHandler)
@@ -21,9 +21,11 @@ def main():
     
     CoordInfoGrabber = GetCoordinateInfo(
         window, 
-        SubSubQueryHandler.AroundObject, 
-        SubSubQueryHandler.AdvancedCoords,     
-        MainQueryHandler.Coordinates 
+        SubSubQueryHandler.AroundObject,
+        SubQueryHandler.ManualCoords,
+        MainQueryHandler.Coordinates,
+        SubQueryHandler.AdvFlow_AroundObject,
+        SubQueryHandler.AdvFlow_ManualCoords 
     )
     window.show()
     sys.exit(app.exec())

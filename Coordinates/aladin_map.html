@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { margin: 0; padding: 0; overflow: hidden; background-color: #1e1e1e; user-select: none; }
+        #aladin-lite-div { width: 100vw; height: 100vh; cursor: crosshair; }
+    </style>
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <script type="text/javascript" src="https://aladin.cds.unistra.fr/AladinLite/api/v3/latest/aladin.js" charset="utf-8"></script>
+    
+    <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</head>
+<body>
+    <div id="aladin-lite-div"></div>
+
+    <script type="text/javascript">
+        // NEW: Wait for all external scripts to download before executing
+        window.addEventListener('load', function() {
+            
+            // Safety check in case the network totally failed
+            if (typeof A === "undefined") {
+                console.error("CRITICAL: Aladin library failed to download. Check network/firewall.");
+                return;
+            }
+
+            A.init.then(() => {
+            let aladin = A.aladin('#aladin-lite-div', {
+                survey: "CDS/P/DSS2/color",
+                fov: 60,
+                showReticle: false,
+                showContextMenu: false 
+            });
+
+            // 1. THE FIX: Correctly initialize using addOverlay
+            let polygonOverlay = A.graphicOverlay({color: '#00eeff', lineWidth: 3});
+            aladin.addOverlay(polygonOverlay); 
+
+            let pythonBackend = null;
+            if (typeof QWebChannel !== "undefined" && typeof qt !== "undefined") {
+                new QWebChannel(qt.webChannelTransport, function (channel) {
+                    pythonBackend = channel.objects.backend;
+                });
+            } else {
+                console.error("QWebChannel not found. Python bridge inactive.");
+            }
+
+            // --- TRACK CURRENT MOUSE POSITION ---
+            let currentMouseX = 0;
+            let currentMouseY = 0;
+            
+            document.getElementById('aladin-lite-div').addEventListener('mousemove', function(e) {
+                currentMouseX = e.offsetX;
+                currentMouseY = e.offsetY;
+            });
+
+            // --- SHIFT+Q AND SHIFT+X KEYBOARD SHORTCUTS ---
+            document.addEventListener('keydown', function(e) {
+                if (e.shiftKey) {
+                    if (e.key === 'q' || e.key === 'Q') {
+                        let radec = aladin.pix2world(currentMouseX, currentMouseY);
+                        if (radec && pythonBackend) {
+                            pythonBackend.receive_click(radec[0], radec[1]);
+                        }
+                    }
+                    else if (e.key === 'x' || e.key === 'X') {
+                        if (pythonBackend) {
+                            pythonBackend.request_delete_last();
+                        }
+                    }
+                }
+            });
+
+            // 2. THE FIX: Strict object typing for the v3 WebGL engine
+            window.updatePolygon = function(coords) {
+                if (!polygonOverlay) return; 
+                
+                polygonOverlay.removeAll(); 
+
+                if (coords.length > 0) {
+                    
+                    if (coords.length === 1) {
+                        // Just draw a small circle (0.05 degrees) to show the starting point
+                        polygonOverlay.add(A.circle(coords[0][0], coords[0][1], 0.05));
+                    } 
+                    else if (coords.length === 2) {
+                        polygonOverlay.add(A.polyline(coords));
+                        polygonOverlay.add(A.circle(coords[0][0], coords[0][1], 0.05));
+                        polygonOverlay.add(A.circle(coords[1][0], coords[1][1], 0.05));
+                    } 
+                    else {
+                        // To perfectly guarantee a closed polygon without crashing v3, 
+                        // we copy the array and push the very first coordinate to the end.
+                        let closedLoop = [...coords, coords[0]];
+                        polygonOverlay.add(A.polyline(closedLoop));
+                    }
+                }
+           
+            };
+        });
+        });
+    </script>
+</body>
+</html>

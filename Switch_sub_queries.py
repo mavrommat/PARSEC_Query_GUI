@@ -1,8 +1,8 @@
-
 from Switch_main_queries import SwitchMainQueries
 from Coordinates.CoordinatesSearchFanc import SearchByCoordinatesWidget
 from Coordinates.SearchAroundFanc import SearchAround
-from Coordinates.AdvancedCoordsSearchFanc import AdvancedCoordsSearch
+from Coordinates.ManualCoordsFanc import ManualCoords
+from Coordinates.DrawOnSky import DrawOnSky
 
 from Bibliographic.JournalFanc import Journal
 from Bibliographic.ReferenceQueryFanc import Reference
@@ -11,7 +11,7 @@ from Bibliographic.AdvancedBibliographicFanc import AdvancedBibliographic
 from Bibliographic.AdvancedSemanticFanc import AdvancedSemantic
 
 from Advanced.ConstraintsFanc import Constraints
-from Advanced.InfoViewSelectionFanc import InfoViewSelection
+
 class SwitchSubQueries:
     def __init__(self, window, main_handler):
         self.main_window = window
@@ -20,15 +20,18 @@ class SwitchSubQueries:
         self.current_main_query = ""
         self.QueryHandler.Query_signal.connect(self.update_main_query)
 
+        # --- COORDINATES ROUTING ---
         self.Coordinates = self.QueryHandler.Coordinates 
         self.Coordinates.Sub_coord_signal.connect(self.SwitchToSubQuery)
 
         self.AroundObject = SearchAround()
-        self.AdvancedCoords = AdvancedCoordsSearch()
+        self.ManualCoords = ManualCoords()
+        self.DrawSky = DrawOnSky()
         self.AroundObject.final_coords_query_signal.connect(self.handle_completed_search_area)
-        self.AdvancedCoords.final_coords_query_signal.connect(self.handle_completed_search_area)
+        self.ManualCoords.settings_info_signal.connect(self.handle_completed_search_area)
+        self.DrawSky.settings_info_signal.connect(self.handle_completed_search_area)
 
-
+        # --- BIBLIOGRAPHY ROUTING ---
         self.Bibliography = self.QueryHandler.Bibliography 
         self.Bibliography.Sub_coord_signal.connect(self.SwitchToSubQuery)
 
@@ -38,65 +41,65 @@ class SwitchSubQueries:
         self.AdvancedBibl = AdvancedBibliographic()
         self.AdvancedSemantic = AdvancedSemantic()
         
-
-        #  ADVANCED FLOW DUPLICATION 
         # Yes/No signal
-        self.QueryHandler.CoordQuestion.Answer_Signal.connect(self.route_adv_question)
+        self.CoordQuestion = self.QueryHandler.CoordQuestion 
+        self.CoordQuestion.Answer_Signal.connect(self.handle_advanced_question_answer)
 
-        # duplicate main panel 
-        self.AdvFlow_Coordinates = self.QueryHandler.AdvFlow_Coordinates
-        self.AdvFlow_Coordinates.Sub_coord_signal.connect(self.SwitchToAdvFlowSubQuery)
-
-        self.AdvFlow_Coordinates.ui.B_submit_coord_search.setText("Confirm areas: Next Process")
-        
-        #--- 1. CONNECT THE COORDS COMPLETION SIGNAL
-        self.AdvFlow_Coordinates.Next_step_signal.connect(self.handle_adv_coords_completed)
-        
-        # independent duplicates of the sub-panels
+        # Create Advanced Flow
+        self.AdvFlow_Coordinates = SearchByCoordinatesWidget()
         self.AdvFlow_AroundObject = SearchAround()
-        self.AdvFlow_AdvancedCoords = AdvancedCoordsSearch()
-        self.Constraints = Constraints()
-        self.ViewSelection = InfoViewSelection()
+        self.AdvFlow_ManualCoords = ManualCoords()
+        self.AdvFlow_DrawSky = DrawOnSky()
 
-        #--- 2. CONNECT THE CONSTRAINTS COMPLETION SIGNAL
-        self.Constraints.Constraints_query_signal.connect(self.handle_constraints_completed)
+        self.Advanced = Constraints()
 
-        # signals back to the duplicate main panel
-        self.AdvFlow_AroundObject.final_coords_query_signal.connect(self.handle_adv_flow_completed)
-        self.AdvFlow_AdvancedCoords.final_coords_query_signal.connect(self.handle_adv_flow_completed)
+        self.AdvFlow_Coordinates.ui.B_submit_coord_search.setText("Submit Coordinates: Next Step")
+        self.AdvFlow_Coordinates.ui.B_submit_coord_search.clicked.connect(self.route_to_constraints)
 
-    def route_adv_question(self, wants_coords):
-        if wants_coords:
-            self.main_window.SwitchQueryWidget(self.AdvFlow_Coordinates)
+        # Connect the advanced flow sub-signals
+        self.AdvFlow_Coordinates.Sub_coord_signal.connect(self.SwitchToSubQuery)
 
-    def SwitchToAdvFlowSubQuery(self, SubQuery):
-        print(f"AdvFlow SubQuery triggered: {SubQuery}")
-        if SubQuery == "Searching around an object/Specified coordinates":
-            self.main_window.SwitchQueryWidget(self.AdvFlow_AroundObject)
-        elif SubQuery == "Advanced coordinate search":
-            self.main_window.SwitchQueryWidget(self.AdvFlow_AdvancedCoords)
-
-    def handle_adv_flow_completed(self, final_dict):
-        # Add the completed area to the DUPLICATE scroll widget, then switch back
-        self.AdvFlow_Coordinates.add_area_to_scroll_widget(final_dict)
-        self.main_window.SwitchQueryWidget(self.AdvFlow_Coordinates)
-
-    # --- 
-
+        self.Advanced = Constraints()
+        # Connect the advanced flow sub-signals
+        self.AdvFlow_Coordinates.Sub_coord_signal.connect(self.SwitchToSubQuery)
+        
+        self.AdvFlow_AroundObject.final_coords_query_signal.connect(self.handle_adv_completed_search_area)
+        self.AdvFlow_ManualCoords.settings_info_signal.connect(self.handle_adv_completed_search_area)
+        self.AdvFlow_DrawSky.settings_info_signal.connect(self.handle_adv_completed_search_area)
+        
     def update_main_query(self, query_name):
         self.current_main_query = query_name
 
     def SwitchToSubQuery(self, SubQuery):
         print(f"SubQueryHandler reacting! Main: {self.current_main_query} | Sub: {SubQuery}")
         
+        # --- STANDARD COORDINATES SWITCHING ---
         if self.current_main_query == "Coordinates" and \
            SubQuery == "Searching around an object/Specified coordinates":
             self.main_window.SwitchQueryWidget(self.AroundObject)
 
         elif self.current_main_query == "Coordinates" and \
-           SubQuery == "Advanced coordinate search":
-            self.main_window.SwitchQueryWidget(self.AdvancedCoords)
+           SubQuery == "Manual Coordinates":
+            self.main_window.SwitchQueryWidget(self.ManualCoords)
+        
+        elif self.current_main_query == "Coordinates" and \
+           SubQuery == "Draw on Sky":
+            self.main_window.SwitchQueryWidget(self.DrawSky)
 
+        # --- ADVANCED FLOW COORDINATES SWITCHING ---
+        elif self.current_main_query == "Advanced Search" and \
+             SubQuery == "Searching around an object/Specified coordinates":
+            self.main_window.SwitchQueryWidget(self.AdvFlow_AroundObject)
+
+        elif self.current_main_query == "Advanced Search" and \
+             SubQuery == "Manual Coordinates":
+            self.main_window.SwitchQueryWidget(self.AdvFlow_ManualCoords)
+
+        elif self.current_main_query == "Advanced Search" and \
+             SubQuery == "Draw on Sky":
+            self.main_window.SwitchQueryWidget(self.AdvFlow_DrawSky)
+
+        # --- BIBLIOGRAPHY SWITCHING ---
         elif self.current_main_query == "Bibliography" and \
            SubQuery == "Journal Search":
             self.main_window.SwitchQueryWidget(self.Journal)
@@ -123,24 +126,20 @@ class SwitchSubQueries:
         
         # 2. Switch the screen BACK to the main Coordinates widget!
         self.main_window.SwitchQueryWidget(self.Coordinates)
+
+    def handle_adv_completed_search_area(self, final_dict):
+        # 1. Update the UI for the Advanced Flow coordinates
+        self.AdvFlow_Coordinates.add_area_to_scroll_widget(final_dict)
+        self.main_window.SwitchQueryWidget(self.AdvFlow_Coordinates)
     
-    def route_adv_question(self, wants_coords):
-        if wants_coords:
-            # User clicked "Yes"
+    def handle_advanced_question_answer(self, wants_coordinates):
+        if wants_coordinates:
+            print("Advanced Flow: User clicked YES for coordinates.")
             self.main_window.SwitchQueryWidget(self.AdvFlow_Coordinates)
         else:
-            # User clicked "No" -> Route straight to Constraints
-            print("Skipping Coordinates. Routing to next advanced step...")
-            self.main_window.SwitchQueryWidget(self.Constraints)
+            print("Advanced Flow: User clicked NO for coordinates.")
+            self.main_window.SwitchQueryWidget(self.Advanced)
     
-    def handle_adv_coords_completed(self, status_string):
-        """Catches the Next_step_signal from AdvFlow_Coordinates."""
-        if status_string == "Coord Search Completed":
-            print("AdvFlow Coordinates finished! Routing to Constraints...")
-            self.main_window.SwitchQueryWidget(self.Constraints)
-
-    def handle_constraints_completed(self, groups_data):
-        """Catches the Constraints_query_signal from Constraints."""
-        print(f"Constraints finished with data: {groups_data}")
-        print("Routing to the Next Step...")
-        self.main_window.SwitchQueryWidget(self.ViewSelection)
+    def route_to_constraints(self):
+        print("Advanced Flow: Coordinates submitted. Routing to Constraints.")
+        self.main_window.SwitchQueryWidget(self.Advanced)

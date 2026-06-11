@@ -1,0 +1,3 @@
+{ (flux.H > [0.1] x_units) AND (flux.I >= [2] y_units) }
+OR
+ { (flux.K <=> [0.1,0.2] x_units) OR (flux.R <= [4] y_units) }

@@ -61,10 +61,15 @@ class Ui_CoordinatesSearch(object):
 
         self.gridLayout_3.addWidget(self.B_coord_mode_search_around_object_specified_coords, 0, 0, 1, 1)
 
-        self.B_coord_mode_advanced_search = QPushButton(self.coord_search_mode_selection_sub_gb)
-        self.B_coord_mode_advanced_search.setObjectName(u"B_coord_mode_advanced_search")
+        self.B_manual_coordinates = QPushButton(self.coord_search_mode_selection_sub_gb)
+        self.B_manual_coordinates.setObjectName(u"B_manual_coordinates")
 
-        self.gridLayout_3.addWidget(self.B_coord_mode_advanced_search, 1, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.B_manual_coordinates, 1, 0, 1, 1)
+
+        self.B_draw_on_sky = QPushButton(self.coord_search_mode_selection_sub_gb)
+        self.B_draw_on_sky.setObjectName(u"B_draw_on_sky")
+
+        self.gridLayout_3.addWidget(self.B_draw_on_sky, 2, 0, 1, 1)
 
         self.gridLayout_3.setRowMinimumHeight(0, 1)
 
@@ -152,7 +157,8 @@ class Ui_CoordinatesSearch(object):
         self.coord_search_mode_selection_gb.setTitle("")
         self.coord_search_mode_selection_sub_gb.setTitle("")
         self.B_coord_mode_search_around_object_specified_coords.setText(QCoreApplication.translate("CoordinatesSearch", u"Searching around an object/Specified coordinates", None))
-        self.B_coord_mode_advanced_search.setText(QCoreApplication.translate("CoordinatesSearch", u"Advanced coordinate search", None))
+        self.B_manual_coordinates.setText(QCoreApplication.translate("CoordinatesSearch", u"Manual Coordinates", None))
+        self.B_draw_on_sky.setText(QCoreApplication.translate("CoordinatesSearch", u"Draw on Sky", None))
         self.placeholder_gb.setTitle("")
         self.coord_search_scroll_add_gb.setTitle("")
         self.B_submit_coord_search.setText(QCoreApplication.translate("CoordinatesSearch", u"Submit", None))

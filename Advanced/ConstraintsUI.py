@@ -57,9 +57,14 @@ class Ui_Constraints(object):
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.Confirm_constrains_next_step = QPushButton(self.opper_gb)
         self.Confirm_constrains_next_step.setObjectName(u"Confirm_constrains_next_step")
-
-        self.gridLayout_4.addWidget(self.Confirm_constrains_next_step, 8, 4, 1, 3)
-
+        # Placed at row 8, column 5, spans 1 row, spans 2 columns (2/3 width)
+        self.gridLayout_4.addWidget(self.Confirm_constrains_next_step, 8, 5, 1, 2)
+#----
+        self.B_copy_query = QPushButton(self.opper_gb)
+        self.B_copy_query.setObjectName(u"B_copy_query")
+        # Placed at row 8, column 4, spans 1 row, spans 1 column (1/3 width)
+        self.gridLayout_4.addWidget(self.B_copy_query, 8, 4, 1, 1)
+#----
         self.B_add_manual = QPushButton(self.opper_gb)
         self.B_add_manual.setObjectName(u"B_add_manual")
 
@@ -70,6 +75,7 @@ class Ui_Constraints(object):
         self.gridLayout_6 = QGridLayout(self.groupBox)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.menu_units = QComboBox(self.groupBox)
+        self.menu_units.addItem("")
         self.menu_units.addItem("")
         self.menu_units.setObjectName(u"menu_units")
 
@@ -92,7 +98,8 @@ class Ui_Constraints(object):
         self.relation_cb.addItem("")
         self.relation_cb.addItem("")
         self.relation_cb.addItem("")
-        self.relation_cb.addItem("")       
+        self.relation_cb.addItem("")     
+        self.relation_cb.addItem("")  
         self.relation_cb.setObjectName(u"relation_cb")
 
         self.gridLayout_6.addWidget(self.relation_cb, 2, 2, 1, 1)
@@ -231,13 +238,15 @@ class Ui_Constraints(object):
         self.label.setText(QCoreApplication.translate("Constraints", u"Set Constraints", None))
         self.opper_gb.setTitle("")
         self.Confirm_constrains_next_step.setText(QCoreApplication.translate("Constraints", u"Confirm constraints: Next Step", None))
+        self.B_copy_query.setText(QCoreApplication.translate("Constraints", u"Copy constraints to clipboard", None))
         self.B_add_manual.setText(QCoreApplication.translate("Constraints", u"Add manual contraints", None))
         self.groupBox.setTitle("")
-        self.menu_units.setItemText(0, QCoreApplication.translate("Constraints", u"Independent of units", None))
+        self.menu_units.setItemText(0, QCoreApplication.translate("Constraints", u"All_units", None))
+        self.menu_units.setItemText(1, QCoreApplication.translate("Constraints", u"No_units", None))
         self.Manual_constrain_Input.setPlaceholderText(
     QCoreApplication.translate(
         "Constraints",
-        "Enter manual constraint: e.g. { ( flux.H > 0.1 counts ) AND ( flux.V IN [0.1, 0.2] indep_units )} OR {  ( flux.U > 0.4 counts ) AND NOT ( flux.I IN [0.5, 0.7] indep_units ) }",
+        "Enter manual constraint: e.g. { ( flux.H > 0.1 \"All_units\" ) AND ( flux.V IN [0.1, 0.2] \"No_units\" )} OR {  ( flux.U > 0.4 \"All_units\" ) AND NOT ( flux.I IN [0.5, 0.7] \"No_units\" ) }",
         None
     )
 )
@@ -247,7 +256,8 @@ class Ui_Constraints(object):
         self.relation_cb.setItemText(3, QCoreApplication.translate("Constraints", u"<=", None))
         self.relation_cb.setItemText(4, QCoreApplication.translate("Constraints", u"<=>", None))
         self.relation_cb.setItemText(5, QCoreApplication.translate("Constraints", u"=!", None))
-        self.relation_cb.setItemText(5, QCoreApplication.translate("Constraints", u"==", None))
+        self.relation_cb.setItemText(6, QCoreApplication.translate("Constraints", u"==", None))
+        self.relation_cb.setItemText(7, QCoreApplication.translate("Constraints", u"~=", None))
 
         self.menu_categories_features.setText(QCoreApplication.translate("Constraints", u"Categories/Features", None))
         self.add_constrain.setText(QCoreApplication.translate("Constraints", u"Add constrain", None))
@@ -261,9 +271,9 @@ class Ui_Constraints(object):
         self.B_and_gr.setText(QCoreApplication.translate("Constraints", u"AND", None))
         self.B_not_gr.setText(QCoreApplication.translate("Constraints", u"NOT", None))
         self.label_3.setText(QCoreApplication.translate("Constraints", u"Logical Operation with last group:", None))
-        self.B_add_group.setText(QCoreApplication.translate("Constraints", u"Add Group", None))
+        self.B_add_group.setText(QCoreApplication.translate("Constraints", u"Add Criteria Group", None))
         self.logical_gb.setTitle("")
-        self.B_NOT.setText(QCoreApplication.translate("Constraints", u"NOT", None))
+        self.B_NOT.setText(QCoreApplication.translate("Constraints", u"AND NOT", None))
         self.B_OR.setText(QCoreApplication.translate("Constraints", u"OR", None))
         self.B_AND.setText(QCoreApplication.translate("Constraints", u"AND", None))
         self.label_2.setText(QCoreApplication.translate("Constraints", u"Logical Operator:", None))
