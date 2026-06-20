@@ -49,42 +49,85 @@ def main():
     # 4. Payload Aggregator setup
     payload_aggregator = PayloadAggregator()
     
-    # Coordinate Execution Capture
-    def finalize_coordinate_payload(result_list):        
- 
-        payload_aggregator.reset_payload()  # Reset aggregator
+    # A. Advanced Flow Capture 
+    def capture_advanced_constraints(constraints_dict):
+        print("Main: Captured Advanced Constraints.")
+        payload_aggregator.update_constraints(constraints_dict)
+
+    def capture_display_options(display_payload):
+        print("Main: Captured Display Options.")
+        payload_aggregator.update_display_options(display_payload)
+
+    SubQueryHandler.Advanced.Constraints_query_signal.connect(capture_advanced_constraints)
+    SubQueryHandler.DisplayOptions.Displayed_concepts_signal.connect(capture_display_options)
+
+
+    # B. Universal Execution Capture 
+    def finalize_execution_payload(result_list):
+        print("Main: Execution complete. Extracting IDs...")
         
+        # current metadata
         master_coord_payload = CoordInfoGrabber.get_master_payload()
+        current_mode = master_coord_payload.get("Query_Mode", "Coordinates")
         
+        # If this is a Standard Coordinate search wipe out any lingering Data 
+        if current_mode == "Coordinates":
+            print("Main: Standard search detected. Scrubbing stale advanced data...")
+            payload_aggregator.update_constraints({})
+            payload_aggregator.update_display_options({})
+        
+        #  consistent metadata
         payload_aggregator.update_databases(master_coord_payload.get("Databases", []))
-        payload_aggregator.update_main_query_type(master_coord_payload.get("Query_Mode", "Coordinates"))
+        payload_aggregator.update_main_query_type(current_mode)
         
+        # 4. Extract and format the IDs
         clean_results = []
         id_column_name = 'id' 
-        
         for df in result_list:
             if hasattr(df, 'columns') and id_column_name in df.columns:
                 clean_results.extend(df[id_column_name].tolist())
                 
         unique_clean_results = list(set(clean_results))
         payload_aggregator.update_found_ids(unique_clean_results)
+        
         payload_aggregator.save_to_json_file("final_search_payload.json")
 
-    execution_manager.Execution_completed_signal.connect(finalize_coordinate_payload)
+    execution_manager.Execution_completed_signal.connect(finalize_execution_payload)
 
-    
-    # Object ID Execution Capture
+
+    # C. Object ID Execution Capture 
     def finalize_object_id_payload(id_list):
-
-        payload_aggregator.reset_payload()  # Reset aggregator
-        
+        payload_aggregator.reset_payload()
         payload_aggregator.update_databases(MainQueryHandler.Databases)
         payload_aggregator.update_main_query_type("Object ID")
-        
         payload_aggregator.update_found_ids(id_list)
         payload_aggregator.save_to_json_file("final_object_id_payload.json")
 
     MainQueryHandler.ObjectID.ObjectID_Signal.connect(finalize_object_id_payload)
+
+    # D. Bibliographic Execution Capture
+    def finalize_bibliographic_payload(bib_dict):
+        search_type = bib_dict.get("Search", "Unknown Bib Search")
+        print(f"Main: Captured Bibliographic Search -> {search_type}")
+        
+        # Wipe out any stale Coordinate/Advanced data
+        payload_aggregator.reset_payload()
+        
+        payload_aggregator.update_databases(MainQueryHandler.Databases)
+        payload_aggregator.update_main_query_type("Bibliography")
+        
+        # 3. Inject bibliographic dictionary
+        payload_aggregator.update_bibliography(bib_dict)
+        
+        payload_aggregator.save_to_json_file("final_bibliographic_payload.json")
+
+    # Connect the signals from all 5 Bibliographic sub-widgets
+    SubQueryHandler.Journal.Bibliography_Signal.connect(finalize_bibliographic_payload)
+    SubQueryHandler.Reference.Bibliography_Signal.connect(finalize_bibliographic_payload)
+    SubQueryHandler.Bibcode.Bibliography_Signal.connect(finalize_bibliographic_payload)
+    SubQueryHandler.AdvancedBibl.Bibliography_Signal.connect(finalize_bibliographic_payload)
+    SubQueryHandler.AdvancedSemantic.Bibliography_Signal.connect(finalize_bibliographic_payload)
+
 
     window.show()
     sys.exit(app.exec())
