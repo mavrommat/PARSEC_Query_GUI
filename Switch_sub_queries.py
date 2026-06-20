@@ -11,7 +11,7 @@ from Bibliographic.AdvancedBibliographicFanc import AdvancedBibliographic
 from Bibliographic.AdvancedSemanticFanc import AdvancedSemantic
 
 from Advanced.ConstraintsFanc import Constraints
-
+from Advanced.InfoViewSelectionFanc import InfoViewSelection
 class SwitchSubQueries:
     def __init__(self, window, main_handler):
         self.main_window = window
@@ -52,20 +52,25 @@ class SwitchSubQueries:
         self.AdvFlow_DrawSky = DrawOnSky()
 
         self.Advanced = Constraints()
-
         self.AdvFlow_Coordinates.ui.B_submit_coord_search.setText("Submit Coordinates: Next Step")
         self.AdvFlow_Coordinates.ui.B_submit_coord_search.clicked.connect(self.route_to_constraints)
 
-        # Connect the advanced flow sub-signals
+        # Connect advanced flow sub-signals
         self.AdvFlow_Coordinates.Sub_coord_signal.connect(self.SwitchToSubQuery)
 
         self.Advanced = Constraints()
-        # Connect the advanced flow sub-signals
+        # Connect advanced flow sub-signals
         self.AdvFlow_Coordinates.Sub_coord_signal.connect(self.SwitchToSubQuery)
         
         self.AdvFlow_AroundObject.final_coords_query_signal.connect(self.handle_adv_completed_search_area)
         self.AdvFlow_ManualCoords.settings_info_signal.connect(self.handle_adv_completed_search_area)
         self.AdvFlow_DrawSky.settings_info_signal.connect(self.handle_adv_completed_search_area)
+
+        self.DisplayOptions = InfoViewSelection()
+        self.Advanced.Constraints_query_signal.connect(self.route_to_display_options)
+        
+        # final payload from InfoViewSelection
+        self.DisplayOptions.Displayed_concepts_signal.connect(self.handle_final_advanced_query)
         
     def update_main_query(self, query_name):
         self.current_main_query = query_name
@@ -121,14 +126,14 @@ class SwitchSubQueries:
             self.main_window.SwitchQueryWidget(self.AdvancedSemantic)
 
     def handle_completed_search_area(self, final_dict):
-        # 1. Send the dictionary to the scroll widget to update the UI
+        # Send the dictionary to the scroll widget
         self.Coordinates.add_area_to_scroll_widget(final_dict)
         
-        # 2. Switch the screen BACK to the main Coordinates widget!
+        # Switch screen to the main Coordinates
         self.main_window.SwitchQueryWidget(self.Coordinates)
 
     def handle_adv_completed_search_area(self, final_dict):
-        # 1. Update the UI for the Advanced Flow coordinates
+        # Update UI for the Advanced Flow 
         self.AdvFlow_Coordinates.add_area_to_scroll_widget(final_dict)
         self.main_window.SwitchQueryWidget(self.AdvFlow_Coordinates)
     
@@ -143,3 +148,12 @@ class SwitchSubQueries:
     def route_to_constraints(self):
         print("Advanced Flow: Coordinates submitted. Routing to Constraints.")
         self.main_window.SwitchQueryWidget(self.Advanced)
+    
+    def route_to_display_options(self):
+        print("Advanced Flow: Constraints submitted. Routing to Display Options.")
+        self.main_window.SwitchQueryWidget(self.DisplayOptions)  # Uncomment and implement when DisplayOptions is ready
+
+    def handle_final_advanced_query(self, display_payload):
+        print("Advanced Flow Complete! Display Options Selected:")
+        print(f"View Mode: {display_payload['view_mode']}")
+        print(f"Features: {display_payload['features']}")

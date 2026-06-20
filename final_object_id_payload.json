@@ -1,0 +1,11 @@
+{
+    "Databases": [
+        "HECATE",
+        "HyperAtlas"
+    ],
+    "Query_Mode": "Object ID",
+    "Found_Object_IDs": [
+        "WiggleZ S15J150255431+05130891",
+        "SDSS J153126.00+450848.5"
+    ]
+}

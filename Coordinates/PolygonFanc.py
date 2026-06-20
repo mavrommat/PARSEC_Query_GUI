@@ -32,17 +32,17 @@ class Polygon(QWidget):
 
     # --- ADD THIS METHOD TO CHANGE THE VISUAL LABEL ---
     def update_units_label(self, selected_units):
-        self.ui.units_label.setText(selected_units)
+        self.ui.side_units_label.setText(selected_units)
 
     def pass_settings(self, checked=False):
-        poly_dist = self.ui.polyg_hypot_sb.value()
+        poly_dist = self.ui.side_sb.value()
         poly_dist = float(poly_dist)
 
         vertices = self.ui.vertices_sb.value()
         vertices = int(vertices)
 
         # Grab the text directly from the visual label!
-        current_units = self.ui.units_label.text()
+        current_units = self.ui.side_units_label.text()
 
         settings_info = {
             "Advanced": False,

@@ -46,6 +46,7 @@ class InfoViewSelection(QWidget):
         self.ui.R_default.clicked.connect(lambda: self.set_view_logic("default_view"))
         self.ui.R_object_view.clicked.connect(lambda: self.set_view_logic("object_view"))
 
+        self.ui.B_confirm_query.clicked.connect(self.emit_confimation)
         # EXACT replica call
         self.add_concepts()
 
@@ -133,4 +134,13 @@ class InfoViewSelection(QWidget):
             "view_mode": self.current_view,
             "features": self.selected_features_data
         }
+        #self.Displayed_concepts_signal.emit(payload)
+
+    def emit_confimation(self):
+        print("Final Confirmation: Emitting the selected concepts and view mode.")
+        payload = {
+            "view_mode": self.current_view,
+            "features": self.selected_features_data
+        }
         self.Displayed_concepts_signal.emit(payload)
+    

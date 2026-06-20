@@ -27,28 +27,45 @@ class Ui_Rectagular(object):
         font.setFamilies([u"Source Code Pro"])
         font.setPointSize(12)
         ObjectIdRectagular.setFont(font)
+        
         self.gridLayout = QGridLayout(ObjectIdRectagular)
         self.gridLayout.setObjectName(u"gridLayout")
+        
         self.rectangular_gb = QGroupBox(ObjectIdRectagular)
         self.rectangular_gb.setObjectName(u"rectangular_gb")
+        
         self.gridLayout_2 = QGridLayout(self.rectangular_gb)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.hypot_sb = QDoubleSpinBox(self.rectangular_gb)
-        self.hypot_sb.setObjectName(u"hypot_sb")
+        
+        # --- Width Inputs (Row 0) ---
+        self.width_label = QLabel(self.rectangular_gb)
+        self.width_label.setObjectName(u"width_label")
+        self.gridLayout_2.addWidget(self.width_label, 0, 0, 1, 1)
 
-        self.gridLayout_2.addWidget(self.hypot_sb, 0, 1, 1, 1)
+        self.width_sb = QDoubleSpinBox(self.rectangular_gb)
+        self.width_sb.setObjectName(u"width_sb")
+        self.gridLayout_2.addWidget(self.width_sb, 0, 1, 1, 1)
 
-        self.label = QLabel(self.rectangular_gb)
-        self.label.setObjectName(u"label")
+        # RENAMED TO width_units_label
+        self.width_units_label = QLabel(self.rectangular_gb)
+        self.width_units_label.setObjectName(u"width_units_label")
+        self.gridLayout_2.addWidget(self.width_units_label, 0, 2, 1, 1)
 
-        self.gridLayout_2.addWidget(self.label, 0, 0, 1, 1)
+        # --- Height Inputs (Row 1) ---
+        self.height_label = QLabel(self.rectangular_gb)
+        self.height_label.setObjectName(u"height_label")
+        self.gridLayout_2.addWidget(self.height_label, 1, 0, 1, 1)
 
-        self.units_label = QLabel(self.rectangular_gb)
-        self.units_label.setObjectName(u"units_label")
+        self.height_sb = QDoubleSpinBox(self.rectangular_gb)
+        self.height_sb.setObjectName(u"height_sb")
+        self.gridLayout_2.addWidget(self.height_sb, 1, 1, 1, 1)
 
-        self.gridLayout_2.addWidget(self.units_label, 0, 2, 1, 1)
+        # RENAMED TO height_units_label
+        self.height_units_label = QLabel(self.rectangular_gb)
+        self.height_units_label.setObjectName(u"height_units_label")
+        self.gridLayout_2.addWidget(self.height_units_label, 1, 2, 1, 1)
 
-
+        # --- Main Layout Assembly ---
         self.gridLayout.addWidget(self.rectangular_gb, 0, 0, 1, 1)
 
         self.B_confirm_area = QPushButton(ObjectIdRectagular)
@@ -58,16 +75,19 @@ class Ui_Rectagular(object):
         self.retranslateUi(ObjectIdRectagular)
 
         QMetaObject.connectSlotsByName(ObjectIdRectagular)
-
-       
     # setupUi
 
     def retranslateUi(self, ObjectIdRectagular):
         ObjectIdRectagular.setWindowTitle(QCoreApplication.translate("ObjectIdRectagular", u"Form", None))
         self.rectangular_gb.setTitle("")
-        self.label.setText(QCoreApplication.translate("ObjectIdRectagular", u"Hypotenuse distance from center:", None))
-        self.units_label.setText(QCoreApplication.translate("ObjectIdRectagular", u"Units", None))
+        
+        # Translations for Width
+        self.width_label.setText(QCoreApplication.translate("ObjectIdRectagular", u"Side Width:", None))
+        self.width_units_label.setText(QCoreApplication.translate("ObjectIdRectagular", u"Units", None)) # UPDATED HERE
+        
+        # Translations for Height
+        self.height_label.setText(QCoreApplication.translate("ObjectIdRectagular", u"Height:", None))
+        self.height_units_label.setText(QCoreApplication.translate("ObjectIdRectagular", u"Units", None)) # UPDATED HERE
+        
         self.B_confirm_area.setText(QCoreApplication.translate("ObjectIdRectagular", u"Confirm area", None))
-    
     # retranslateUi
-

@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import QWidget, QLabel, QVBoxLayout, QGridLayout
 from PySide6.QtCore import Qt, Signal
 from Coordinates.CoordinateSearchUI import Ui_CoordinatesSearch
+
 class SearchByCoordinatesWidget(QWidget):
 
     Sub_coord_signal = Signal(str)
@@ -68,10 +69,34 @@ class SearchByCoordinatesWidget(QWidget):
     def add_area_to_scroll_widget(self, settings_dict):
         target = settings_dict.get("Target", "N/A")
         shape = settings_dict.get("Shape", "N/A")
-        dist = settings_dict.get("Distance", 0) 
         units = settings_dict.get("Units", "")
         
-        display_text = f"Coordinate Area -> Target: {target} | {shape}: {dist} {units}"
+        # --- DYNAMICALLY FORMAT THE DISPLAY TEXT ---
+        shape_parameters = ""
+        
+        # Format for Radius
+        if "Distance" in settings_dict:
+            dist = settings_dict["Distance"]
+            shape_parameters = f"{dist} {units}"
+            
+        # Format for Rectangle
+        elif "Width" in settings_dict and "Height" in settings_dict:
+            w = settings_dict["Width"]
+            h = settings_dict["Height"]
+            shape_parameters = f"{w} x {h} {units}"
+            
+        # Format for Polygon
+        elif "Side_Length" in settings_dict and "Vertices" in settings_dict:
+            side = settings_dict["Side_Length"]
+            vert = settings_dict["Vertices"]
+            shape_parameters = f"Side: {side} {units} ({vert} vertices)"
+        
+        # Fallback just in case
+        else:
+            shape_parameters = "Unknown parameters"
+            
+        display_text = f"Coordinate Area -> Target: {target} | {shape}: {shape_parameters}"
+        # -------------------------------------------
         
         row_label = QLabel(display_text)
         row_label.setStyleSheet("""
@@ -107,3 +132,4 @@ class SearchByCoordinatesWidget(QWidget):
 
     def broadcast_next_step(self):
         self.Next_step_signal.emit("Coord Search Completed")
+    

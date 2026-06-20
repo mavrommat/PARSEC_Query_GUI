@@ -9,10 +9,10 @@ from Coordinates.RectangularFanc import Rectagular
 from Coordinates.PolygonFanc import Polygon
 
 from Coordinates.Resolver import ObjectResolver
+
 class SearchAround(QWidget):
 
     Sub_Sub_coord_signal = Signal(str)
-    
     final_coords_query_signal = Signal(dict) 
 
     def __init__(self):
@@ -54,7 +54,7 @@ class SearchAround(QWidget):
 
         self.ui.B_resolved.clicked.connect(self.resolver_process)
 
-        # 2. Add an instance variable to remember the target/frame/epoch settings
+        # Add an instance variable to remember the target/frame/epoch settings
         self.current_info_settings = {}
 
         self.Radius = Radius()
@@ -79,8 +79,11 @@ class SearchAround(QWidget):
 
         # Pushing the unit text to the child widgets 
         self.Radius.ui.units_label.setText(units_choice)
-        self.Rectangle.ui.units_label.setText(units_choice)
-        self.Polygon.ui.units_label.setText(units_choice)
+        
+        # Using the exact UI element names we set up earlier
+        self.Rectangle.ui.width_units_label.setText(units_choice)
+        self.Rectangle.ui.height_units_label.setText(units_choice)
+        self.Polygon.ui.side_units_label.setText(units_choice)
         
         info_settings = {
             "Target": coords_id_input,
@@ -89,19 +92,18 @@ class SearchAround(QWidget):
             "Frame": frame_choice,
             "Epoch": epoch_choice,
             "Equinox": equinox_choice
-            }
+        }
         
         self.current_info_settings = info_settings # save the settings 
 
         self.validate_input_data(coords_id_input, info_settings)
-
         self.ui.coords_id_input.clear()
 
     def validate_input_data(self, coords_id_input, info_settings):
         if coords_id_input.strip() == "":
             popup = ErrorPopup("Empty target", "Please enter a target")
             popup.show_popup()
-            return  # Stop the function from proceeding
+            return  
         
         # Attempt to resolve the object before proceeding to search shapes
         try:
@@ -121,20 +123,38 @@ class SearchAround(QWidget):
         self.Sub_Sub_coord_signal.emit(info_settings["Shape"])
 
     def shape_info_process(self, settings_info):
-            CoordsQuerySelections = {
-                "Target": self.current_info_settings.get("Target", "N/A"),
-                "Shape": self.current_info_settings.get("Shape", "N/A"),
-                "Vertices": settings_info.get("Vertices", "N/A"), 
-                "Distance": settings_info.get("Distance", 0),      
-                "Units": self.current_info_settings.get("Units", ""),       
-                "Frame": self.current_info_settings.get("Frame", "N/A"),
-                "Epoch": self.current_info_settings.get("Epoch", "N/A"),
-                "Equinox": self.current_info_settings.get("Equinox", "N/A")
-            }
+        # Base settings from the main panel
+        CoordsQuerySelections = {
+            "Target": self.current_info_settings.get("Target", "N/A"),
+            "Shape": self.current_info_settings.get("Shape", "N/A"),
+            "Units": self.current_info_settings.get("Units", ""),       
+            "Frame": self.current_info_settings.get("Frame", "N/A"),
+            "Epoch": self.current_info_settings.get("Epoch", "N/A"),
+            "Equinox": self.current_info_settings.get("Equinox", "N/A")
+        }
 
-            print(f"Broadcasting Final Selection: {CoordsQuerySelections}")
-                
-            self.final_coords_query_signal.emit(CoordsQuerySelections)
+        # --- DYNAMICALLY append the parameters based on the incoming dictionary ---
+        
+        # From Radius
+        if "Distance" in settings_info:
+            CoordsQuerySelections["Distance"] = settings_info["Distance"]
+            
+        # From Rectangle
+        if "Width" in settings_info and "Height" in settings_info:
+            CoordsQuerySelections["Width"] = settings_info["Width"]
+            CoordsQuerySelections["Height"] = settings_info["Height"]
+            
+        # From Polygon
+        if "Side_Length" in settings_info:
+            CoordsQuerySelections["Side_Length"] = settings_info["Side_Length"]
+            
+        # From Polygon and Rectangle
+        if "Vertices" in settings_info:
+            CoordsQuerySelections["Vertices"] = settings_info["Vertices"]
+
+        print(f"Broadcasting Final Selection: {CoordsQuerySelections}")
+            
+        self.final_coords_query_signal.emit(CoordsQuerySelections)
     
     def resolver_process(self):
         input_text = self.ui.coords_id_input.text().strip()
@@ -151,12 +171,11 @@ class SearchAround(QWidget):
             popup.show_popup()
             return
 
-        # 3. Update the UI with the payload data
+        # Update the UI with the payload data
         self.display_resolved_payload(payload)
 
     def display_resolved_payload(self, payload):
         """Clears the old output and displays the new resolved payload dynamically with aligned columns."""
-        
         layout = self.ui.verticalLayout_resolved
 
         # Clear any existing widgets from previous searches

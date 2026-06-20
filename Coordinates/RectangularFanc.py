@@ -30,35 +30,36 @@ class Rectagular(QWidget):
 
         self.ui.B_confirm_area.clicked.connect(self.pass_settings)
 
-    # --- ADD THIS METHOD TO CHANGE THE VISUAL LABEL ---
     def update_units_label(self, selected_units):
-        self.ui.units_label.setText(selected_units)
+        # Update both unit labels to keep them in sync
+        self.ui.width_units_label.setText(selected_units)
+        self.ui.height_units_label.setText(selected_units)
 
     def pass_settings(self, checked=False):
-        rectangular_dist = self.ui.hypot_sb.value()
-        rectangular_dist = float(rectangular_dist)
+        # Grab width and height from the new spinboxes
+        rect_width = float(self.ui.width_sb.value())
+        rect_height = float(self.ui.height_sb.value())
         
-        # Grab the text directly from the visual label!
-        current_units = self.ui.units_label.text()
+        # Grab the text directly from one of the visual labels
+        current_units = self.ui.width_units_label.text()
 
         settings_info = {
             "Advanced": False,
-            "Distance": rectangular_dist,
+            "Width": rect_width,
+            "Height": rect_height,
             "Units": current_units,
             "Vertices": 4
-            }
+        }
         
-        self.validate_input_data(rectangular_dist, settings_info)
+        self.validate_input_data(rect_width, rect_height, settings_info)
         
 
-    def validate_input_data(self, rectangular_dist, settings_info):
-        if rectangular_dist <= 0:
-            popup = ErrorPopup("Unvalid Value", "Please enter a hypotenuse value > 0")
+    def validate_input_data(self, rect_width, rect_height, settings_info):
+        # Ensure both dimensions are strictly positive
+        if rect_width <= 0 or rect_height <= 0:
+            popup = ErrorPopup("Invalid Value", "Please enter width and height values > 0")
             popup.show_popup()
             return  # Stop the function from proceeding
-        elif rectangular_dist > 0:
+        else:
             # Emit the data!
             self.settings_info_signal.emit(settings_info)
-
-
-    

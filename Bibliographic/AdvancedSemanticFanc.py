@@ -5,7 +5,7 @@ from ErrorPopUp import ErrorPopup
 
 class AdvancedSemantic(QWidget):
 
-    # Bibliography_Signal = Signal(dict)
+    Bibliography_Signal = Signal(dict)
 
     def __init__(self):
         super().__init__()
@@ -137,8 +137,13 @@ class AdvancedSemantic(QWidget):
             self.show_error("Empty Search", "Please add at least one search parameter to the list.")
             return
 
-        search_payload = {"semantic_queries": self.collected_data}
-        # self.Bibliography_Signal.emit(search_payload)
+        # 2. Emit the payload
+        search_payload = {
+            "Search": "Advanced Semantic",
+            "semantic_queries": self.collected_data
+        }
+        
+        self.Bibliography_Signal.emit(search_payload)
         
         print(f"Emitting {len(self.collected_data)} constraints for search:")
         for item in self.collected_data:

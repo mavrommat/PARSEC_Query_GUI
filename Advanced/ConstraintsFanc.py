@@ -12,7 +12,6 @@ from Advanced.QueryParser import QueryParser
 from Concepts.ConceptsProcessing import ConceptsProcessing
 
 class Constraints(QWidget):
-    # --- FIX 1: Changed Signal type to dict since self.groups_data is a dictionary ---
     Constraints_query_signal = Signal(dict) 
 
     def __init__(self):
@@ -86,9 +85,8 @@ class Constraints(QWidget):
         self.ui.Confirm_constrains_next_step.clicked.connect(self.emit_updates)
 
         self.ui.B_copy_query.clicked.connect(self.copy_query_to_clipboard)
-    # --- FIX 1: Helper method to emit the signal cleanly ---
+    
     def emit_updates(self):
-        """Emits the current constraints data to the parent application."""
         self.Constraints_query_signal.emit(self.groups_data)
 
     def set_selected_one(self):

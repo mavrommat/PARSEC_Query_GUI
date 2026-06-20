@@ -7,7 +7,7 @@ from ErrorPopUp import ErrorPopup
 
 class AdvancedBibliographic(QWidget):
 
-    #ObjectID_Signal = Signal(list)
+    Bibliography_Signal = Signal(dict)
 
     def __init__(self):
         super().__init__()
@@ -88,6 +88,16 @@ class AdvancedBibliographic(QWidget):
                     return self.show_error("Date Range Error", "End month is before start month.")
 
         print("Validation passed. Proceeding with search...")
+        
+        # 2. Package the data and emit it
+        search_data = {
+            "Search": "Advanced Bibliographic",
+            "Start_Month": s_m,
+            "Start_Year": s_y,
+            "End_Month": e_m,
+            "End_Year": e_y
+        }
+        self.Bibliography_Signal.emit(search_data)
 
     def is_valid_month(self, input_str):
         if input_str.isdigit():
