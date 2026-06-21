@@ -1,10 +1,7 @@
-from PySide6.QtWidgets import QWidget
 from Bibliographic.AdvancedBibliographicUI import Ui_AdvancedBibliographic
 from PySide6.QtCore import Qt, Signal
-from PySide6.QtWidgets import (
-    QLineEdit, QTextEdit, QRadioButton, QWidget)
 from ErrorPopUp import ErrorPopup 
-
+from PySide6.QtWidgets import QWidget, QLineEdit, QTextEdit, QRadioButton, QButtonGroup # Added QButtonGroup
 class AdvancedBibliographic(QWidget):
 
     Bibliography_Signal = Signal(dict)
@@ -41,11 +38,35 @@ class AdvancedBibliographic(QWidget):
         self.ui.B_clear_all.clicked.connect(self.clear_all_inputs)
         self.ui.B_submit.clicked.connect(self.validate_input_data)
 
-        #self.ui.B_journal_search.clicked.connect(self.trigger_search)    
-        #self.ui.B_reference_search.clicked.connect(self.trigger_search)
-        #self.ui.B_reference_search.clicked.connect(self.trigger_search)
-        #self.ui.B_advanced_bib_search.clicked.connect(self.trigger_search)
-    
+        # --- Fix Radio Button Exclusivity ---
+        self.author_btn_group = QButtonGroup(self)
+        self.author_btn_group.addButton(self.ui.R_and_author)
+        self.author_btn_group.addButton(self.ui.R_or_author)
+
+        self.object_btn_group = QButtonGroup(self)
+        self.object_btn_group.addButton(self.ui.R_and_object)
+        self.object_btn_group.addButton(self.ui.R_or_object)
+
+        author_tooltip = (
+            "<b>Format:</b> Last Name, First Name<br>"
+            "<b>Multiple Authors:</b> Separate entries using <b>semicolons (;)</b>, <b>new lines (Enter)</b>, or <b>parentheses</b>.<br>"
+            "<i>Note: Do not use commas to separate different authors.</i>"
+        )
+        self.ui.Input_authors.setToolTip(author_tooltip)
+        
+        object_tooltip = (
+            "<b>Format:</b> Enter object identifiers.<br>"
+            "<b>Multiple Objects:</b> Separate entries using <b>semicolons (;)</b>, <b>new lines (Enter)</b>, or <b>parentheses</b>."
+        )
+        self.ui.Input_objects.setToolTip(object_tooltip)
+
+        self.ui.Input_authors.setPlaceholderText(
+            "Format: Last, First. Separate entries using semicolons (;), parentheses, or new lines."
+        )
+        self.ui.Input_objects.setPlaceholderText(
+            "Enter object identifiers. Separate entries using semicolons (;), commas, or new lines."
+        )
+
     def clear_all_inputs(self):
         # Clear QLineEdit
         for widget in self.ui.main_gb.findChildren(QLineEdit):
@@ -87,16 +108,46 @@ class AdvancedBibliographic(QWidget):
                 if int(e_m) < int(s_m):
                     return self.show_error("Date Range Error", "End month is before start month.")
 
+        # --- Extract and Parse Text Fields ---
+        raw_authors = self.ui.Input_authors.toPlainText().strip()
+        raw_objects = self.ui.Input_objects.toPlainText().strip()
+        
+        authors_list = [a.strip() for a in raw_authors.replace(';', '\n').replace('(', '\n').replace(')', '\n').split('\n') if a.strip()]
+        objects_list = [o.strip() for o in raw_objects.replace(';', '\n').replace(',', '\n').replace('(', '\n').replace(')', '\n').split('\n') if o.strip()]
+        
+        title = self.ui.Input_title.text().strip()
+        abstract_keywords = self.ui.Input_abstract_keywords.text().strip()
+
+        # Logic Operators
+        def get_logic_operator(and_rb, or_rb):
+            if and_rb.isChecked(): return "AND"
+            if or_rb.isChecked(): return "OR"
+            return None 
+            
+        author_logic = get_logic_operator(self.ui.R_and_author, self.ui.R_or_author)
+        object_logic = get_logic_operator(self.ui.R_and_object, self.ui.R_or_object)
+        title_logic = get_logic_operator(self.ui.R_and_title, self.ui.R_or_title)
+        abs_logic = get_logic_operator(self.ui.R_and_abs_keyw, self.ui.R_or_abs_keyw)
+
         print("Validation passed. Proceeding with search...")
         
-        # 2. Package the data and emit it
+        # 3. Package the parsed lists and emit
         search_data = {
             "Search": "Advanced Bibliographic",
             "Start_Month": s_m,
             "Start_Year": s_y,
             "End_Month": e_m,
-            "End_Year": e_y
+            "End_Year": e_y,
+            "Authors": authors_list,      
+            "Author_Logic": author_logic,
+            "Objects": objects_list,      
+            "Object_Logic": object_logic,
+            "Title": title,
+            "Title_Logic": title_logic,
+            "Abstract_Keywords": abstract_keywords,
+            "Abstract_Logic": abs_logic
         }
+        
         self.Bibliography_Signal.emit(search_data)
 
     def is_valid_month(self, input_str):

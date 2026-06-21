@@ -34,17 +34,6 @@ def main():
         adv_draw_sky=SubQueryHandler.AdvFlow_DrawSky    
     )
     
-    # 3. Execution Controller setup
-    info_view_widget = SubQueryHandler.DisplayOptions
-    
-    execution_manager = ExecutionController(
-        coord_info_grabber=CoordInfoGrabber,
-        standard_coords_widget=MainQueryHandler.Coordinates, 
-        info_view_widget=info_view_widget 
-    )
-    
-    results_window = ResultsWindow(window)
-    execution_manager.Execution_completed_signal.connect(results_window.display_results) 
 
     # 4. Payload Aggregator setup
     payload_aggregator = PayloadAggregator()
@@ -60,6 +49,19 @@ def main():
 
     SubQueryHandler.Advanced.Constraints_query_signal.connect(capture_advanced_constraints)
     SubQueryHandler.DisplayOptions.Displayed_concepts_signal.connect(capture_display_options)
+    
+    # 3. Execution Controller setup
+    info_view_widget = SubQueryHandler.DisplayOptions
+    
+    execution_manager = ExecutionController(
+        coord_info_grabber=CoordInfoGrabber,
+        standard_coords_widget=MainQueryHandler.Coordinates, 
+        info_view_widget=info_view_widget 
+    )
+    
+    results_window = ResultsWindow(window)
+    execution_manager.Execution_completed_signal.connect(results_window.display_results) 
+
 
 
     # B. Universal Execution Capture 
