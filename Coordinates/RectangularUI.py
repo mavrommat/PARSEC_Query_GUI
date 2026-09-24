@@ -60,7 +60,6 @@ class Ui_Rectagular(object):
         self.height_sb.setObjectName(u"height_sb")
         self.gridLayout_2.addWidget(self.height_sb, 1, 1, 1, 1)
 
-        # RENAMED TO height_units_label
         self.height_units_label = QLabel(self.rectangular_gb)
         self.height_units_label.setObjectName(u"height_units_label")
         self.gridLayout_2.addWidget(self.height_units_label, 1, 2, 1, 1)

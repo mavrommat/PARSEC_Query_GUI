@@ -1,8 +1,14 @@
+from curses import window
 import os
-from PySide6.QtWidgets import QMainWindow, QLabel, QVBoxLayout, QStackedWidget
+from PySide6.QtWidgets import QMainWindow, QLabel, QVBoxLayout, QStackedWidget, QWidget
 from PySide6.QtGui import QPixmap, QIcon
 from PySide6.QtCore import Qt, Signal
 from MainWindowUI import Ui_MainWindow
+from Results.ResultsObjectsFanc import Results_Objects
+from Results.ObjectOverviewFanc import ObjectOverviewWidget
+from Results.DisplayConcepts import AllMeasurementsWidget
+from ResultsController import ResultsController
+from ResultsProcessor import ResultsProcessor
 
 class MainWindow(QMainWindow):
 
@@ -15,10 +21,9 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
         self.setWindowTitle("PARSEC's GUI") # Window name
-
         # image paths
         current_folder = os.path.dirname(os.path.abspath(__file__))
-        image_path = os.path.join(current_folder, "multimedia", "pismis24.png")
+        image_path = os.path.join(current_folder, "multimedia", "eso0932a.jpg")
         icon_path = os.path.join(current_folder, "multimedia", "PARSEC_icon.png")
         
         self.setWindowIcon(QIcon(icon_path)) # Set icon
@@ -97,9 +102,56 @@ class MainWindow(QMainWindow):
         self.query_layout = QVBoxLayout(self.ui.query_widget)
         self.query_layout.setContentsMargins(0, 0, 0, 0)
         
-        # 1. Create the deck of cards
+        #====================================================================
+        # Results Wiring
+        #====================================================================
         self.query_stack = QStackedWidget()
         self.query_layout.addWidget(self.query_stack)
+        self.empty_query_widget = QWidget()
+        self.empty_query_widget.setStyleSheet("background: transparent;")
+        self.query_stack.addWidget(self.empty_query_widget)
+        self.output_layout = QVBoxLayout(self.ui.output_widget)
+        self.output_layout.setContentsMargins(0, 0, 0, 0)
+        
+        # Instantiate the widgets
+        self.results_widget = Results_Objects()
+        self.overview_widget = ObjectOverviewWidget()
+        self.all_measurements_widget = AllMeasurementsWidget()
+        
+        # Initialize Controller (replaces ViewRouter)
+        self.controller = ResultsController(self.query_stack, self.empty_query_widget)
+        
+        # Register modules with abstraction names
+        self.controller.register_module("OverviewModule", self.overview_widget)
+        self.controller.register_module("MeasurementsModule", self.all_measurements_widget)        
+        
+        # Ensure Results_Objects UI knows which actions to display
+        self.results_widget.set_available_views(["Overview", "Measurements"])
+        
+        # Route main results panel requests directly into the orchestrator
+        self.results_widget.request_view_signal.connect(self.controller.route_action)
+        
+        # Wire UI updates to controller events
+        self.controller.navigated_signal.connect(self.clear_search_modes)
+        self.controller.returned_home_signal.connect(self.restore_search_modes)
+
+        # Add the requested widgets to their respective layouts
+        self.output_layout.addWidget(self.results_widget)
+        
+        #  Jumpstart the backend processor
+        self.results_processor = ResultsProcessor()
+        self.results_processor.Processed_data_signal.connect(self.results_widget.receive_processed_data)
+
+
+        # 'B_execute_query' to start the process
+        #self.ui.B_execute_query.clicked.connect(self.load_json_results)
+        self.load_json_results()
+
+    def SwitchQueryWidget(self, widget):
+        """Adds a widget to the query stack if it doesn't exist, and brings it to the front."""
+        if self.query_stack.indexOf(widget) == -1:
+            self.query_stack.addWidget(widget)
+        self.query_stack.setCurrentWidget(widget)
 
     # Resize the background picture to be compatable with change of the aspect ratio
     def resizeEvent(self, event):
@@ -111,8 +163,6 @@ class MainWindow(QMainWindow):
         )
         self.bg_label.setPixmap(scaled_pixmap)
         super().resizeEvent(event)
-
-    
 
     def set_selected_one(self):
         self.ui.B_objectid_search.setStyleSheet("")
@@ -128,7 +178,10 @@ class MainWindow(QMainWindow):
         
         self.current_search_mode = clicked_button.text() # Save current search mode name
         
-        self.broadcast_selections() # Announce the change to main.py
+        if hasattr(self, 'controller'):
+            self.controller.set_mode(self.current_search_mode)
+            
+        self.broadcast_selections() # Announce to main
 
     def broadcast_selections(self):
         # Gather all currently active databases into a list
@@ -139,11 +192,36 @@ class MainWindow(QMainWindow):
             active_dbs.append(self.ui.B_database_2.text())
             
         self.Database_query_signal.emit(active_dbs, str(self.current_search_mode)) # Emit the signal 
+    
+    def clear_search_modes(self, module_name): # Deselection of query buttons
+        self.ui.B_objectid_search.setStyleSheet("")
+        self.ui.B_coordinates_search.setStyleSheet("")
+        self.ui.B_bibliographic_search.setStyleSheet("")
+        self.ui.B_advanced_search.setStyleSheet("")
 
-    def SwitchQueryWidget(self, widget):
-        # If the widget isn't in the deck yet, add it
-        if self.query_stack.indexOf(widget) == -1:
-            self.query_stack.addWidget(widget)
+    def restore_search_modes(self):
+        if self.current_search_mode:
+            self.broadcast_selections()
             
-        # Bring this specific widget to the top of the deck!
-        self.query_stack.setCurrentWidget(widget)
+        buttons = {
+            "Object ID": self.ui.B_objectid_search,
+            "Coordinates": self.ui.B_coordinates_search,
+            "Bibliography": self.ui.B_bibliographic_search,
+            "Advanced Search": self.ui.B_advanced_search
+        }
+        
+        if self.current_search_mode in buttons:
+            buttons[self.current_search_mode].setStyleSheet("""
+                QPushButton { background-color: hsla(248,24%,48%, 200); border: 1px solid hsla(210, 80%, 70%, 255); color: hsla(0, 0%, 100%, 255); }
+                QPushButton:hover { background-color: hsla(248,24%,60%, 200); }
+            """)
+
+    def load_json_results(self, filename="test_results.json"):
+        if self.current_search_mode != "Object ID":
+            print("Note: Currently only hardcoded to support 'Object ID' searches.")
+            # return # Uncomment enforcing Object ID mode for later use
+            
+        current_folder = os.path.dirname(os.path.abspath(__file__))
+        mockup_path = os.path.join(current_folder, filename)
+        
+        self.results_processor.load_from_json(mockup_path)

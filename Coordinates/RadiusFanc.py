@@ -30,7 +30,6 @@ class Radius(QWidget):
 
         self.ui.B_confirm_area.clicked.connect(self.pass_settings)
 
-    # --- ADD THIS METHOD TO CHANGE THE VISUAL LABEL ---
     def update_units_label(self, selected_units):
         self.ui.units_label.setText(selected_units)
 
@@ -38,7 +37,6 @@ class Radius(QWidget):
         raw_radius = self.ui.radius_sb.value()
         radius_val = float(raw_radius)
 
-        # Grab the text directly from the visual label!
         current_units = self.ui.units_label.text()
 
         settings_info = {
@@ -57,7 +55,6 @@ class Radius(QWidget):
             popup.show_popup()
             return  # Stop the function from proceeding
         elif radius_val > 0:
-            # Emit the data!
             self.settings_info_signal.emit(settings_info)
 
     

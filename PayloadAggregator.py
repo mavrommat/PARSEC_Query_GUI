@@ -1,6 +1,5 @@
 import json
-import os
-from PySide6.QtCore import QObject, Slot
+from PySide6.QtCore import QObject
 
 class PayloadAggregator(QObject):
     def __init__(self):
@@ -12,33 +11,26 @@ class PayloadAggregator(QObject):
             "Databases": [],
             "Query_Mode": None,
             "Found_Object_IDs": [],
-            
             "Advanced_Constraints": {},
             "Display_Options": {},
             "Bibliographic_Data": {}
         }
 
-    @Slot(str)
     def update_main_query_type(self, query_type):
         self.payload["Query_Mode"] = query_type
 
-    @Slot(list)
     def update_databases(self, databases):
         self.payload["Databases"] = databases
 
-    @Slot(list)
     def update_found_ids(self, id_list):
         self.payload["Found_Object_IDs"] = id_list
 
-    @Slot(dict)
     def update_constraints(self, constraints_data):
         self.payload["Advanced_Constraints"] = constraints_data
 
-    @Slot(dict)
     def update_display_options(self, display_data):
         self.payload["Display_Options"] = display_data
 
-    @Slot(dict)
     def update_bibliography(self, bib_data):
         self.payload["Bibliographic_Data"] = bib_data
 
@@ -60,7 +52,6 @@ class PayloadAggregator(QObject):
 
     def save_to_json_file(self, filename="master_query_payload.json"):
         cleaned_payload = self.get_clean_payload()
-        
         try:
             with open(filename, 'w', encoding='utf-8') as f:
                 json.dump(cleaned_payload, f, indent=4)

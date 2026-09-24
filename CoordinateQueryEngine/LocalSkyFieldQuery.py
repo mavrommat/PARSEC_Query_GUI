@@ -18,7 +18,6 @@ class LocalSkyFieldQuery:
         )
 
     def _return_filtered_data(self, boolean_mask):
-        """Helper method to return the rows of the database where the mask is True."""
         return self.database[boolean_mask]
 
     def query_circle(self, center_coord, radius):

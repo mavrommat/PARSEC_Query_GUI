@@ -1,18 +1,19 @@
+from ast import operator
 import re
 import pprint
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QAction, QDoubleValidator
-from PySide6.QtWidgets import QWidget, QMenu, QToolButton, QLabel, QVBoxLayout, QGroupBox
-
+from PySide6.QtWidgets import QWidget, QMenu, QToolButton, QLabel, QVBoxLayout, QGroupBox, QButtonGroup, QApplication
+from matplotlib import units
 # Assuming these are custom modules in your project
 from Advanced.ConstraintsUI import Ui_Constraints
-from Advanced.DSLParser import DSLParser
-from Advanced.QueryParser import QueryParser
+#from Advanced.QueryParser import QueryParser
 
-from Concepts.ConceptsProcessing import ConceptsProcessing
-
+from Concepts.OntologyProcessing import OntologyParser
+from Advanced.ConstraintsMetadataFanc import ConstraintMetadataWidget
+from Advanced.Regex_parser import parse_custom_query, validate_constraint_values
 class Constraints(QWidget):
-    Constraints_query_signal = Signal(dict) 
+    Constraints_query_signal = Signal(object)
 
     def __init__(self):
         super().__init__()
@@ -20,33 +21,8 @@ class Constraints(QWidget):
         self.ui = Ui_Constraints()
         self.ui.setupUi(self)
 
-        self.current_category = "" 
-        self.current_concept = ""
-        
-        # --- FIX 2: Initialize state variable to avoid missing attribute errors later ---
-        self.current_search_mode = "AND"
-        
-        # --- Group Data Structure ---
-        self.groups_data = {} 
-        self.group_counter = 0
-        self.group_layouts = {} 
-        self.group_constraint_widgets = {}
-
-        # --- Tracking elements for deletion and logic ---
-        self.ordered_groups = [] 
-        self.group_ui_elements = {} 
-        self.current_group_logic = "AND" 
-        
-        # --- Setup Scroll Area Layout ---
-        self.scroll_layout = QVBoxLayout(self.ui.scrollAreaWidgetContents)
-        self.scroll_layout.setAlignment(Qt.AlignTop)
-
-        self.ui.Categories_features.clear()
-        self.add_new_group()
-
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setObjectName("SearchWrapper")
-        
         self.setStyleSheet("""
             QWidget#SearchWrapper {
                 background-color: hsla(0, 0%, 12%, 150); 
@@ -57,525 +33,472 @@ class Constraints(QWidget):
                 border: none;
                 margin-top: 10px;     
             }
-        """)
-
-        self.ui.left_constrain.setEnabled(False)
-        self.ui.B_AND.clicked.connect(self.set_selected_one)
-        self.ui.B_OR.clicked.connect(self.set_selected_one)
-        self.ui.B_NOT.clicked.connect(self.set_selected_one)
-
-        # --- FIX 5: Applied standard Python snake_case to method names ---
-        self.ui.relation_cb.currentTextChanged.connect(self.update_constraint_logic)
-        self.add_concepts()
-
-        self.ui.add_constrain.clicked.connect(self.collect_constraints)
-        self.ui.B_add_manual.clicked.connect(self.manual_constraints)
-        self.ui.B_del_last_constrain.clicked.connect(self.delete_last_constraint)
-
-        self.ui.B_add_group.clicked.connect(self.add_new_group)
-        self.ui.B_del_group.clicked.connect(self.delete_last_group)
-        
-        self.ui.B_and_gr.clicked.connect(lambda: self.set_group_logic("AND"))
-        self.ui.B_or_gr.clicked.connect(lambda: self.set_group_logic("OR"))
-        self.ui.B_not_gr.clicked.connect(lambda: self.set_group_logic("NOT"))
-
-        self.num_validator = QDoubleValidator(self) 
-        self.num_validator.setNotation(QDoubleValidator.StandardNotation) 
-
-        self.ui.Confirm_constrains_next_step.clicked.connect(self.emit_updates)
-
-        self.ui.B_copy_query.clicked.connect(self.copy_query_to_clipboard)
-    
-    def emit_updates(self):
-        self.Constraints_query_signal.emit(self.groups_data)
-
-    def set_selected_one(self):
-        self.ui.B_AND.setStyleSheet("")
-        self.ui.B_OR.setStyleSheet("")
-        self.ui.B_NOT.setStyleSheet("")
-        
-        clicked_button = self.sender()
-        clicked_button.setStyleSheet("""
-            QPushButton { background-color: hsla(248,24%,48%, 200); border: 1px solid hsla(210, 80%, 70%, 255); color: hsla(0, 0%, 100%, 255); }
-            QPushButton:hover { background-color: hsla(248,24%,60%, 200); }
-            """)
-        
-        self.current_search_mode = clicked_button.text() 
-
-    def update_constraint_logic(self, relation):
-        def clear_inputs():
-            self.ui.left_constrain.clear() 
-            self.ui.right_constrain.clear()
-
-        if relation == "<=>":
-            clear_inputs()
-            self.ui.left_constrain.setEnabled(True)   
-            self.ui.right_constrain.setEnabled(True)
-        elif relation in ["<", ">", "<=", ">=", "=!", "=="]:
-            clear_inputs()
-            self.ui.left_constrain.setEnabled(False)   
-            self.ui.right_constrain.setEnabled(True)
-
-    def add_concepts(self):
-        file_name = 'Concepts/Parsec_concepts v.1.1 - sifis_current_version.csv'
-        processor = ConceptsProcessing(file_name)
-
-        try:
-            self.valid_concepts = processor.build_dictionary()
-            main_menu = QMenu(self)
-
-            for category, features in self.valid_concepts.items():
-                category_submenu = QMenu(category, self)
-                for feature in features:
-                    feature_action = QAction(feature, self)
-                    feature_action.triggered.connect(
-                        lambda checked=False, c=category, f=feature: self.on_feature_selected(c, f)
-                    )
-                    category_submenu.addAction(feature_action)
-                main_menu.addMenu(category_submenu)
-            
-            self.ui.menu_categories_features.setMenu(main_menu)
-            self.ui.menu_categories_features.setPopupMode(QToolButton.InstantPopup)
-            self.ui.menu_categories_features.setText("Select Concept")
-
-        except Exception as e:
-            print(f"An error occurred loading concepts: {e}")
-
-    def setup_group_ui(self, group_name):
-        group_box = QGroupBox(group_name)
-        group_box.setStyleSheet("QGroupBox { border: 1px solid gray; border-radius: 5px; margin-top: 10px; } QGroupBox::title { subcontrol-origin: margin; left: 10px; padding: 0 3px 0 3px; }")
-        
-        group_layout = QVBoxLayout()
-        group_box.setLayout(group_layout)
-        self.scroll_layout.addWidget(group_box) 
-        self.group_layouts[group_name] = group_layout 
-
-    def set_group_logic(self, logic):
-        # Force standalone NOT to be AND NOT for group connections
-        if logic == "NOT":
-            logic = "AND NOT"
-            
-        self.current_group_logic = logic
-        
-        self.ui.B_and_gr.setStyleSheet("")
-        self.ui.B_or_gr.setStyleSheet("")
-        self.ui.B_not_gr.setStyleSheet("")
-        
-        clicked_button = self.sender()
-        if clicked_button:
-            clicked_button.setStyleSheet("""
-                QPushButton { background-color: hsla(248,24%,48%, 200); 
-                            border: 1px solid hsla(210, 80%, 70%, 255); 
-                            color: white; }
-                                        """)
-
-    def add_new_group(self):
-        self.group_counter += 1
-        new_group_name = f"Criteria {self.group_counter}"
-        
-        self.group_constraint_widgets[new_group_name] = []
-
-        logic_label = None
-        # FIX 4: Ensure the NOT label is visually drawn even if it's the very first group
-        if self.ordered_groups or self.current_group_logic in ["NOT", "AND NOT"]: 
-            logic_label = QLabel(self.current_group_logic)
-            logic_label.setAlignment(Qt.AlignCenter)
-            logic_label.setStyleSheet("""
-                QLabel { color: hsla(210, 80%, 70%, 255); font-weight: bold; font-size: 14px; margin: 5px; }
-            """)
-            self.scroll_layout.addWidget(logic_label)
-            
-        group_box = QGroupBox(new_group_name)
-        group_box.setObjectName("DynamicGroup")
-        group_box.setStyleSheet("""
-            QGroupBox#DynamicGroup { 
+            QLabel {
+                color: white;
+                font-weight: bold;
+            }
+            QPushButton:checked { 
+                background-color: hsla(248,24%,48%, 200); 
                 border: 1px solid hsla(210, 80%, 70%, 255); 
-                border-radius: 6px; margin-top: 15px; 
-                background-color: hsla(0, 0%, 20%, 150); 
-            } 
-            QGroupBox#DynamicGroup::title { 
-                subcontrol-origin: margin; left: 10px; padding: 0 5px 0 5px; 
-                color: hsla(210, 80%, 70%, 255); font-weight: bold;
+                color: hsla(0, 0%, 100%, 255); 
             }
         """)
-        
-        group_layout = QVBoxLayout()
-        group_box.setLayout(group_layout)
-        self.scroll_layout.addWidget(group_box)
-        
-        self.groups_data[new_group_name] = []
-        self.ordered_groups.append(new_group_name)
-        self.group_layouts[new_group_name] = group_layout
-        self.group_ui_elements[new_group_name] = {'box': group_box, 'logic_label': logic_label}
-        
-        self.ui.Categories_features.addItem(new_group_name)
-        self.ui.Categories_features.setCurrentText(new_group_name)
 
-    def collect_constraints(self):
-        if not hasattr(self, 'valid_concepts') or not self.valid_concepts:
-            print("Error: The concept database is empty. Check your CSV file path!")
-            return
+        self.Ontology = OntologyParser()
+
+        self.MASTER_DICT = { }
+        self.constraint_id = 0
+        self.current_ingroup_logic_operator = "AND"
+        self.current_outgroup_logic_operator = "AND"
+        self.current_group_index = 1
+        self.total_groups = 1 
+        self.current_ingroup_index = 0
+        self.current_category = None
+        self.current_feature = None
+        self.current_characterization = None
+        self.current_auxiliary = None
+        self.current_math_operator = None
+        self.current_constraint_val = None
+        self.current_units = None
+
+        self.lock_left_input = True
+        self.ui.left_constraint_val.setDisabled(True)
+
+        #self.ui.B_add_manual.clicked.connect(self.add_manual_constraits)
+        # In-Group Logic Operators (AND, OR, AND NOT)
+        self.ui.B_AND.clicked.connect(lambda: self.set_ingroup_logic_operator("AND"))
+        self.ui.B_OR.clicked.connect(lambda: self.set_ingroup_logic_operator("OR"))
+        self.ui.B_AND_NOT.clicked.connect(lambda: self.set_ingroup_logic_operator("AND NOT"))
+        self.ingroup_btn_group = QButtonGroup(self)
+        for btn in [self.ui.B_AND, self.ui.B_OR, self.ui.B_AND_NOT]:
+            btn.setCheckable(True)
+            self.ingroup_btn_group.addButton(btn)
         
-        c_left = self.ui.left_constrain.text()
-        c_right = self.ui.right_constrain.text()
-        relation = self.ui.relation_cb.currentText()
-        logical_op = self.current_search_mode 
-        category = self.current_category
-        concept = self.current_concept 
-        units = self.ui.menu_units.currentText() 
-        
-        current_group = self.ui.Categories_features.currentText()
-        
-        if not concept:
-            print("Please select a concept from the menu or type a manual constraint!")
-            return
+        self.ui.B_AND.setChecked(True) # default selection
+        self.populate_categories_features()
+        self.ui.Concept_Characterisation_cb.currentTextChanged.connect(self.set_characterisation)
+        self.ui.Auxiliary_Concept_cb.currentTextChanged.connect(self.set_auxiliary)
+        self.ui.Operator_symbol.currentTextChanged.connect(self.set_math_operator)
+        self.ui.menu_units.currentTextChanged.connect(self.set_units)
 
-        # --- FIX: Differentiate Outer Group Logic from Inner Item Logic ---
-        is_first = len(self.groups_data.get(current_group, [])) == 0
-        
-        # If it's the first item, save the Group connection logic for the clipboard. 
-        # Otherwise, save the Inner UI logic.
-        applied_logic = self.current_group_logic if is_first else logical_op
-
-        # Intercept standalone "NOT" for data storage
-        if applied_logic == "NOT":
-            applied_logic = "AND NOT"
-
-        # --- Map the UI's "<=>" to the Parser's "IN" ---
-        is_array_operator = (relation == "<=>" or relation == "IN")
-        display_relation = "IN" if is_array_operator else relation
-
-        # Format to match the bracket style used by the AST stringifier 
-        value_str = f"[{c_left},{c_right}]" if is_array_operator else f"[{c_right}]"
-        
-        # Wraps the UI unit in literal double quotes
-        unit_str = f' "{units}"' if units else ""
-
-        dropdown_dict = {
-            "Category": category,
-            "Concept": concept,
-            "Relation": display_relation,
-            "Value": value_str,
-            "Units": units,
-            "Logical Operator": applied_logic  # Now correctly stores OR for the first item!
-        }
-
-        # The clean string for the condition block (without the AND/OR prepended)
-        clean_string = f"({category}.{concept} {display_relation} {value_str}{unit_str})".strip()
-
-        # If there are already widgets in this group, add the logic separator first
-        existing_widgets = self.group_constraint_widgets.get(current_group, [])
-        if len(existing_widgets) > 0:
+        # Out-Group Logic Operators (AND, OR, NOT)
+        self.ui.B_add_gr.clicked.connect(self.add_group)
+        self.ui.B_del_gr.clicked.connect(self.del_group)
+        self.ui.Group_cb.currentIndexChanged.connect(self.select_group)
+        self.ui.B_and_gr.clicked.connect(lambda: self.group_logic_operator("AND"))
+        self.ui.B_or_gr.clicked.connect(lambda: self.group_logic_operator("OR"))
+        self.ui.B_not_gr.clicked.connect(lambda: self.group_logic_operator("AND NOT"))
+        self.outgroup_btn_group = QButtonGroup(self)
+        for btn in [self.ui.B_and_gr, self.ui.B_or_gr, self.ui.B_not_gr]:
+            btn.setCheckable(True)
+            self.outgroup_btn_group.addButton(btn)
             
-            # Ensure the UI visual label strictly uses the inner logic
-            ui_inner_logic = "AND NOT" if logical_op == "NOT" else logical_op
-            
-            inner_logic_label = QLabel(ui_inner_logic)
-            inner_logic_label.setAlignment(Qt.AlignCenter)
-            inner_logic_label.setStyleSheet("""
-                QLabel { color: hsla(210, 80%, 70%, 255); font-weight: bold; font-size: 12px; margin: 3px; }
-            """)
-            
-            self.group_layouts[current_group].addWidget(inner_logic_label)
-            self.group_constraint_widgets[current_group].append(inner_logic_label)
+        self.ui.B_and_gr.setChecked(True) # default selection
 
-        # Finally, add the actual condition block
-        self.add_constraint_to_ui(current_group, clean_string)
-        self.groups_data.setdefault(current_group, []).append(dropdown_dict)
+        self.ui.Operator_symbol.currentTextChanged.connect(self.collect_value_specifics)
 
-        # --- UI RESET LOGIC ---
-        # Reset the internal state
-        self.current_category = ""
-        self.current_concept = ""
+        self.ui.add_constraint.clicked.connect(self.add_constraint)
+
+        # Initialize defaults from the UI before any user interaction
+        self.current_math_operator = self.ui.Operator_symbol.currentText()
+        self.current_units = self.ui.menu_units.currentText()
+        self.current_auxiliary = self.ui.Auxiliary_Concept_cb.currentText()
+        self.current_characterisation = self.ui.Concept_Characterisation_cb.currentText()
+
+        self.ui.B_add_manual.clicked.connect(self.add_manual_constraints)
+        self.ui.B_copy_constraints.clicked.connect(self.copy_constraints_to_clipboard)
+
+        #===============================================
+        # Replace scroll area with the metadata widget
+        #===============================================
+        self.metadata_widget = ConstraintMetadataWidget()
+        self.ui.verticalLayout_4.replaceWidget(self.ui.constrains_scroll_area, self.metadata_widget)
+        self.ui.constrains_scroll_area.hide()
+        self.ui.constrains_scroll_area.deleteLater()
+        #===============================================
+        self.metadata_widget.ui.B_del_constraint.clicked.connect(self.delete_current_constraint)
+
+        self.ui.Confirm_constraints_next_step.clicked.connect(self.emit_constraints)
+
+    def disable_left_input(self, disable):
+        self.lock_left_input = disable
+        self.ui.left_constraint_val.setDisabled(disable)
+
+    def set_ingroup_logic_operator(self, operator):
+        self.current_ingroup_logic_operator = operator
+
+    def populate_categories_features(self):
+        categories_dict = self.Ontology.build_dictionary()
+        main_menu = QMenu(self)
         
-        # Reset the tool button text to default
-        self.ui.menu_categories_features.setText("Select Concept")
-        
-        # Clear the input boxes
-        self.ui.left_constrain.clear()
-        self.ui.right_constrain.clear()
-        
-
-    def add_constraint_to_ui(self, group_name, constraint_string):
-        if group_name not in self.group_layouts:
-            return
-
-        constraint_label = QLabel(constraint_string)
-        constraint_label.setStyleSheet("""
-            QLabel { background-color: hsla(248, 24%, 38%, 150); color: white; padding: 5px; border-radius: 4px; }
-        """)
-
-        constraint_label.group = group_name
-        constraint_label.text_data = constraint_string
-
-        self.group_layouts[group_name].addWidget(constraint_label)
-        self.group_constraint_widgets.setdefault(group_name, []).append(constraint_label)
-
-    def on_feature_selected(self, category_name, feature_name):        
-        self.current_category = category_name
-        self.current_concept = feature_name
-        
-        # FIX 1: Update the button text to show what was just selected
-        self.ui.menu_categories_features.setText(f"{category_name} \u2192 {feature_name}")
-        
-    def manual_constraints(self):
-        manual_text = self.ui.Manual_constrain_Input.toPlainText().strip()
-        if not manual_text:
-            print("Please enter a manual constraint.")
-            return
-
-        parser = QueryParser(manual_text)
-        try:
-            full_ast = parser.parse()
-            
-            if not isinstance(full_ast, list):
-                full_ast = [full_ast]
-                
-            # FIX 1: Ignore UI buttons for the very first group to prevent "ghost" logic
-            pending_logic = "AND" if not self.ordered_groups else self.current_group_logic
-            
-            for node in full_ast:
-                if 'logic' in node:
-                    pending_logic = node['logic']
-                    self.set_group_logic(pending_logic)
-                    continue
-                    
-                current_group = self.ui.Categories_features.currentText()
-                if current_group and len(self.group_constraint_widgets.get(current_group, [])) == 0:
-                    target_group = current_group
-                else:
-                    self.add_new_group()
-                    target_group = self.ordered_groups[-1]
-                    
-                elements = node.get('elements', [node]) if node.get('type') == 'group' else [node]
-                inner_pending_logic = "AND" 
-                
-                for child in elements:
-                    if 'logic' in child:
-                        inner_pending_logic = child['logic']
-                        
-                        # FIX 2: If the first inner condition has a NOT, skip drawing it 
-                        # as a separate label so we can bake it directly into the condition text.
-                        is_first_logic = len(self.group_constraint_widgets.get(target_group, [])) == 0
-                        if is_first_logic and inner_pending_logic == "NOT":
-                            continue 
-                            
-                        inner_logic_label = QLabel(inner_pending_logic)
-                        inner_logic_label.setAlignment(Qt.AlignCenter)
-                        inner_logic_label.setStyleSheet("""
-                            QLabel { color: hsla(210, 80%, 70%, 255); font-weight: bold; font-size: 12px; margin: 3px; }
-                        """)
-                        self.group_layouts[target_group].addWidget(inner_logic_label)
-                        self.group_constraint_widgets.setdefault(target_group, []).append(inner_logic_label)
-                        continue 
-                        
-                    cond_str = self._ast_to_string(child)
-                    is_first = len(self.groups_data.get(target_group, [])) == 0
-                    
-                    # FIX 3: Bake the inner NOT into the raw text so it is never erased
-                    if is_first and inner_pending_logic == "NOT":
-                        cond_str = f"NOT {cond_str}"
-                        
-                    applied_logic = pending_logic if is_first else inner_pending_logic
-                    
-                    self.add_constraint_to_ui(target_group, cond_str)
-                    self.groups_data[target_group].append({
-                        "Type": "Manual",
-                        "Logical_Operator": applied_logic,
-                        "AST": child,
-                        "Raw_Text": cond_str
-                    })
-                    
-            self.ui.Manual_constrain_Input.clear() 
-
-        except Exception as e:
-            print(f"Syntax Error in Manual Constraint: {e}") 
-
-
-    def delete_last_group(self):
-        if len(self.ordered_groups) <= 1:
-            print("Cannot delete the only remaining group.")
-            return 
-            
-        last_group_name = self.ordered_groups.pop()
-        
-        del self.groups_data[last_group_name]
-        del self.group_layouts[last_group_name]
-        
-        # --- FIX 3: Remove from constraint widgets dict to stop memory leak ---
-        if last_group_name in self.group_constraint_widgets:
-            del self.group_constraint_widgets[last_group_name]
-        
-        index = self.ui.Categories_features.findText(last_group_name)
-        if index >= 0:
-            self.ui.Categories_features.removeItem(index)
-            
-        elements = self.group_ui_elements.pop(last_group_name)
-        
-        box = elements['box']
-        self.scroll_layout.removeWidget(box)
-        box.deleteLater()
-        
-        logic_label = elements['logic_label']
-        if logic_label:
-            self.scroll_layout.removeWidget(logic_label)
-            logic_label.deleteLater()
-            
-    
-
-    def delete_last_group(self):
-        if len(self.ordered_groups) <= 1:
-            print("Cannot delete the only remaining group.")
-            return 
-            
-        last_group_name = self.ordered_groups.pop()
-        
-        del self.groups_data[last_group_name]
-        del self.group_layouts[last_group_name]
-        
-        if last_group_name in self.group_constraint_widgets:
-            del self.group_constraint_widgets[last_group_name]
-        
-        index = self.ui.Categories_features.findText(last_group_name)
-        if index >= 0:
-            self.ui.Categories_features.removeItem(index)
-            
-        elements = self.group_ui_elements.pop(last_group_name)
-        
-        box = elements['box']
-        self.scroll_layout.removeWidget(box)
-        box.deleteLater()
-        
-        logic_label = elements['logic_label']
-        if logic_label:
-            self.scroll_layout.removeWidget(logic_label)
-            logic_label.deleteLater()
-            
-        # FIX: Dial the counter back so the next added group reclaims this number
-        self.group_counter -= 1
-
-    def delete_last_constraint(self):
-        group_name = self.ui.Categories_features.currentText()
-
-        widgets = self.group_constraint_widgets.get(group_name, [])
-        data = self.groups_data.get(group_name, [])
-
-        if not widgets or not data:
-            print("No constraints to delete.")
-            return
-
-        # 1. Remove the condition block
-        last_widget = widgets.pop()
-        self.group_layouts[group_name].removeWidget(last_widget)
-        last_widget.deleteLater()
-        
-        # Remove the underlying data entry
-        data.pop()
-
-        # 2. If the next thing in the UI list is a standalone logic label, remove it too
-        if widgets and widgets[-1].text() in ["AND", "OR", "NOT", "AND NOT", "OR NOT"]:
-            logic_widget = widgets.pop()
-            self.group_layouts[group_name].removeWidget(logic_widget)
-            logic_widget.deleteLater()
-
-    def extract_brace_blocks(self, text):
-        blocks = []
-        depth = 0
-        start = None
-
-        for i, ch in enumerate(text):
-            if ch == "{":
-                if depth == 0:
-                    start = i + 1
-                depth += 1
-
-            elif ch == "}":
-                depth -= 1
-                if depth == 0 and start is not None:
-                    blocks.append(text[start:i])
-
-        return blocks
-    
-    def _ast_to_string(self, node):
-        """Helper to reconstruct AST nodes into clean strings for UI labels."""
-        if 'variable' in node:
-            var = node['variable']
-            op = node['operator']
-            val = node['value']
-            unit = node.get('unit', '')
-            
-            # If it's a string match, skip the float/int math formatting
-            if op == '~=':
-                val_str = f"[{','.join(val)}]"
-            else:
-                v_list = [int(v) if isinstance(v, float) and v.is_integer() else v for v in val]
-                val_str = f"[{','.join(map(str, v_list))}]"
-                
-            return f"{var} {op} {val_str} {unit}".strip()
-            
-        if 'type' in node and node['type'] == 'group':
-            inner = " ".join(self._ast_to_string(n) for n in node.get('elements', []))
-            return f"({inner})"
-            
-        if 'logic' in node:
-            return node['logic']
-            
-        return ""
-    
-    def copy_query_to_clipboard(self):
-        if not self.groups_data:
-            print("No criteria to copy.")
-            return
-
-        query_blocks = []
-        
-        for i, group_name in enumerate(self.ordered_groups):
-            if group_name not in self.groups_data or not self.groups_data[group_name]:
+        # 1. Add Categories and Features directly to the main menu
+        for category, features in categories_dict.items():
+            if not features:
                 continue
                 
-            group_items = self.groups_data[group_name]
+            category_menu = main_menu.addMenu(category)
             
-            # The logic operator that connects this group to the previous one
-            group_logic = group_items[0].get("Logical_Operator", group_items[0].get("Logical Operator", "AND"))
-            
-            inner_strings = []
-            for j, item in enumerate(group_items):
-                if item.get("Type") == "Manual":
-                    cond_str = item.get("Raw_Text", "")
-                else:
-                    cat = item.get("Category", "")
-                    conc = item.get("Concept", "")
-                    rel = item.get("Relation", "")
-                    val = item.get("Value", "")
-                    unit = item.get("Units", "")
-                    
-                    unit_str = f' "{unit}"' if unit else ""
-                    cond_str = f"({cat}.{conc} {rel} {val}{unit_str})".strip()
-
-                if j == 0:
-                    inner_strings.append(cond_str)
-                else:
-                    # Grab the inner logic that connects this condition
-                    item_logic = item.get("Logical_Operator", item.get("Logical Operator", "AND"))
-                    inner_strings.append(f"{item_logic} {cond_str}")
-            
-            group_content = " ".join(inner_strings)
-            formatted_group = f"{{ {group_content} }}"
-            
-            # Handle group formatting
-            if i == 0:
-                # If the very first group was flagged as negated
-                if group_logic in ["NOT", "AND NOT", "OR NOT"]:
-                    query_blocks.append(f"NOT {formatted_group}")
-                else:
-                    query_blocks.append(formatted_group)
-            else:
-                query_blocks.append(f"{group_logic}\n{formatted_group}")
-
-        final_query = "\n".join(query_blocks)
+            for feature in features.keys():
+                action = QAction(feature, self)
+                action.triggered.connect(
+                    lambda checked=False, c=category, f=feature: self.set_category_feature(c, f)
+                )
+                category_menu.addAction(action)
+                
+        # Attach the constructed menu to the Concepts_cb button
+        self.ui.Concepts_cb.setMenu(main_menu)
+        self.ui.Concepts_cb.setPopupMode(QToolButton.InstantPopup)
         
-        from PySide6.QtGui import QGuiApplication
-        clipboard = QGuiApplication.clipboard()
-        clipboard.setText(final_query)
+        # Populate the Auxiliary Combobox directly from the Ontology constant
+        self.ui.Auxiliary_Concept_cb.clear()
+        self.ui.Auxiliary_Concept_cb.addItems(["None", "Unspecified"])
         
-        print("Successfully copied to clipboard:\n" + final_query)
+        # Fetch the VALID_AUXILIARY from OntologyParser
+        global_auxiliaries = list(self.Ontology.VALID_AUXILIARY)
+        if global_auxiliaries:
+            # Sort alphabetically for better UX
+            self.ui.Auxiliary_Concept_cb.addItems(sorted(global_auxiliaries))
+
+    def set_category_feature(self, category, feature):
+        # Update class variables
+        self.current_category = category
+        self.current_feature = feature
+        
+        # Update the button text to display the user's selection
+        self.ui.Concepts_cb.setText(f"{category} / {feature}")
+        print(f"User selected: {category} / {feature}")
+        
+        # Trigger the individual population functions
+        self.update_characterisations(category, feature)
+        self.update_units(category, feature)
+
+    def update_characterisations(self, category, feature):
+        # Reset to default UI state
+        self.ui.Concept_Characterisation_cb.clear()
+        self.ui.Concept_Characterisation_cb.addItem("Unspecified")
+        
+        # Fetch and add feature-specific characterizations
+        characterizations = self.Ontology.get_feature_characterizations(category, feature)
+        if isinstance(characterizations, list) and characterizations:
+            self.ui.Concept_Characterisation_cb.addItems(characterizations)
+
+    def set_characterisation(self, characterisation):
+        self.current_characterisation = characterisation
+
+    def set_auxiliary(self, auxiliary):
+        self.current_auxiliary = auxiliary
+
+    def set_math_operator(self, operator):
+        self.current_math_operator = operator
+
+    def set_units(self, units):
+        self.current_units = units
+
+    def update_units(self, category, feature):
+        # Reset to default UI state
+        self.ui.menu_units.clear()
+        self.ui.menu_units.addItem("Unspecified")
+        
+        # Fetch and add feature-specific units
+        units = self.Ontology.get_feature_unit(category, feature)
+        if isinstance(units, list) and units:
+            self.ui.menu_units.addItems(units)
+
+    def collect_value_specifics(self):
+        operator = self.ui.Operator_symbol.currentText()
+
+        # String
+        if operator == "str":
+            self.ui.left_constraint_val.setDisabled(True)
+            value = self.ui.right_constraint_val.text().strip()
+
+            if not value:
+                return None
+
+            return [value]
+
+        # Range
+        if operator == "<=>":
+            self.ui.left_constraint_val.setDisabled(False)
+            left_text = self.ui.left_constraint_val.text().strip()
+            right_text = self.ui.right_constraint_val.text().strip()
+
+            try:
+                left_value = float(left_text)
+                right_value = float(right_text)
+            except ValueError:
+                return None
+
+            return [left_value, right_value]
+
+        # Normal numeric operator
+        self.ui.left_constraint_val.setDisabled(True)
+        right_text = self.ui.right_constraint_val.text().strip()
+
+        try:
+            right_value = float(right_text)
+        except ValueError:
+            return None
+
+        return [right_value]
+
+    def add_group(self):
+        self.total_groups += 1
+        self.ui.Group_cb.addItem(f"Group {self.total_groups}")
+        self.current_group_index = self.total_groups
+        self.ui.Group_cb.setCurrentIndex(self.current_group_index - 1)
+        
+    def select_group(self, index):
+        self.current_group_index = index + 1
+
+    def group_logic_operator(self, operator):
+        self.current_outgroup_logic_operator = operator
+
+    def del_group(self):
+        if self.total_groups > 1:
+            self.ui.Group_cb.removeItem(self.current_group_index - 1)
+            self.total_groups -= 1
+            for i in range(self.current_group_index - 1, self.total_groups):
+                self.ui.Group_cb.setItemText(i, f"Group {i + 1}")
+
+            self.current_group_index = min(self.current_group_index, self.total_groups)
+            self.ui.Group_cb.setCurrentIndex(self.current_group_index - 1)
+
+
+    def select_group(self, index):
+        self.current_group_index = index + 1
+        # Synchronize ingroup index for new groups
+        group_items = [c for c in self.MASTER_DICT.values() if c["Group_Index"] == self.current_group_index]
+        self.current_ingroup_index = len(group_items)
+        # Push to widget
+        self.metadata_widget.filter_by_group(self.MASTER_DICT, self.current_group_index)
+
+    def add_constraint(self):
+        constraint_val = self.collect_value_specifics()
+        if constraint_val is None:
+            return
+
+        constraint = {
+            "ID": self.constraint_id,
+            "Category": self.current_category,
+            "Feature": self.current_feature,
+            "Characterisation": self.current_characterisation,
+            "Auxiliary": self.current_auxiliary,
+            "Math_Operator": self.current_math_operator,
+            "Constraint_Val": constraint_val,
+            "Units": self.current_units,
+            "Ingroup_Logic_Operator": self.current_ingroup_logic_operator,
+            "Outgroup_Logic_Operator": self.current_outgroup_logic_operator,
+            "Group_Index": self.current_group_index,
+            "Ingroup_Index": self.current_ingroup_index
+        }
+
+        self.MASTER_DICT[self.constraint_id] = constraint
+        self.constraint_id += 1
+        self.current_ingroup_index += 1
+
+        print(f"Added constraint: {constraint}")
+
+        # Update UI and jump to the newly added constraint
+        self.metadata_widget.filter_by_group(self.MASTER_DICT, self.current_group_index)
+        self.metadata_widget.ui.constraints_cb.setCurrentIndex(self.metadata_widget.ui.constraints_cb.count() - 1)
+
+    def delete_current_constraint(self):
+        current_index = self.metadata_widget.ui.constraints_cb.currentIndex()
+        if current_index < 0: return
+
+        const_id = self.metadata_widget.ui.constraints_cb.itemData(current_index)
+        if const_id not in self.MASTER_DICT: return
+
+        del self.MASTER_DICT[const_id]
+        self.reindex_constraints()
+        self.metadata_widget.filter_by_group(self.MASTER_DICT, self.current_group_index)
+
+    def del_group(self):
+        if self.total_groups > 1:
+            # Wipe dictionary items associated with this group
+            keys_to_delete = [k for k, v in self.MASTER_DICT.items() if v["Group_Index"] == self.current_group_index]
+            for k in keys_to_delete:
+                del self.MASTER_DICT[k]
+
+            self.reindex_constraints(group_deleted=self.current_group_index)
+
+            # Prevent signaling during UI adjustments
+            self.ui.Group_cb.blockSignals(True)
+            self.ui.Group_cb.removeItem(self.current_group_index - 1)
+            self.total_groups -= 1
+
+            for i in range(self.ui.Group_cb.count()):
+                self.ui.Group_cb.setItemText(i, f"Group {i + 1}")
+
+            self.current_group_index = min(self.current_group_index, self.total_groups)
+            self.ui.Group_cb.setCurrentIndex(self.current_group_index - 1)
+            self.ui.Group_cb.blockSignals(False)
+
+            self.select_group(self.current_group_index - 1)
+
+    def reindex_constraints(self, group_deleted=None):
+        # Sort remaining dictionaries mathematically to preserve sequences
+        sorted_items = sorted(self.MASTER_DICT.items(), key=lambda x: (x[1]["Group_Index"], x[1]["Ingroup_Index"]))
+
+        new_dict = {}
+        new_id = 0
+        current_grp = -1
+        ingroup_idx = 0
+
+        for old_id, data in sorted_items:
+            grp = data["Group_Index"]
+            # Shift group index down if a preceding group was deleted
+            if group_deleted is not None and grp > group_deleted:
+                grp -= 1
+
+            # Reset ingroup index when moving to a new group iteration
+            if grp != current_grp:
+                current_grp = grp
+                ingroup_idx = 0
+
+            data["ID"] = new_id
+            data["Group_Index"] = grp
+            data["Ingroup_Index"] = ingroup_idx
+
+            new_dict[new_id] = data
+            ingroup_idx += 1
+            new_id += 1
+
+        self.MASTER_DICT = new_dict
+        self.constraint_id = new_id
+
+        # Safely align current insertion index for active group
+        group_items = [c for c in self.MASTER_DICT.values() if c["Group_Index"] == self.current_group_index]
+        self.current_ingroup_index = len(group_items)
+
+    def add_manual_constraints(self):
+        # Extract text from the UI widget
+        raw_text = self.ui.Manual_constrain_Input.toPlainText().strip()
+        if not raw_text:
+            return
+
+        try:
+            # Parse structural syntax and validate against the ontology instance
+            parsed_constraints = parse_custom_query(raw_text, self.Ontology)
+            
+            if not parsed_constraints:
+                return
+
+            # Shift parsed group indices to append after existing UI groups
+            is_empty = len(self.MASTER_DICT) == 0
+            group_offset = 0 if is_empty else self.total_groups
+            max_group_added = 0
+
+            for constraint in parsed_constraints:
+                # Validate extracted values against the math operator rules
+                if not validate_constraint_values(constraint["Math_Operator"], constraint["Constraint_Val"]):
+                    print(f"Value mismatch for parsed constraint {constraint['ID']}")
+                    continue
+
+                # Align regex 0-based indices with GUI 1-based logic
+                new_group_index = group_offset + constraint["Group_Index"] + 1
+                max_group_added = max(max_group_added, new_group_index)
+
+                constraint["Group_Index"] = new_group_index
+                constraint["ID"] = self.constraint_id
+
+                # Push to the main orchestrator state
+                self.MASTER_DICT[self.constraint_id] = constraint
+                self.constraint_id += 1
+
+            # Update the Group Combobox if new groups were created
+            if max_group_added > self.total_groups:
+                # Avoid duplicating group numbers if overwriting an empty default group 1
+                start_idx = self.total_groups + 1 if not is_empty else 2 
+                for i in range(start_idx, max_group_added + 1):
+                    self.ui.Group_cb.addItem(f"Group {i}")
+                self.total_groups = max_group_added
+
+            # Navigate GUI to the last added group
+            self.current_group_index = self.total_groups
+            self.ui.Group_cb.setCurrentIndex(self.current_group_index - 1)
+            
+            # Align ingroup index for further UI additions
+            group_items = [c for c in self.MASTER_DICT.values() if c["Group_Index"] == self.current_group_index]
+            self.current_ingroup_index = len(group_items)
+
+            # Push the updated dictionary to the metadata widget
+            self.metadata_widget.filter_by_group(self.MASTER_DICT, self.current_group_index)
+            self.metadata_widget.ui.constraints_cb.setCurrentIndex(self.metadata_widget.ui.constraints_cb.count() - 1)
+            
+            # Clear text field on success
+            self.ui.Manual_constrain_Input.clear()
+            print(f"Successfully appended {len(parsed_constraints)} manual constraints.")
+
+        except ValueError as e:
+            print(f"Query Parsing Error: {e}")
+
+    def copy_constraints_to_clipboard(self):
+        if not self.MASTER_DICT:
+            print("No constraints to copy.")
+            return
+
+        # Group all constraints by Group_Index
+        groups = {}
+        for const_id, data in self.MASTER_DICT.items():
+            grp = data["Group_Index"]
+            if grp not in groups:
+                groups[grp] = []
+            groups[grp].append(data)
+
+        sorted_group_keys = sorted(groups.keys())
+        final_query_parts = []
+
+        for i, grp_key in enumerate(sorted_group_keys):
+            constraints = groups[grp_key]
+            constraints = sorted(constraints, key=lambda x: x["Ingroup_Index"])
+            
+            group_string_parts = []
+            for j, const in enumerate(constraints):
+                aux = const.get("Auxiliary", "None")
+                cat = const.get("Category", "")
+                feat = const.get("Feature", "")
+                char = const.get("Characterisation", "Unspecified")
+                op = const.get("Math_Operator", "")
+                units = const.get("Units", "Unspecified")
+                
+                vals = const.get("Constraint_Val", [])
+                val_str = ", ".join(str(v) for v in vals)
+                
+                # regex compatible tuple
+                const_str = f"({aux}|{cat}|{feat}|{char} {op} [{val_str}] \"{units}\")"
+                
+                # Append the ingroup operator if this is not the last constraint in the group
+                if j < len(constraints) - 1:
+                    next_in_op = constraints[j+1].get("Ingroup_Logic_Operator", "AND")
+                    const_str += f" {next_in_op}"
+                
+                group_string_parts.append(const_str)
+            
+            # ingroup parts are wrapped in curly braces
+            group_inner = " ".join(group_string_parts)
+            group_str = f"{{{group_inner}}}"
+            
+            # Append the outgroup operator if this is not the last group
+            if i < len(sorted_group_keys) - 1:
+                next_grp_key = sorted_group_keys[i+1]
+                # The operator linking to the NEXT group is stored in the NEXT group's first constraint
+                out_op = groups[next_grp_key][0].get("Outgroup_Logic_Operator", "AND")
+                group_str += f" {out_op}"
+                
+            final_query_parts.append(group_str)
+            
+        # final string
+        final_query_string = " ".join(final_query_parts)
+        
+        QApplication.clipboard().setText(final_query_string)
+        print(f"Copied syntax to clipboard: {final_query_string}")
+
+    def emit_constraints(self):
+        if not self.MASTER_DICT:
+            print("Error: Cannot proceed. The constraints list is empty.")
+            return 
+            
+        self.Constraints_query_signal.emit(self.MASTER_DICT)
+        print(f"Emitted {len(self.MASTER_DICT)} constraints to the main pipeline.")

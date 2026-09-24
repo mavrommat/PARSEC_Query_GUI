@@ -36,11 +36,9 @@ class Rectagular(QWidget):
         self.ui.height_units_label.setText(selected_units)
 
     def pass_settings(self, checked=False):
-        # Grab width and height from the new spinboxes
         rect_width = float(self.ui.width_sb.value())
         rect_height = float(self.ui.height_sb.value())
         
-        # Grab the text directly from one of the visual labels
         current_units = self.ui.width_units_label.text()
 
         settings_info = {
@@ -55,11 +53,10 @@ class Rectagular(QWidget):
         
 
     def validate_input_data(self, rect_width, rect_height, settings_info):
-        # Ensure both dimensions are strictly positive
+        # Ensure both dimensions are positive
         if rect_width <= 0 or rect_height <= 0:
             popup = ErrorPopup("Invalid Value", "Please enter width and height values > 0")
             popup.show_popup()
             return  # Stop the function from proceeding
         else:
-            # Emit the data!
             self.settings_info_signal.emit(settings_info)

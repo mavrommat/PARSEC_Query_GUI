@@ -1,0 +1,4141 @@
+{
+  "results": [
+    {
+      "paper": {
+        "id": "paper_001",
+        "title": "The SEDs of Nearby Star-Forming Galaxies",
+        "authors": [
+          "Example A.",
+          "Example B.",
+          "Example C."
+        ],
+        "year": 2024,
+        "doi": "10.1234/example.001"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000001",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "123456"
+          },
+          {
+            "catalogue": "HyperLEDA",
+            "id": "987654"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "NGC 1234"
+          }
+        ],
+        "coordinates": {
+          "ra": "03:17:45.2",
+          "dec": "+12:34:56.7",
+          "frame": "ICRS"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HECATE",
+            "catalogue_version": "v3",
+            "measurements": [
+              {
+                "measurement_id": "m_001",
+                "concept": "H_alpha",
+                "value": 12.43,
+                "unit": "erg s-1 cm-2",
+                "raw_value": "12.43",
+                "raw_unit": "erg/s/cm2",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "H_alpha_error",
+                    "value": 0.31,
+                    "unit": "erg s-1 cm-2",
+                    "type": "error"
+                  },
+                  {
+                    "concept": "H_alpha_CI",
+                    "value": [
+                      11.91,
+                      13.02
+                    ],
+                    "unit": "erg s-1 cm-2",
+                    "type": "confidence_interval"
+                  }
+                ],
+                "category": "Spectroscopy"
+              },
+              {
+                "measurement_id": "m_002",
+                "concept": "FUV_magnitude",
+                "value": 17.82,
+                "unit": "mag",
+                "raw_value": "17.82",
+                "raw_unit": "mag",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "FUV_magnitude_error",
+                    "value": 0.08,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_003",
+                "concept": "stellar_mass",
+                "value": 10.42,
+                "unit": "log(M_sun)",
+                "raw_value": "10.42",
+                "raw_unit": "dex",
+                "characterisation": "Prospector",
+                "auxiliary": [],
+                "category": "Physical Properties"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "SDSS DR18",
+            "catalogue_version": "DR18",
+            "measurements": [
+              {
+                "measurement_id": "m_004",
+                "concept": "g_mag",
+                "value": 15.72,
+                "unit": "mag",
+                "raw_value": "15.72",
+                "raw_unit": "mag",
+                "characterisation": "fibermag",
+                "auxiliary": [
+                  {
+                    "concept": "g_mag_error",
+                    "value": 0.02,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_005",
+                "concept": "r_mag",
+                "value": 15.11,
+                "unit": "mag",
+                "raw_value": "15.11",
+                "raw_unit": "mag",
+                "characterisation": "fibermag",
+                "auxiliary": [
+                  {
+                    "concept": "r_mag_error",
+                    "value": 0.02,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_002",
+        "title": "Dust Attenuation and Metallicity in Spiral Galaxies",
+        "authors": [
+          "Example D.",
+          "Example E."
+        ],
+        "year": 2023,
+        "doi": "10.1234/example.002"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000002",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "234567"
+          },
+          {
+            "catalogue": "NGC",
+            "id": "4321"
+          }
+        ],
+        "coordinates": {
+          "ra": "10:21:33.8",
+          "dec": "-04:18:22.1",
+          "frame": "ICRS"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HECATE",
+            "catalogue_version": "v3",
+            "measurements": [
+              {
+                "measurement_id": "m_006",
+                "concept": "A_FUV",
+                "value": 1.37,
+                "unit": "mag",
+                "raw_value": "1.37",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "A_FUV_error",
+                    "value": 0.11,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "GALEX",
+            "catalogue_version": "GR6/7",
+            "measurements": [
+              {
+                "measurement_id": "m_007",
+                "concept": "FUV_flux",
+                "value": 2.81e-15,
+                "unit": "erg s-1 cm-2 A-1",
+                "raw_value": "2.81E-15",
+                "raw_unit": "erg/s/cm2/A",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "FUV_flux_error",
+                    "value": 1.7e-16,
+                    "unit": "erg s-1 cm-2 A-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_008",
+                "concept": "NUV_flux",
+                "value": 4.32e-15,
+                "unit": "erg s-1 cm-2 A-1",
+                "raw_value": "4.32E-15",
+                "raw_unit": "erg/s/cm2/A",
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_009",
+                "concept": "FUV_NUV_colour",
+                "value": 1.84,
+                "unit": "mag",
+                "raw_value": "1.84",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_010",
+                "concept": "metallicity",
+                "value": 8.71,
+                "unit": "12 + log(O/H)",
+                "raw_value": "8.71",
+                "raw_unit": "dex",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "metallicity_error",
+                    "value": 0.06,
+                    "unit": "dex",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_003",
+        "title": "A Large Multi-Catalogue Study of Nearby Galaxies",
+        "authors": [
+          "Example F."
+        ],
+        "year": 2022,
+        "doi": "10.1234/example.003"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000003",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HyperAtlas",
+            "id": "HTA-000345"
+          }
+        ],
+        "coordinates": {
+          "ra": "14:42:10.0",
+          "dec": "+28:15:40.0",
+          "frame": "Galactic"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HyperAtlas",
+            "catalogue_version": "v1",
+            "measurements": [
+              {
+                "measurement_id": "m_011",
+                "concept": "redshift",
+                "value": 0.0124,
+                "unit": null,
+                "raw_value": "0.0124",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_012",
+                "concept": "distance",
+                "value": 52.4,
+                "unit": "Mpc",
+                "raw_value": "52.4",
+                "raw_unit": "Mpc",
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_013",
+                "concept": "log_L_IR",
+                "value": 10.83,
+                "unit": "log(L_sun)",
+                "raw_value": "10.83",
+                "raw_unit": "dex",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "log_L_IR_error",
+                    "value": 0.14,
+                    "unit": "dex",
+                    "type": "error"
+                  },
+                  {
+                    "concept": "log_L_IR_low",
+                    "value": 10.6,
+                    "unit": "dex",
+                    "type": "lower_uncertainty"
+                  },
+                  {
+                    "concept": "log_L_IR_high",
+                    "value": 10.99,
+                    "unit": "dex",
+                    "type": "upper_uncertainty"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_014",
+                "concept": "SFR",
+                "value": 3.24,
+                "unit": "M_sun yr-1",
+                "raw_value": "3.24",
+                "raw_unit": "Msun/yr",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "SFR_error",
+                    "value": 0.52,
+                    "unit": "M_sun yr-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_015",
+                "concept": "axis_ratio",
+                "value": 0.61,
+                "unit": null,
+                "raw_value": "0.61",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Morphology & Environment"
+              },
+              {
+                "measurement_id": "m_016",
+                "concept": "position_angle",
+                "value": 137.4,
+                "unit": "deg",
+                "raw_value": "137.4",
+                "raw_unit": "deg",
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Morphology & Environment"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "Pan-STARRS",
+            "catalogue_version": "DR2",
+            "measurements": []
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_004",
+        "title": "Resolved Star Formation in Nearby Galaxies",
+        "authors": [
+          "Example A.",
+          "Example K."
+        ],
+        "year": 2019,
+        "doi": "10.1234/example.004"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000004",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "345678"
+          },
+          {
+            "catalogue": "HyperLEDA",
+            "id": "112233"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "NGC 5678"
+          }
+        ],
+        "coordinates": {
+          "ra": "01:12:34.5",
+          "dec": "+05:43:21.0",
+          "frame": "ICRS"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HECATE",
+            "catalogue_version": "v3",
+            "measurements": [
+              {
+                "measurement_id": "m_1040",
+                "concept": "H_alpha",
+                "value": 8.42,
+                "unit": "erg s-1 cm-2",
+                "raw_value": "8.42",
+                "raw_unit": "erg/s/cm2",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "H_alpha_error",
+                    "value": 0.22,
+                    "unit": "erg s-1 cm-2",
+                    "type": "error"
+                  }
+                ],
+                "category": "Spectroscopy"
+              },
+              {
+                "measurement_id": "m_1041",
+                "concept": "stellar_mass",
+                "value": 9.87,
+                "unit": "log(M_sun)",
+                "raw_value": "9.87",
+                "raw_unit": "dex",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "stellar_mass_error",
+                    "value": 0.11,
+                    "unit": "log(M_sun)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1042",
+                "concept": "SFR",
+                "value": 1.84,
+                "unit": "M_sun yr-1",
+                "raw_value": "1.84",
+                "raw_unit": "Msun/yr",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "SFR_error",
+                    "value": 0.19,
+                    "unit": "M_sun yr-1",
+                    "type": "error"
+                  },
+                  {
+                    "concept": "log_L_IR_low",
+                    "value": 10.57,
+                    "unit": "dex",
+                    "type": "lower_uncertainty"
+                  },
+                  {
+                    "concept": "log_L_IR_high",
+                    "value": 10.94,
+                    "unit": "dex",
+                    "type": "upper_uncertainty"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1043",
+                "concept": "axis_ratio",
+                "value": 0.73,
+                "unit": null,
+                "raw_value": "0.73",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Morphology & Environment"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "GALEX",
+            "catalogue_version": "GR6/7",
+            "measurements": [
+              {
+                "measurement_id": "m_1044",
+                "concept": "FUV_flux",
+                "value": 3.2e-15,
+                "unit": "erg s-1 cm-2 A-1",
+                "raw_value": "3.20E-15",
+                "raw_unit": "erg/s/cm2/A",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "FUV_flux_error",
+                    "value": 2e-16,
+                    "unit": "erg s-1 cm-2 A-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1045",
+                "concept": "NUV_flux",
+                "value": 5.1e-15,
+                "unit": "erg s-1 cm-2 A-1",
+                "raw_value": "5.10E-15",
+                "raw_unit": "erg/s/cm2/A",
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_005",
+        "title": "Infrared Properties of Local Spiral Systems",
+        "authors": [
+          "Example B.",
+          "Example L."
+        ],
+        "year": 2019,
+        "doi": "10.1234/example.005"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000005",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "456789"
+          },
+          {
+            "catalogue": "NGC",
+            "id": "6543"
+          }
+        ],
+        "coordinates": {
+          "ra": "05:22:11.2",
+          "dec": "-12:34:45.6",
+          "frame": "ICRS"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "SDSS DR18",
+            "catalogue_version": "DR18",
+            "measurements": [
+              {
+                "measurement_id": "m_1050",
+                "concept": "u_mag",
+                "value": 17.31,
+                "unit": "mag",
+                "raw_value": "17.31",
+                "raw_unit": "mag",
+                "characterisation": "petromag",
+                "auxiliary": [
+                  {
+                    "concept": "u_mag_error",
+                    "value": 0.05,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1051",
+                "concept": "g_mag",
+                "value": 16.48,
+                "unit": "mag",
+                "raw_value": "16.48",
+                "raw_unit": "mag",
+                "characterisation": "petromag",
+                "auxiliary": [
+                  {
+                    "concept": "g_mag_error",
+                    "value": 0.03,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1052",
+                "concept": "r_mag",
+                "value": 16.02,
+                "unit": "mag",
+                "raw_value": "16.02",
+                "raw_unit": "mag",
+                "characterisation": "fibermag",
+                "auxiliary": [
+                  {
+                    "concept": "r_mag_error",
+                    "value": 0.02,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1053",
+                "concept": "i_mag",
+                "value": 15.81,
+                "unit": "mag",
+                "raw_value": "15.81",
+                "raw_unit": "mag",
+                "characterisation": "modelmag",
+                "auxiliary": [
+                  {
+                    "concept": "i_mag_error",
+                    "value": 0.03,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1054",
+                "concept": "z_mag",
+                "value": 15.7,
+                "unit": "mag",
+                "raw_value": "15.70",
+                "raw_unit": "mag",
+                "characterisation": "modelmag",
+                "auxiliary": [],
+                "category": "Photometry"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "Pan-STARRS",
+            "catalogue_version": "DR2",
+            "measurements": [
+              {
+                "measurement_id": "m_1055",
+                "concept": "g_mag",
+                "value": 16.51,
+                "unit": "mag",
+                "raw_value": "16.51",
+                "raw_unit": "mag",
+                "characterisation": "Kron",
+                "auxiliary": [
+                  {
+                    "concept": "g_mag_error",
+                    "value": 0.02,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1056",
+                "concept": "r_mag",
+                "value": 16.05,
+                "unit": "mag",
+                "raw_value": "16.05",
+                "raw_unit": "mag",
+                "characterisation": "Kron",
+                "auxiliary": [
+                  {
+                    "concept": "r_mag_error",
+                    "value": 0.02,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1057",
+                "concept": "z_mag",
+                "value": 15.72,
+                "unit": "mag",
+                "raw_value": "15.72",
+                "raw_unit": "mag",
+                "characterisation": "Kron",
+                "auxiliary": [],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_006",
+        "title": "A Multi-Wavelength Catalogue of Galaxy Clusters",
+        "authors": [
+          "Example C.",
+          "Example M."
+        ],
+        "year": 2019,
+        "doi": "10.1234/example.006"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000006",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HyperAtlas",
+            "id": "HTA-000891"
+          }
+        ],
+        "coordinates": {
+          "ra": "08:34:56.7",
+          "dec": "+21:09:10.4",
+          "frame": "Galactic"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HyperAtlas",
+            "catalogue_version": "v1",
+            "measurements": [
+              {
+                "measurement_id": "m_1060",
+                "concept": "redshift",
+                "value": 0.0217,
+                "unit": null,
+                "raw_value": "0.02",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1061",
+                "concept": "distance",
+                "value": 91.6,
+                "unit": "Mpc",
+                "raw_value": "91.60",
+                "raw_unit": "Mpc",
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1062",
+                "concept": "log_L_IR",
+                "value": 11.14,
+                "unit": "log(L_sun)",
+                "raw_value": "11.14",
+                "raw_unit": "dex",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "log_L_IR_error",
+                    "value": 0.12,
+                    "unit": "log(L_sun)",
+                    "type": "error"
+                  },
+                  {
+                    "concept": "metallicity_CI",
+                    "value": [
+                      8.55,
+                      8.71
+                    ],
+                    "unit": "dex",
+                    "type": "confidence_interval"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1063",
+                "concept": "metallicity",
+                "value": 8.63,
+                "unit": "12 + log(O/H)",
+                "raw_value": "8.63",
+                "raw_unit": "dex",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "metallicity_error",
+                    "value": 0.08,
+                    "unit": "12 + log(O/H)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1064",
+                "concept": "SFR",
+                "value": 6.72,
+                "unit": "M_sun yr-1",
+                "raw_value": "6.72",
+                "raw_unit": "Msun/yr",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "SFR_error",
+                    "value": 0.71,
+                    "unit": "M_sun yr-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "WISE",
+            "catalogue_version": "AllWISE",
+            "measurements": [
+              {
+                "measurement_id": "m_1065",
+                "concept": "W1_mag",
+                "value": 10.84,
+                "unit": "mag",
+                "raw_value": "10.84",
+                "raw_unit": "mag",
+                "characterisation": "profile",
+                "auxiliary": [
+                  {
+                    "concept": "W1_mag_error",
+                    "value": 0.03,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1066",
+                "concept": "W2_mag",
+                "value": 10.91,
+                "unit": "mag",
+                "raw_value": "10.91",
+                "raw_unit": "mag",
+                "characterisation": "profile",
+                "auxiliary": [
+                  {
+                    "concept": "W2_mag_error",
+                    "value": 0.04,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1067",
+                "concept": "W3_mag",
+                "value": 9.42,
+                "unit": "mag",
+                "raw_value": "9.42",
+                "raw_unit": "mag",
+                "characterisation": "profile",
+                "auxiliary": [],
+                "category": "Photometry"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "Example Empty Catalogue",
+            "catalogue_version": "test",
+            "measurements": []
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_007",
+        "title": "Stellar Populations from UV to Near-IR",
+        "authors": [
+          "Example D.",
+          "Example N."
+        ],
+        "year": 2019,
+        "doi": "10.1234/example.007"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000007",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "567890"
+          },
+          {
+            "catalogue": "HyperLEDA",
+            "id": "445566"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "IC 999"
+          }
+        ],
+        "coordinates": {
+          "ra": "11:45:02.1",
+          "dec": "+33:21:09.8",
+          "frame": "FK5"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HECATE",
+            "catalogue_version": "v3",
+            "measurements": [
+              {
+                "measurement_id": "m_1070",
+                "concept": "H_beta",
+                "value": 4.71,
+                "unit": "erg s-1 cm-2",
+                "raw_value": "4.71",
+                "raw_unit": "erg/s/cm2",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "H_beta_error",
+                    "value": 0.17,
+                    "unit": "erg s-1 cm-2",
+                    "type": "error"
+                  }
+                ],
+                "category": "Spectroscopy"
+              },
+              {
+                "measurement_id": "m_1071",
+                "concept": "H_alpha",
+                "value": 15.82,
+                "unit": "erg s-1 cm-2",
+                "raw_value": "15.82",
+                "raw_unit": "erg/s/cm2",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "H_alpha_error",
+                    "value": 0.41,
+                    "unit": "erg s-1 cm-2",
+                    "type": "error"
+                  }
+                ],
+                "category": "Spectroscopy"
+              },
+              {
+                "measurement_id": "m_1072",
+                "concept": "balmer_decrement",
+                "value": 3.36,
+                "unit": null,
+                "raw_value": "3.36",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Spectroscopy"
+              },
+              {
+                "measurement_id": "m_1073",
+                "concept": "stellar_mass",
+                "value": 10.21,
+                "unit": "log(M_sun)",
+                "raw_value": "10.21",
+                "raw_unit": "dex",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "stellar_mass_error",
+                    "value": 0.09,
+                    "unit": "log(M_sun)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1074",
+                "concept": "SFR",
+                "value": 2.91,
+                "unit": "M_sun yr-1",
+                "raw_value": "2.91",
+                "raw_unit": "Msun/yr",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "SFR_error",
+                    "value": 0.32,
+                    "unit": "M_sun yr-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1075",
+                "concept": "specific_SFR",
+                "value": -9.75,
+                "unit": "log(yr-1)",
+                "raw_value": "-9.75",
+                "raw_unit": "dex",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "specific_SFR_error",
+                    "value": 0.13,
+                    "unit": "log(yr-1)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "GALEX",
+            "catalogue_version": "GR6/7",
+            "measurements": [
+              {
+                "measurement_id": "m_1076",
+                "concept": "FUV_magnitude",
+                "value": 18.12,
+                "unit": "mag",
+                "raw_value": "18.12",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "FUV_magnitude_error",
+                    "value": 0.1,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1077",
+                "concept": "NUV_magnitude",
+                "value": 17.54,
+                "unit": "mag",
+                "raw_value": "17.54",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "NUV_magnitude_error",
+                    "value": 0.07,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "SDSS DR18",
+            "catalogue_version": "DR18",
+            "measurements": [
+              {
+                "measurement_id": "m_1078",
+                "concept": "g_mag",
+                "value": 15.88,
+                "unit": "mag",
+                "raw_value": "15.88",
+                "raw_unit": "mag",
+                "characterisation": "cModelMag",
+                "auxiliary": [
+                  {
+                    "concept": "g_mag_error",
+                    "value": 0.01,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1079",
+                "concept": "r_mag",
+                "value": 15.26,
+                "unit": "mag",
+                "raw_value": "15.26",
+                "raw_unit": "mag",
+                "characterisation": "cModelMag",
+                "auxiliary": [
+                  {
+                    "concept": "r_mag_error",
+                    "value": 0.01,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_008",
+        "title": "Emission-Line Diagnostics of Galaxies",
+        "authors": [
+          "Example E.",
+          "Example O."
+        ],
+        "year": 2019,
+        "doi": "10.1234/example.008"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000008",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "678901"
+          },
+          {
+            "catalogue": "NGC",
+            "id": "7788"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "NGC 7788"
+          }
+        ],
+        "coordinates": {
+          "ra": "16:20:45.9",
+          "dec": "-08:11:32.0",
+          "frame": "Ecliptic"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HECATE",
+            "catalogue_version": "v3",
+            "measurements": [
+              {
+                "measurement_id": "m_1080",
+                "concept": "redshift",
+                "value": 0.0048,
+                "unit": null,
+                "raw_value": "0.0048",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1081",
+                "concept": "distance",
+                "value": 21.3,
+                "unit": "Mpc",
+                "raw_value": "21.3",
+                "raw_unit": "Mpc",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "distance_error",
+                    "value": 1.8,
+                    "unit": "Mpc",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1082",
+                "concept": "metallicity",
+                "value": 8.91,
+                "unit": "12 + log(O/H)",
+                "raw_value": "8.91",
+                "raw_unit": "dex",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "metallicity_error",
+                    "value": 0.04,
+                    "unit": "12 + log(O/H)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "2MASS",
+            "catalogue_version": "PSC",
+            "measurements": [
+              {
+                "measurement_id": "m_1083",
+                "concept": "J_mag",
+                "value": 11.42,
+                "unit": "mag",
+                "raw_value": "11.42",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "J_mag_error",
+                    "value": 0.03,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1084",
+                "concept": "H_mag",
+                "value": 10.87,
+                "unit": "mag",
+                "raw_value": "10.87",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "H_mag_error",
+                    "value": 0.03,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1085",
+                "concept": "K_mag",
+                "value": 10.61,
+                "unit": "mag",
+                "raw_value": "10.61",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "K_mag_error",
+                    "value": 0.02,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_009",
+        "title": "Kinematic Properties of Nearby Galaxies",
+        "authors": [
+          "Example F.",
+          "Example P."
+        ],
+        "year": 2019,
+        "doi": "10.1234/example.009"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000009",
+        "object_type": "Star",
+        "identifiers": [
+          {
+            "catalogue": "Gaia",
+            "id": "DR3-123456789"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "TYC 1234-567-1"
+          }
+        ],
+        "coordinates": {
+          "ra": "19:31:04.2",
+          "dec": "+44:12:09.7",
+          "frame": "ICRS"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "Gaia DR3",
+            "catalogue_version": "DR3",
+            "measurements": [
+              {
+                "measurement_id": "m_1090",
+                "concept": "parallax",
+                "value": 7.42,
+                "unit": "mas",
+                "raw_value": "7.42",
+                "raw_unit": "mas",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "parallax_error",
+                    "value": 0.12,
+                    "unit": "mas",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1091",
+                "concept": "pm_ra",
+                "value": -5.83,
+                "unit": "mas yr-1",
+                "raw_value": "-5.83",
+                "raw_unit": "mas/yr",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "pm_ra_error",
+                    "value": 0.08,
+                    "unit": "mas yr-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1092",
+                "concept": "pm_dec",
+                "value": 3.21,
+                "unit": "mas yr-1",
+                "raw_value": "3.21",
+                "raw_unit": "mas/yr",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "pm_dec_error",
+                    "value": 0.07,
+                    "unit": "mas yr-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1093",
+                "concept": "G_mag",
+                "value": 12.64,
+                "unit": "mag",
+                "raw_value": "12.64",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "G_mag_error",
+                    "value": 0.01,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1094",
+                "concept": "BP_mag",
+                "value": 13.18,
+                "unit": "mag",
+                "raw_value": "13.18",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "BP_mag_error",
+                    "value": 0.02,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1095",
+                "concept": "RP_mag",
+                "value": 11.93,
+                "unit": "mag",
+                "raw_value": "11.93",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "RP_mag_error",
+                    "value": 0.01,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "Example Empty Catalogue",
+            "catalogue_version": "test",
+            "measurements": []
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_010",
+        "title": "Dust and Molecular Gas in Star-Forming Systems",
+        "authors": [
+          "Example G.",
+          "Example Q."
+        ],
+        "year": 2019,
+        "doi": "10.1234/example.010"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000010",
+        "object_type": "Galaxy Cluster",
+        "identifiers": [
+          {
+            "catalogue": "NED",
+            "id": "CLUSTER-1001"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "ClG J1234+5678"
+          }
+        ],
+        "coordinates": {
+          "ra": "12:34:11.9",
+          "dec": "+56:48:32.2",
+          "frame": "ICRS"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "ClusterCat",
+            "catalogue_version": "v2",
+            "measurements": [
+              {
+                "measurement_id": "m_1100",
+                "concept": "redshift",
+                "value": 0.0871,
+                "unit": null,
+                "raw_value": "0.0871",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1101",
+                "concept": "distance",
+                "value": 389.2,
+                "unit": "Mpc",
+                "raw_value": "389.2",
+                "raw_unit": "Mpc",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "distance_error",
+                    "value": 14.7,
+                    "unit": "Mpc",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1102",
+                "concept": "M500",
+                "value": 580000000000000.0,
+                "unit": "M_sun",
+                "raw_value": "5.80E14",
+                "raw_unit": "Msun",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "M500_error",
+                    "value": 70000000000000.0,
+                    "unit": "M_sun",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1103",
+                "concept": "R500",
+                "value": 1.12,
+                "unit": "Mpc",
+                "raw_value": "1.12",
+                "raw_unit": "Mpc",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "R500_error",
+                    "value": 0.05,
+                    "unit": "Mpc",
+                    "type": "error"
+                  }
+                ],
+                "category": "Morphology & Environment"
+              },
+              {
+                "measurement_id": "m_1104",
+                "concept": "temperature",
+                "value": 6.4,
+                "unit": "keV",
+                "raw_value": "6.4",
+                "raw_unit": "keV",
+                "characterisation": "Xray",
+                "auxiliary": [
+                  {
+                    "concept": "temperature_error",
+                    "value": 0.4,
+                    "unit": "keV",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "SDSS DR18",
+            "catalogue_version": "DR18",
+            "measurements": [
+              {
+                "measurement_id": "m_1105",
+                "concept": "richness",
+                "value": 78,
+                "unit": null,
+                "raw_value": "78",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Morphology & Environment"
+              },
+              {
+                "measurement_id": "m_1106",
+                "concept": "bcg_g_mag",
+                "value": 17.22,
+                "unit": "mag",
+                "raw_value": "17.22",
+                "raw_unit": "mag",
+                "characterisation": "cModelMag",
+                "auxiliary": [
+                  {
+                    "concept": "bcg_g_mag_error",
+                    "value": 0.03,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_011",
+        "title": "Photometric Properties from Wide-Field Surveys",
+        "authors": [
+          "Example H.",
+          "Example R."
+        ],
+        "year": 2019,
+        "doi": "10.1234/example.011"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000011",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "789012"
+          },
+          {
+            "catalogue": "HyperLEDA",
+            "id": "778899"
+          }
+        ],
+        "coordinates": {
+          "ra": "22:05:19.3",
+          "dec": "-31:44:12.6",
+          "frame": "ICRS"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "ALMA",
+            "catalogue_version": "DR3",
+            "measurements": [
+              {
+                "measurement_id": "m_1110",
+                "concept": "CO10_flux",
+                "value": 128.4,
+                "unit": "Jy km s-1",
+                "raw_value": "128.4",
+                "raw_unit": "Jy km/s",
+                "characterisation": "integrated",
+                "auxiliary": [
+                  {
+                    "concept": "CO10_flux_error",
+                    "value": 7.8,
+                    "unit": "Jy km s-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1111",
+                "concept": "CO10_width",
+                "value": 241.0,
+                "unit": "km s-1",
+                "raw_value": "241",
+                "raw_unit": "km/s",
+                "characterisation": "integrated",
+                "auxiliary": [
+                  {
+                    "concept": "CO10_width_error",
+                    "value": 12.0,
+                    "unit": "km s-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "Herschel",
+            "catalogue_version": "PACS/SPIRE",
+            "measurements": [
+              {
+                "measurement_id": "m_1112",
+                "concept": "FIR_flux",
+                "value": 2.31e-12,
+                "unit": "W m-2",
+                "raw_value": "2.31E-12",
+                "raw_unit": "W/m2",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "FIR_flux_error",
+                    "value": 1.4e-13,
+                    "unit": "W m-2",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1113",
+                "concept": "dust_temperature",
+                "value": 28.7,
+                "unit": "K",
+                "raw_value": "28.7",
+                "raw_unit": "K",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "dust_temperature_error",
+                    "value": 1.8,
+                    "unit": "K",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1114",
+                "concept": "dust_mass",
+                "value": 71000000.0,
+                "unit": "M_sun",
+                "raw_value": "7.10E7",
+                "raw_unit": "Msun",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "dust_mass_error",
+                    "value": 9000000.0,
+                    "unit": "M_sun",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_012",
+        "title": "Pipeline Test Study 12",
+        "authors": [
+          "Test Author 12A.",
+          "Test Author 12B.",
+          "Test Author 12C."
+        ],
+        "year": 2021,
+        "doi": "10.1234/pipeline.test.012"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000012",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "345678-12"
+          },
+          {
+            "catalogue": "HyperLEDA",
+            "id": "112233-12"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "NGC 5678-12"
+          },
+          {
+            "catalogue": "TestCatalogue",
+            "id": "TST-000012"
+          }
+        ],
+        "coordinates": {
+          "ra": "14:24:36.0",
+          "dec": "+36:12:24.0",
+          "frame": "ICRS"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HECATE",
+            "catalogue_version": "v3",
+            "measurements": [
+              {
+                "measurement_id": "m_1200",
+                "concept": "H_alpha",
+                "value": 8.42,
+                "unit": "erg s-1 cm-2",
+                "raw_value": "8.42",
+                "raw_unit": "erg/s/cm2",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "H_alpha_error",
+                    "value": 0.22,
+                    "unit": "erg s-1 cm-2",
+                    "type": "error"
+                  }
+                ],
+                "category": "Spectroscopy"
+              },
+              {
+                "measurement_id": "m_1201",
+                "concept": "stellar_mass",
+                "value": 9.87,
+                "unit": "log(M_sun)",
+                "raw_value": "9.87",
+                "raw_unit": "dex",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "stellar_mass_error",
+                    "value": 0.11,
+                    "unit": "log(M_sun)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1202",
+                "concept": "SFR",
+                "value": 1.84,
+                "unit": "M_sun yr-1",
+                "raw_value": "1.84",
+                "raw_unit": "Msun/yr",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "SFR_error",
+                    "value": 0.19,
+                    "unit": "M_sun yr-1",
+                    "type": "error"
+                  },
+                  {
+                    "concept": "log_L_IR_low",
+                    "value": 10.57,
+                    "unit": "dex",
+                    "type": "lower_uncertainty"
+                  },
+                  {
+                    "concept": "log_L_IR_high",
+                    "value": 10.94,
+                    "unit": "dex",
+                    "type": "upper_uncertainty"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1203",
+                "concept": "axis_ratio",
+                "value": 0.73,
+                "unit": null,
+                "raw_value": "0.73",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Morphology & Environment"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "GALEX",
+            "catalogue_version": "GR6/7",
+            "measurements": [
+              {
+                "measurement_id": "m_1204",
+                "concept": "FUV_flux",
+                "value": 0.0,
+                "unit": "erg s-1 cm-2 A-1",
+                "raw_value": "0.0",
+                "raw_unit": "erg/s/cm2/A",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "FUV_flux_error",
+                    "value": 0.0,
+                    "unit": "erg s-1 cm-2 A-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1205",
+                "concept": "NUV_flux",
+                "value": 0.0,
+                "unit": "erg s-1 cm-2 A-1",
+                "raw_value": "0.0",
+                "raw_unit": "erg/s/cm2/A",
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_013",
+        "title": "Pipeline Test Study 13",
+        "authors": [
+          "Test Author 13A.",
+          "Test Author 13B.",
+          "Test Author 13C."
+        ],
+        "year": 2022,
+        "doi": "10.1234/pipeline.test.013"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000013",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "456789-13"
+          },
+          {
+            "catalogue": "NGC",
+            "id": "6543-13"
+          }
+        ],
+        "coordinates": {
+          "ra": "15:31:49.0",
+          "dec": "-39:23:41.0",
+          "frame": "FK5"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "SDSS DR18",
+            "catalogue_version": "DR18",
+            "measurements": [
+              {
+                "measurement_id": "m_1300",
+                "concept": "u_mag",
+                "value": 17.91585,
+                "unit": "mag",
+                "raw_value": "17.91585",
+                "raw_unit": "mag",
+                "characterisation": "petromag",
+                "auxiliary": [
+                  {
+                    "concept": "u_mag_error",
+                    "value": 0.05175,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1301",
+                "concept": "g_mag",
+                "value": 17.0568,
+                "unit": "mag",
+                "raw_value": "17.0568",
+                "raw_unit": "mag",
+                "characterisation": "petromag",
+                "auxiliary": [
+                  {
+                    "concept": "g_mag_error",
+                    "value": 0.03105,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1302",
+                "concept": "r_mag",
+                "value": 16.5807,
+                "unit": "mag",
+                "raw_value": "16.5807",
+                "raw_unit": "mag",
+                "characterisation": "fibermag",
+                "auxiliary": [
+                  {
+                    "concept": "r_mag_error",
+                    "value": 0.0207,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1303",
+                "concept": "i_mag",
+                "value": 16.36335,
+                "unit": "mag",
+                "raw_value": "16.36335",
+                "raw_unit": "mag",
+                "characterisation": "modelmag",
+                "auxiliary": [
+                  {
+                    "concept": "i_mag_error",
+                    "value": 0.03105,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1304",
+                "concept": "z_mag",
+                "value": 16.2495,
+                "unit": "mag",
+                "raw_value": "16.2495",
+                "raw_unit": "mag",
+                "characterisation": "modelmag",
+                "auxiliary": [],
+                "category": "Photometry"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "Pan-STARRS",
+            "catalogue_version": "DR2",
+            "measurements": [
+              {
+                "measurement_id": "m_1305",
+                "concept": "g_mag",
+                "value": 17.08785,
+                "unit": "mag",
+                "raw_value": "17.08785",
+                "raw_unit": "mag",
+                "characterisation": "Kron",
+                "auxiliary": [
+                  {
+                    "concept": "g_mag_error",
+                    "value": 0.0207,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1306",
+                "concept": "r_mag",
+                "value": 16.61175,
+                "unit": "mag",
+                "raw_value": "16.61175",
+                "raw_unit": "mag",
+                "characterisation": "Kron",
+                "auxiliary": [
+                  {
+                    "concept": "r_mag_error",
+                    "value": 0.0207,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1307",
+                "concept": "z_mag",
+                "value": 16.2702,
+                "unit": "mag",
+                "raw_value": "16.2702",
+                "raw_unit": "mag",
+                "characterisation": "Kron",
+                "auxiliary": [],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_014",
+        "title": "Pipeline Test Study 14",
+        "authors": [
+          "Test Author 14A.",
+          "Test Author 14B.",
+          "Test Author 14C."
+        ],
+        "year": 2023,
+        "doi": "10.1234/pipeline.test.014"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000014",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HyperAtlas",
+            "id": "HTA-000891-14"
+          }
+        ],
+        "coordinates": {
+          "ra": "16:38:02.0",
+          "dec": "+42:34:58.0",
+          "frame": "Galactic"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HyperAtlas",
+            "catalogue_version": "v1",
+            "measurements": [
+              {
+                "measurement_id": "m_1400",
+                "concept": "redshift",
+                "value": 0.023219,
+                "unit": null,
+                "raw_value": "0.023219",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1401",
+                "concept": "distance",
+                "value": 98.012,
+                "unit": "Mpc",
+                "raw_value": "98.012",
+                "raw_unit": "Mpc",
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1402",
+                "concept": "log_L_IR",
+                "value": 11.9198,
+                "unit": "log(L_sun)",
+                "raw_value": "11.9198",
+                "raw_unit": "dex",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "log_L_IR_error",
+                    "value": 0.1284,
+                    "unit": "log(L_sun)",
+                    "type": "error"
+                  },
+                  {
+                    "concept": "metallicity_CI",
+                    "value": [
+                      9.1485,
+                      9.3197
+                    ],
+                    "unit": "dex",
+                    "type": "confidence_interval"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1403",
+                "concept": "metallicity",
+                "value": 9.2341,
+                "unit": "12 + log(O/H)",
+                "raw_value": "9.2341",
+                "raw_unit": "dex",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "metallicity_error",
+                    "value": 0.0856,
+                    "unit": "12 + log(O/H)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1404",
+                "concept": "SFR",
+                "value": 7.1904,
+                "unit": "M_sun yr-1",
+                "raw_value": "7.1904",
+                "raw_unit": "Msun/yr",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "SFR_error",
+                    "value": 0.7597,
+                    "unit": "M_sun yr-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "WISE",
+            "catalogue_version": "AllWISE",
+            "measurements": [
+              {
+                "measurement_id": "m_1405",
+                "concept": "W1_mag",
+                "value": 11.5988,
+                "unit": "mag",
+                "raw_value": "11.5988",
+                "raw_unit": "mag",
+                "characterisation": "profile",
+                "auxiliary": [
+                  {
+                    "concept": "W1_mag_error",
+                    "value": 0.0321,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1406",
+                "concept": "W2_mag",
+                "value": 11.6737,
+                "unit": "mag",
+                "raw_value": "11.6737",
+                "raw_unit": "mag",
+                "characterisation": "profile",
+                "auxiliary": [
+                  {
+                    "concept": "W2_mag_error",
+                    "value": 0.0428,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1407",
+                "concept": "W3_mag",
+                "value": 10.0794,
+                "unit": "mag",
+                "raw_value": "10.0794",
+                "raw_unit": "mag",
+                "characterisation": "profile",
+                "auxiliary": [],
+                "category": "Photometry"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "Example Empty Catalogue",
+            "catalogue_version": "test",
+            "measurements": []
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_015",
+        "title": "Pipeline Test Study 15",
+        "authors": [
+          "Test Author 15A.",
+          "Test Author 15B.",
+          "Test Author 15C."
+        ],
+        "year": 2024,
+        "doi": "10.1234/pipeline.test.015"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000015",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "567890-15"
+          },
+          {
+            "catalogue": "HyperLEDA",
+            "id": "445566-15"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "IC 999-15"
+          },
+          {
+            "catalogue": "TestCatalogue",
+            "id": "TST-000015"
+          }
+        ],
+        "coordinates": {
+          "ra": "17:45:15.0",
+          "dec": "-45:45:15.0",
+          "frame": "Ecliptic"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HECATE",
+            "catalogue_version": "v3",
+            "measurements": [
+              {
+                "measurement_id": "m_1500",
+                "concept": "H_beta",
+                "value": 4.3803,
+                "unit": "erg s-1 cm-2",
+                "raw_value": "4.3803",
+                "raw_unit": "erg/s/cm2",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "H_beta_error",
+                    "value": 0.1581,
+                    "unit": "erg s-1 cm-2",
+                    "type": "error"
+                  }
+                ],
+                "category": "Spectroscopy"
+              },
+              {
+                "measurement_id": "m_1501",
+                "concept": "H_alpha",
+                "value": 14.7126,
+                "unit": "erg s-1 cm-2",
+                "raw_value": "14.7126",
+                "raw_unit": "erg/s/cm2",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "H_alpha_error",
+                    "value": 0.3813,
+                    "unit": "erg s-1 cm-2",
+                    "type": "error"
+                  }
+                ],
+                "category": "Spectroscopy"
+              },
+              {
+                "measurement_id": "m_1502",
+                "concept": "balmer_decrement",
+                "value": 3.1248,
+                "unit": null,
+                "raw_value": "3.1248",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Spectroscopy"
+              },
+              {
+                "measurement_id": "m_1503",
+                "concept": "stellar_mass",
+                "value": 9.4953,
+                "unit": "log(M_sun)",
+                "raw_value": "9.4953",
+                "raw_unit": "dex",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "stellar_mass_error",
+                    "value": 0.0837,
+                    "unit": "log(M_sun)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1504",
+                "concept": "SFR",
+                "value": 2.7063,
+                "unit": "M_sun yr-1",
+                "raw_value": "2.7063",
+                "raw_unit": "Msun/yr",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "SFR_error",
+                    "value": 0.2976,
+                    "unit": "M_sun yr-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1505",
+                "concept": "specific_SFR",
+                "value": -9.0675,
+                "unit": "log(yr-1)",
+                "raw_value": "-9.0675",
+                "raw_unit": "dex",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "specific_SFR_error",
+                    "value": 0.1209,
+                    "unit": "log(yr-1)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "GALEX",
+            "catalogue_version": "GR6/7",
+            "measurements": [
+              {
+                "measurement_id": "m_1506",
+                "concept": "FUV_magnitude",
+                "value": 16.8516,
+                "unit": "mag",
+                "raw_value": "16.8516",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "FUV_magnitude_error",
+                    "value": 0.093,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1507",
+                "concept": "NUV_magnitude",
+                "value": 16.3122,
+                "unit": "mag",
+                "raw_value": "16.3122",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "NUV_magnitude_error",
+                    "value": 0.0651,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "SDSS DR18",
+            "catalogue_version": "DR18",
+            "measurements": [
+              {
+                "measurement_id": "m_1508",
+                "concept": "g_mag",
+                "value": 14.7684,
+                "unit": "mag",
+                "raw_value": "14.7684",
+                "raw_unit": "mag",
+                "characterisation": "cModelMag",
+                "auxiliary": [
+                  {
+                    "concept": "g_mag_error",
+                    "value": 0.0093,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1509",
+                "concept": "r_mag",
+                "value": 14.1918,
+                "unit": "mag",
+                "raw_value": "14.1918",
+                "raw_unit": "mag",
+                "characterisation": "cModelMag",
+                "auxiliary": [
+                  {
+                    "concept": "r_mag_error",
+                    "value": 0.0093,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_016",
+        "title": "Pipeline Test Study 16",
+        "authors": [
+          "Test Author 16A.",
+          "Test Author 16B.",
+          "Test Author 16C."
+        ],
+        "year": 2025,
+        "doi": "10.1234/pipeline.test.016"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000016",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "678901-16"
+          },
+          {
+            "catalogue": "NGC",
+            "id": "7788-16"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "NGC 7788-16"
+          }
+        ],
+        "coordinates": {
+          "ra": "18:52:28.0",
+          "dec": "+48:56:32.0",
+          "frame": "ICRS"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HECATE",
+            "catalogue_version": "v3",
+            "measurements": [
+              {
+                "measurement_id": "m_1600",
+                "concept": "redshift",
+                "value": 0.004632,
+                "unit": null,
+                "raw_value": "0.004632",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1601",
+                "concept": "distance",
+                "value": 20.5545,
+                "unit": "Mpc",
+                "raw_value": "20.5545",
+                "raw_unit": "Mpc",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "distance_error",
+                    "value": 1.737,
+                    "unit": "Mpc",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1602",
+                "concept": "metallicity",
+                "value": 8.59815,
+                "unit": "12 + log(O/H)",
+                "raw_value": "8.59815",
+                "raw_unit": "dex",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "metallicity_error",
+                    "value": 0.0386,
+                    "unit": "12 + log(O/H)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "2MASS",
+            "catalogue_version": "PSC",
+            "measurements": [
+              {
+                "measurement_id": "m_1603",
+                "concept": "J_mag",
+                "value": 11.0203,
+                "unit": "mag",
+                "raw_value": "11.0203",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "J_mag_error",
+                    "value": 0.02895,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1604",
+                "concept": "H_mag",
+                "value": 10.48955,
+                "unit": "mag",
+                "raw_value": "10.48955",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "H_mag_error",
+                    "value": 0.02895,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1605",
+                "concept": "K_mag",
+                "value": 10.23865,
+                "unit": "mag",
+                "raw_value": "10.23865",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "K_mag_error",
+                    "value": 0.0193,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_017",
+        "title": "Pipeline Test Study 17",
+        "authors": [
+          "Test Author 17A.",
+          "Test Author 17B.",
+          "Test Author 17C."
+        ],
+        "year": 2026,
+        "doi": "10.1234/pipeline.test.017"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000017",
+        "object_type": "Star",
+        "identifiers": [
+          {
+            "catalogue": "Gaia",
+            "id": "DR3-123456789-17"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "TYC 1234-567-1-17"
+          }
+        ],
+        "coordinates": {
+          "ra": "19:59:41.0",
+          "dec": "-51:07:49.0",
+          "frame": "FK5"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "Gaia DR3",
+            "catalogue_version": "DR3",
+            "measurements": [
+              {
+                "measurement_id": "m_1700",
+                "concept": "parallax",
+                "value": 7.42,
+                "unit": "mas",
+                "raw_value": "7.42",
+                "raw_unit": "mas",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "parallax_error",
+                    "value": 0.12,
+                    "unit": "mas",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1701",
+                "concept": "pm_ra",
+                "value": -5.83,
+                "unit": "mas yr-1",
+                "raw_value": "-5.83",
+                "raw_unit": "mas/yr",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "pm_ra_error",
+                    "value": 0.08,
+                    "unit": "mas yr-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1702",
+                "concept": "pm_dec",
+                "value": 3.21,
+                "unit": "mas yr-1",
+                "raw_value": "3.21",
+                "raw_unit": "mas/yr",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "pm_dec_error",
+                    "value": 0.07,
+                    "unit": "mas yr-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1703",
+                "concept": "G_mag",
+                "value": 12.64,
+                "unit": "mag",
+                "raw_value": "12.64",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "G_mag_error",
+                    "value": 0.01,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1704",
+                "concept": "BP_mag",
+                "value": 13.18,
+                "unit": "mag",
+                "raw_value": "13.18",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "BP_mag_error",
+                    "value": 0.02,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1705",
+                "concept": "RP_mag",
+                "value": 11.93,
+                "unit": "mag",
+                "raw_value": "11.93",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "RP_mag_error",
+                    "value": 0.01,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "Example Empty Catalogue",
+            "catalogue_version": "test",
+            "measurements": []
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_018",
+        "title": "Pipeline Test Study 18",
+        "authors": [
+          "Test Author 18A.",
+          "Test Author 18B.",
+          "Test Author 18C."
+        ],
+        "year": 2018,
+        "doi": "10.1234/pipeline.test.018"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000018",
+        "object_type": "Galaxy Cluster",
+        "identifiers": [
+          {
+            "catalogue": "NED",
+            "id": "CLUSTER-1001-18"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "ClG J1234+5678-18"
+          },
+          {
+            "catalogue": "TestCatalogue",
+            "id": "TST-000018"
+          }
+        ],
+        "coordinates": {
+          "ra": "20:06:54.0",
+          "dec": "+54:18:06.0",
+          "frame": "Galactic"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "ClusterCat",
+            "catalogue_version": "v2",
+            "measurements": [
+              {
+                "measurement_id": "m_1800",
+                "concept": "redshift",
+                "value": 0.0901485,
+                "unit": null,
+                "raw_value": "0.0901485",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1801",
+                "concept": "distance",
+                "value": 402.822,
+                "unit": "Mpc",
+                "raw_value": "402.822",
+                "raw_unit": "Mpc",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "distance_error",
+                    "value": 15.2145,
+                    "unit": "Mpc",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_1802",
+                "concept": "M500",
+                "value": 600300000000000.0,
+                "unit": "M_sun",
+                "raw_value": "600300000000000.0",
+                "raw_unit": "Msun",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "M500_error",
+                    "value": 72450000000000.0,
+                    "unit": "M_sun",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1803",
+                "concept": "R500",
+                "value": 1.1592,
+                "unit": "Mpc",
+                "raw_value": "1.1592",
+                "raw_unit": "Mpc",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "R500_error",
+                    "value": 0.05175,
+                    "unit": "Mpc",
+                    "type": "error"
+                  }
+                ],
+                "category": "Morphology & Environment"
+              },
+              {
+                "measurement_id": "m_1804",
+                "concept": "temperature",
+                "value": 6.624,
+                "unit": "keV",
+                "raw_value": "6.624",
+                "raw_unit": "keV",
+                "characterisation": "Xray",
+                "auxiliary": [
+                  {
+                    "concept": "temperature_error",
+                    "value": 0.414,
+                    "unit": "keV",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "SDSS DR18",
+            "catalogue_version": "DR18",
+            "measurements": [
+              {
+                "measurement_id": "m_1805",
+                "concept": "richness",
+                "value": 80.73,
+                "unit": null,
+                "raw_value": "80.73",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Morphology & Environment"
+              },
+              {
+                "measurement_id": "m_1806",
+                "concept": "bcg_g_mag",
+                "value": 17.8227,
+                "unit": "mag",
+                "raw_value": "17.8227",
+                "raw_unit": "mag",
+                "characterisation": "cModelMag",
+                "auxiliary": [
+                  {
+                    "concept": "bcg_g_mag_error",
+                    "value": 0.03105,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_019",
+        "title": "Pipeline Test Study 19",
+        "authors": [
+          "Test Author 19A.",
+          "Test Author 19B.",
+          "Test Author 19C."
+        ],
+        "year": 2019,
+        "doi": "10.1234/pipeline.test.019"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000019",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "789012-19"
+          },
+          {
+            "catalogue": "HyperLEDA",
+            "id": "778899-19"
+          }
+        ],
+        "coordinates": {
+          "ra": "21:13:07.0",
+          "dec": "-57:29:23.0",
+          "frame": "Ecliptic"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "ALMA",
+            "catalogue_version": "DR3",
+            "measurements": [
+              {
+                "measurement_id": "m_1900",
+                "concept": "CO10_flux",
+                "value": 137.388,
+                "unit": "Jy km s-1",
+                "raw_value": "137.388",
+                "raw_unit": "Jy km/s",
+                "characterisation": "integrated",
+                "auxiliary": [
+                  {
+                    "concept": "CO10_flux_error",
+                    "value": 8.346,
+                    "unit": "Jy km s-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1901",
+                "concept": "CO10_width",
+                "value": 257.87,
+                "unit": "km s-1",
+                "raw_value": "257.87",
+                "raw_unit": "km/s",
+                "characterisation": "integrated",
+                "auxiliary": [
+                  {
+                    "concept": "CO10_width_error",
+                    "value": 12.84,
+                    "unit": "km s-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "Herschel",
+            "catalogue_version": "PACS/SPIRE",
+            "measurements": [
+              {
+                "measurement_id": "m_1902",
+                "concept": "FIR_flux",
+                "value": 0.0,
+                "unit": "W m-2",
+                "raw_value": "0.0",
+                "raw_unit": "W/m2",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "FIR_flux_error",
+                    "value": 0.0,
+                    "unit": "W m-2",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_1903",
+                "concept": "dust_temperature",
+                "value": 30.709,
+                "unit": "K",
+                "raw_value": "30.709",
+                "raw_unit": "K",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "dust_temperature_error",
+                    "value": 1.926,
+                    "unit": "K",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_1904",
+                "concept": "dust_mass",
+                "value": 75970000.0,
+                "unit": "M_sun",
+                "raw_value": "75970000.0",
+                "raw_unit": "Msun",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "dust_mass_error",
+                    "value": 9630000.0,
+                    "unit": "M_sun",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_020",
+        "title": "Pipeline Test Study 20",
+        "authors": [
+          "Test Author 20A.",
+          "Test Author 20B.",
+          "Test Author 20C."
+        ],
+        "year": 2020,
+        "doi": "10.1234/pipeline.test.020"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000020",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "345678-20"
+          },
+          {
+            "catalogue": "HyperLEDA",
+            "id": "112233-20"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "NGC 5678-20"
+          }
+        ],
+        "coordinates": {
+          "ra": "22:20:20.0",
+          "dec": "+00:40:40.0",
+          "frame": "ICRS"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HECATE",
+            "catalogue_version": "v3",
+            "measurements": [
+              {
+                "measurement_id": "m_2000",
+                "concept": "H_alpha",
+                "value": 7.8306,
+                "unit": "erg s-1 cm-2",
+                "raw_value": "7.8306",
+                "raw_unit": "erg/s/cm2",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "H_alpha_error",
+                    "value": 0.2046,
+                    "unit": "erg s-1 cm-2",
+                    "type": "error"
+                  }
+                ],
+                "category": "Spectroscopy"
+              },
+              {
+                "measurement_id": "m_2001",
+                "concept": "stellar_mass",
+                "value": 9.1791,
+                "unit": "log(M_sun)",
+                "raw_value": "9.1791",
+                "raw_unit": "dex",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "stellar_mass_error",
+                    "value": 0.1023,
+                    "unit": "log(M_sun)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_2002",
+                "concept": "SFR",
+                "value": 1.7112,
+                "unit": "M_sun yr-1",
+                "raw_value": "1.7112",
+                "raw_unit": "Msun/yr",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "SFR_error",
+                    "value": 0.1767,
+                    "unit": "M_sun yr-1",
+                    "type": "error"
+                  },
+                  {
+                    "concept": "log_L_IR_low",
+                    "value": 9.8301,
+                    "unit": "dex",
+                    "type": "lower_uncertainty"
+                  },
+                  {
+                    "concept": "log_L_IR_high",
+                    "value": 10.1742,
+                    "unit": "dex",
+                    "type": "upper_uncertainty"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_2003",
+                "concept": "axis_ratio",
+                "value": 0.6789,
+                "unit": null,
+                "raw_value": "0.6789",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Morphology & Environment"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "GALEX",
+            "catalogue_version": "GR6/7",
+            "measurements": [
+              {
+                "measurement_id": "m_2004",
+                "concept": "FUV_flux",
+                "value": 0.0,
+                "unit": "erg s-1 cm-2 A-1",
+                "raw_value": "0.0",
+                "raw_unit": "erg/s/cm2/A",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "FUV_flux_error",
+                    "value": 0.0,
+                    "unit": "erg s-1 cm-2 A-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2005",
+                "concept": "NUV_flux",
+                "value": 0.0,
+                "unit": "erg s-1 cm-2 A-1",
+                "raw_value": "0.0",
+                "raw_unit": "erg/s/cm2/A",
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_021",
+        "title": "Pipeline Test Study 21",
+        "authors": [
+          "Test Author 21A.",
+          "Test Author 21B.",
+          "Test Author 21C."
+        ],
+        "year": 2021,
+        "doi": "10.1234/pipeline.test.021"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000021",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "456789-21"
+          },
+          {
+            "catalogue": "NGC",
+            "id": "6543-21"
+          },
+          {
+            "catalogue": "TestCatalogue",
+            "id": "TST-000021"
+          }
+        ],
+        "coordinates": {
+          "ra": "23:27:33.0",
+          "dec": "-03:51:57.0",
+          "frame": "FK5"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "SDSS DR18",
+            "catalogue_version": "DR18",
+            "measurements": [
+              {
+                "measurement_id": "m_2100",
+                "concept": "u_mag",
+                "value": 16.70415,
+                "unit": "mag",
+                "raw_value": "16.70415",
+                "raw_unit": "mag",
+                "characterisation": "petromag",
+                "auxiliary": [
+                  {
+                    "concept": "u_mag_error",
+                    "value": 0.04825,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2101",
+                "concept": "g_mag",
+                "value": 15.9032,
+                "unit": "mag",
+                "raw_value": "15.9032",
+                "raw_unit": "mag",
+                "characterisation": "petromag",
+                "auxiliary": [
+                  {
+                    "concept": "g_mag_error",
+                    "value": 0.02895,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2101",
+                "concept": "g_mag",
+                "value": 15000,
+                "unit": "mag",
+                "raw_value": "150",
+                "raw_unit": "1e-2 mag",
+                "characterisation": "petromag",
+                "auxiliary": [],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2102",
+                "concept": "r_mag",
+                "value": 15.4593,
+                "unit": "mag",
+                "raw_value": "15.4593",
+                "raw_unit": "mag",
+                "characterisation": "fibermag",
+                "auxiliary": [
+                  {
+                    "concept": "r_mag_error",
+                    "value": 0.0193,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2103",
+                "concept": "i_mag",
+                "value": 15.25665,
+                "unit": "mag",
+                "raw_value": "15.25665",
+                "raw_unit": "mag",
+                "characterisation": "modelmag",
+                "auxiliary": [
+                  {
+                    "concept": "i_mag_error",
+                    "value": 0.02895,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2104",
+                "concept": "z_mag",
+                "value": 15.1505,
+                "unit": "mag",
+                "raw_value": "15.1505",
+                "raw_unit": "mag",
+                "characterisation": "modelmag",
+                "auxiliary": [],
+                "category": "Photometry"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "Pan-STARRS",
+            "catalogue_version": "DR2",
+            "measurements": [
+              {
+                "measurement_id": "m_2105",
+                "concept": "g_mag",
+                "value": 15.93215,
+                "unit": "mag",
+                "raw_value": "15.93215",
+                "raw_unit": "mag",
+                "characterisation": "Kron",
+                "auxiliary": [
+                  {
+                    "concept": "g_mag_error",
+                    "value": 0.0193,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2106",
+                "concept": "r_mag",
+                "value": 15.48825,
+                "unit": "mag",
+                "raw_value": "15.48825",
+                "raw_unit": "mag",
+                "characterisation": "Kron",
+                "auxiliary": [
+                  {
+                    "concept": "r_mag_error",
+                    "value": 0.0193,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2107",
+                "concept": "z_mag",
+                "value": 15.1698,
+                "unit": "mag",
+                "raw_value": "15.1698",
+                "raw_unit": "mag",
+                "characterisation": "Kron",
+                "auxiliary": [],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_022",
+        "title": "Pipeline Test Study 22",
+        "authors": [
+          "Test Author 22A.",
+          "Test Author 22B.",
+          "Test Author 22C."
+        ],
+        "year": 2022,
+        "doi": "10.1234/pipeline.test.022"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000022",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HyperAtlas",
+            "id": "HTA-000891-22"
+          }
+        ],
+        "coordinates": {
+          "ra": "00:34:46.0",
+          "dec": "+06:02:14.0",
+          "frame": "Galactic"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HyperAtlas",
+            "catalogue_version": "v1",
+            "measurements": [
+              {
+                "measurement_id": "m_2200",
+                "concept": "redshift",
+                "value": 0.0217,
+                "unit": null,
+                "raw_value": "0.0217",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_2201",
+                "concept": "distance",
+                "value": 91.6,
+                "unit": "Mpc",
+                "raw_value": "91.6",
+                "raw_unit": "Mpc",
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_2202",
+                "concept": "log_L_IR",
+                "value": 11.14,
+                "unit": "log(L_sun)",
+                "raw_value": "11.14",
+                "raw_unit": "dex",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "log_L_IR_error",
+                    "value": 0.12,
+                    "unit": "log(L_sun)",
+                    "type": "error"
+                  },
+                  {
+                    "concept": "metallicity_CI",
+                    "value": [
+                      8.55,
+                      8.71
+                    ],
+                    "unit": "dex",
+                    "type": "confidence_interval"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_2203",
+                "concept": "metallicity",
+                "value": 8.63,
+                "unit": "12 + log(O/H)",
+                "raw_value": "8.63",
+                "raw_unit": "dex",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "metallicity_error",
+                    "value": 0.08,
+                    "unit": "12 + log(O/H)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_2204",
+                "concept": "SFR",
+                "value": 6.72,
+                "unit": "M_sun yr-1",
+                "raw_value": "6.72",
+                "raw_unit": "Msun/yr",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "SFR_error",
+                    "value": 0.71,
+                    "unit": "M_sun yr-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "WISE",
+            "catalogue_version": "AllWISE",
+            "measurements": [
+              {
+                "measurement_id": "m_2205",
+                "concept": "W1_mag",
+                "value": 10.84,
+                "unit": "mag",
+                "raw_value": "10.84",
+                "raw_unit": "mag",
+                "characterisation": "profile",
+                "auxiliary": [
+                  {
+                    "concept": "W1_mag_error",
+                    "value": 0.03,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2206",
+                "concept": "W2_mag",
+                "value": 10.91,
+                "unit": "mag",
+                "raw_value": "10.91",
+                "raw_unit": "mag",
+                "characterisation": "profile",
+                "auxiliary": [
+                  {
+                    "concept": "W2_mag_error",
+                    "value": 0.04,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2207",
+                "concept": "W3_mag",
+                "value": 9.42,
+                "unit": "mag",
+                "raw_value": "9.42",
+                "raw_unit": "mag",
+                "characterisation": "profile",
+                "auxiliary": [],
+                "category": "Photometry"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "Example Empty Catalogue",
+            "catalogue_version": "test",
+            "measurements": []
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_023",
+        "title": "Pipeline Test Study 23",
+        "authors": [
+          "Test Author 23A.",
+          "Test Author 23B.",
+          "Test Author 23C."
+        ],
+        "year": 2023,
+        "doi": "10.1234/pipeline.test.023"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000023",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "567890-23"
+          },
+          {
+            "catalogue": "HyperLEDA",
+            "id": "445566-23"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "IC 999-23"
+          }
+        ],
+        "coordinates": {
+          "ra": "01:41:59.0",
+          "dec": "-09:13:31.0",
+          "frame": "Ecliptic"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HECATE",
+            "catalogue_version": "v3",
+            "measurements": [
+              {
+                "measurement_id": "m_2300",
+                "concept": "H_beta",
+                "value": 4.87485,
+                "unit": "erg s-1 cm-2",
+                "raw_value": "4.87485",
+                "raw_unit": "erg/s/cm2",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "H_beta_error",
+                    "value": 0.17595,
+                    "unit": "erg s-1 cm-2",
+                    "type": "error"
+                  }
+                ],
+                "category": "Spectroscopy"
+              },
+              {
+                "measurement_id": "m_2301",
+                "concept": "H_alpha",
+                "value": 16.3737,
+                "unit": "erg s-1 cm-2",
+                "raw_value": "16.3737",
+                "raw_unit": "erg/s/cm2",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "H_alpha_error",
+                    "value": 0.42435,
+                    "unit": "erg s-1 cm-2",
+                    "type": "error"
+                  }
+                ],
+                "category": "Spectroscopy"
+              },
+              {
+                "measurement_id": "m_2302",
+                "concept": "balmer_decrement",
+                "value": 3.4776,
+                "unit": null,
+                "raw_value": "3.4776",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Spectroscopy"
+              },
+              {
+                "measurement_id": "m_2303",
+                "concept": "stellar_mass",
+                "value": 10.56735,
+                "unit": "log(M_sun)",
+                "raw_value": "10.56735",
+                "raw_unit": "dex",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "stellar_mass_error",
+                    "value": 0.09315,
+                    "unit": "log(M_sun)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_2304",
+                "concept": "SFR",
+                "value": 3.01185,
+                "unit": "M_sun yr-1",
+                "raw_value": "3.01185",
+                "raw_unit": "Msun/yr",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "SFR_error",
+                    "value": 0.3312,
+                    "unit": "M_sun yr-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              },
+              {
+                "measurement_id": "m_2305",
+                "concept": "specific_SFR",
+                "value": -10.09125,
+                "unit": "log(yr-1)",
+                "raw_value": "-10.09125",
+                "raw_unit": "dex",
+                "characterisation": "Prospector",
+                "auxiliary": [
+                  {
+                    "concept": "specific_SFR_error",
+                    "value": 0.13455,
+                    "unit": "log(yr-1)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "GALEX",
+            "catalogue_version": "GR6/7",
+            "measurements": [
+              {
+                "measurement_id": "m_2306",
+                "concept": "FUV_magnitude",
+                "value": 18.7542,
+                "unit": "mag",
+                "raw_value": "18.7542",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "FUV_magnitude_error",
+                    "value": 0.1035,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2307",
+                "concept": "NUV_magnitude",
+                "value": 18.1539,
+                "unit": "mag",
+                "raw_value": "18.1539",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "NUV_magnitude_error",
+                    "value": 0.07245,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "SDSS DR18",
+            "catalogue_version": "DR18",
+            "measurements": [
+              {
+                "measurement_id": "m_2308",
+                "concept": "g_mag",
+                "value": 16.4358,
+                "unit": "mag",
+                "raw_value": "16.4358",
+                "raw_unit": "mag",
+                "characterisation": "cModelMag",
+                "auxiliary": [
+                  {
+                    "concept": "g_mag_error",
+                    "value": 0.01035,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2309",
+                "concept": "r_mag",
+                "value": 15.7941,
+                "unit": "mag",
+                "raw_value": "15.7941",
+                "raw_unit": "mag",
+                "characterisation": "cModelMag",
+                "auxiliary": [
+                  {
+                    "concept": "r_mag_error",
+                    "value": 0.01035,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_024",
+        "title": "Pipeline Test Study 24",
+        "authors": [
+          "Test Author 24A.",
+          "Test Author 24B.",
+          "Test Author 24C."
+        ],
+        "year": 2024,
+        "doi": "10.1234/pipeline.test.024"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000024",
+        "object_type": "Galaxy",
+        "identifiers": [
+          {
+            "catalogue": "HECATE",
+            "id": "678901-24"
+          },
+          {
+            "catalogue": "NGC",
+            "id": "7788-24"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "NGC 7788-24"
+          },
+          {
+            "catalogue": "TestCatalogue",
+            "id": "TST-000024"
+          }
+        ],
+        "coordinates": {
+          "ra": "02:48:12.0",
+          "dec": "+12:24:48.0",
+          "frame": "ICRS"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "HECATE",
+            "catalogue_version": "v3",
+            "measurements": [
+              {
+                "measurement_id": "m_2400",
+                "concept": "redshift",
+                "value": 0.005136,
+                "unit": null,
+                "raw_value": "0.005136",
+                "raw_unit": null,
+                "characterisation": "Default",
+                "auxiliary": [],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_2401",
+                "concept": "distance",
+                "value": 22.791,
+                "unit": "Mpc",
+                "raw_value": "22.791",
+                "raw_unit": "Mpc",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "distance_error",
+                    "value": 1.926,
+                    "unit": "Mpc",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_2402",
+                "concept": "metallicity",
+                "value": 9.5337,
+                "unit": "12 + log(O/H)",
+                "raw_value": "9.5337",
+                "raw_unit": "dex",
+                "characterisation": "CIGALE",
+                "auxiliary": [
+                  {
+                    "concept": "metallicity_error",
+                    "value": 0.0428,
+                    "unit": "12 + log(O/H)",
+                    "type": "error"
+                  }
+                ],
+                "category": "Physical Properties"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "2MASS",
+            "catalogue_version": "PSC",
+            "measurements": [
+              {
+                "measurement_id": "m_2403",
+                "concept": "J_mag",
+                "value": 12.2194,
+                "unit": "mag",
+                "raw_value": "12.2194",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "J_mag_error",
+                    "value": 0.0321,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2404",
+                "concept": "H_mag",
+                "value": 11.6309,
+                "unit": "mag",
+                "raw_value": "11.6309",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "H_mag_error",
+                    "value": 0.0321,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2405",
+                "concept": "K_mag",
+                "value": 11.3527,
+                "unit": "mag",
+                "raw_value": "11.3527",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "K_mag_error",
+                    "value": 0.0214,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "paper": {
+        "id": "paper_025",
+        "title": "Pipeline Test Study 25",
+        "authors": [
+          "Test Author 25A.",
+          "Test Author 25B.",
+          "Test Author 25C."
+        ],
+        "year": 2025,
+        "doi": "10.1234/pipeline.test.025"
+      },
+      "object": {
+        "object_id": "PARSEC_OBJ_000025",
+        "object_type": "Star",
+        "identifiers": [
+          {
+            "catalogue": "Gaia",
+            "id": "DR3-123456789-25"
+          },
+          {
+            "catalogue": "SIMBAD",
+            "id": "TYC 1234-567-1-25"
+          }
+        ],
+        "coordinates": {
+          "ra": "03:55:25.0",
+          "dec": "-15:35:05.0",
+          "frame": "FK5"
+        },
+        "catalogues": [
+          {
+            "catalogue_name": "Gaia DR3",
+            "catalogue_version": "DR3",
+            "measurements": [
+              {
+                "measurement_id": "m_2500",
+                "concept": "parallax",
+                "value": 6.9006,
+                "unit": "mas",
+                "raw_value": "6.9006",
+                "raw_unit": "mas",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "parallax_error",
+                    "value": 0.1116,
+                    "unit": "mas",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_2501",
+                "concept": "pm_ra",
+                "value": -5.4219,
+                "unit": "mas yr-1",
+                "raw_value": "-5.4219",
+                "raw_unit": "mas/yr",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "pm_ra_error",
+                    "value": 0.0744,
+                    "unit": "mas yr-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_2502",
+                "concept": "pm_dec",
+                "value": 2.9853,
+                "unit": "mas yr-1",
+                "raw_value": "2.9853",
+                "raw_unit": "mas/yr",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "pm_dec_error",
+                    "value": 0.0651,
+                    "unit": "mas yr-1",
+                    "type": "error"
+                  }
+                ],
+                "category": "Kinematics & Astrometry"
+              },
+              {
+                "measurement_id": "m_2503",
+                "concept": "G_mag",
+                "value": 11.7552,
+                "unit": "mag",
+                "raw_value": "11.7552",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "G_mag_error",
+                    "value": 0.0093,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2504",
+                "concept": "BP_mag",
+                "value": 12.2574,
+                "unit": "mag",
+                "raw_value": "12.2574",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "BP_mag_error",
+                    "value": 0.0186,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              },
+              {
+                "measurement_id": "m_2505",
+                "concept": "RP_mag",
+                "value": 11.0949,
+                "unit": "mag",
+                "raw_value": "11.0949",
+                "raw_unit": "mag",
+                "characterisation": "Default",
+                "auxiliary": [
+                  {
+                    "concept": "RP_mag_error",
+                    "value": 0.0093,
+                    "unit": "mag",
+                    "type": "error"
+                  }
+                ],
+                "category": "Photometry"
+              }
+            ]
+          },
+          {
+            "catalogue_name": "Example Empty Catalogue",
+            "catalogue_version": "test",
+            "measurements": []
+          }
+        ]
+      }
+    }
+  ]
+}

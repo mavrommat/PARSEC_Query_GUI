@@ -46,7 +46,6 @@ class SearchAround(QWidget):
             self.Resolver = ObjectResolver(df=df)
         except Exception as e:
             print(f"Failed to load database: {e}")
-            # You might want to trigger an ErrorPopup here if the file is missing!
 
         self.ui.B_Radius_Search.clicked.connect(self.broadcast_selection)
         self.ui.B_Rect_Search.clicked.connect(self.broadcast_selection)
@@ -54,14 +53,13 @@ class SearchAround(QWidget):
 
         self.ui.B_resolved.clicked.connect(self.resolver_process)
 
-        # Add an instance variable to remember the target/frame/epoch settings
+        # instance variable target/frame/epoch settings
         self.current_info_settings = {}
 
         self.Radius = Radius()
         self.Rectangle = Rectagular()
         self.Polygon = Polygon()
 
-        # Connect the confirm buttons from the shape widgets
         self.Radius.settings_info_signal.connect(self.shape_info_process)
         self.Rectangle.settings_info_signal.connect(self.shape_info_process)
         self.Polygon.settings_info_signal.connect(self.shape_info_process)
@@ -110,7 +108,7 @@ class SearchAround(QWidget):
             payload = self.Resolver.resolve(coords_id_input)
             self.display_resolved_payload(payload)
             
-            # GATE: If not resolved, we stop here and do not proceed to the search
+            # If not resolved: do not proceed to the search
             if payload.get("status") == "Not Found":
                 return 
                 
@@ -132,8 +130,6 @@ class SearchAround(QWidget):
             "Epoch": self.current_info_settings.get("Epoch", "N/A"),
             "Equinox": self.current_info_settings.get("Equinox", "N/A")
         }
-
-        # --- DYNAMICALLY append the parameters based on the incoming dictionary ---
         
         # From Radius
         if "Distance" in settings_info:
@@ -192,7 +188,6 @@ class SearchAround(QWidget):
             layout.addWidget(error_label)
             return
 
-        # --- Create a Grid Layout for aligned tabular data ---
         grid_widget = QWidget()
         grid_layout = QGridLayout(grid_widget)
         grid_layout.setContentsMargins(0, 0, 0, 0)
@@ -206,7 +201,7 @@ class SearchAround(QWidget):
             val_lbl = QLabel(value)
             val_lbl.setStyleSheet(f"color: {value_color}; font-weight: bold;")
             
-            # Align title to the right, value to the left
+            # Align title to the right value to the left
             grid_layout.addWidget(title_lbl, row_idx, 0, Qt.AlignmentFlag.AlignRight)
             grid_layout.addWidget(val_lbl, row_idx, 1, Qt.AlignmentFlag.AlignLeft)
 
@@ -240,5 +235,5 @@ class SearchAround(QWidget):
             val_str = f"lon {ecl.get('lon_deg'):.4f}° | lat {ecl.get('lat_deg'):.4f}°"
             add_aligned_row(row, "Ecliptic:", val_str)
 
-        # Add the fully populated grid widget to the main vertical layout
+        # Add to the main vertical layout
         layout.addWidget(grid_widget)

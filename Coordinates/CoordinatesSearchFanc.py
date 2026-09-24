@@ -71,7 +71,6 @@ class SearchByCoordinatesWidget(QWidget):
         shape = settings_dict.get("Shape", "N/A")
         units = settings_dict.get("Units", "")
         
-        # --- DYNAMICALLY FORMAT THE DISPLAY TEXT ---
         shape_parameters = ""
         
         # Format for Radius
@@ -95,8 +94,7 @@ class SearchByCoordinatesWidget(QWidget):
         else:
             shape_parameters = "Unknown parameters"
             
-        display_text = f"Coordinate Area -> Target: {target} | {shape}: {shape_parameters}"
-        # -------------------------------------------
+        display_text = f"Coordinate Area | Target: {target} | {shape}: {shape_parameters}"
         
         row_label = QLabel(display_text)
         row_label.setStyleSheet("""

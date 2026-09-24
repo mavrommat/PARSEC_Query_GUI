@@ -30,7 +30,6 @@ class Polygon(QWidget):
 
         self.ui.B_confirm_area.clicked.connect(self.pass_settings)
 
-    # --- ADD THIS METHOD TO CHANGE THE VISUAL LABEL ---
     def update_units_label(self, selected_units):
         self.ui.side_units_label.setText(selected_units)
 
@@ -65,7 +64,6 @@ class Polygon(QWidget):
             return  # Stop the function from proceeding
 
         elif poly_dist > 0 and (vertices >= 2 and vertices != 4):
-            # Emit the data!
             self.settings_info_signal.emit(settings_info)
 
 

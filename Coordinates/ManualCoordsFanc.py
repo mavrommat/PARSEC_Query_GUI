@@ -31,7 +31,6 @@ class ManualCoords(QWidget):
             }
         """)
 
-        # SIGNAL CONNECTIONS
         # Change coordinate labels when frame changes
         self.ui.frame_cb.currentTextChanged.connect(self.update_coordinate_headers)
 

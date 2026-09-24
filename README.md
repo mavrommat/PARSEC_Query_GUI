@@ -49,14 +49,14 @@ pip install -r requirements.txt
 
 ### 4. Setup the Database (Required)
 
-The application is connected to a database strictly for object resolving and coordinate searches. You must set this up before running the main application.
+The application is connected to a database strictly for object resolving and coordinate searches. You must set this up before running the main application. In the future it will download via Query automatically the Object ID's and their respected coordinates from the PARSEC's database and run a local coordinate search before query to the database.
 
 **Option A: Generate the mock database**
 We provide a script that queries SIMBAD via TAP to generate a mock 10,000-row catalog.
 
 1. Run the database script:
 ```bash
-python mock_database.py
+python Database/mock_database.py
 
 ```
 
