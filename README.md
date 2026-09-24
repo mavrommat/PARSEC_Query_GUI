@@ -6,8 +6,8 @@ The application provides predefined queries and an interactive UI for accessing 
 
 ## Requirements
 
-- Python stable versions so far: **3.11.3** and **3.14.3**
-- pip package manager
+* Python stable versions so far: **3.11.3** and **3.14.3**
+* pip package manager
 
 All dependencies are listed in `requirements.txt`.
 
@@ -16,8 +16,9 @@ All dependencies are listed in `requirements.txt`.
 ## Installation
 
 ### 1. Clone the repository
+
 ```bash
-git clone [https://github.com/mavrommat/PARSEC_Query_GUI.git](https://github.com/mavrommat/PARSEC_Query_GUI.git)
+git clone https://github.com/mavrommat/PARSEC_Query_GUI.git
 cd PARSEC_Query_GUI
 
 ```
@@ -47,24 +48,20 @@ pip install -r requirements.txt
 
 ```
 
-### 4. Setup the Database (Required)
+### 4. Database Configuration
 
-The application is connected to a database strictly for object resolving and coordinate searches. You must set this up before running the main application. In the future it will download via Query automatically the Object ID's and their respected coordinates from the PARSEC's database and run a local coordinate search before query to the database.
+The application requires a database strictly for object resolving and coordinate searches.
 
-**Option A: Generate the mock database**
-We provide a script that queries SIMBAD via TAP to generate a mock 10,000-row catalog.
+**Default Mock Database:**
+The repository **already contains a mock database** (`astro_10k.parquet` located in the `Database/` folder). You do not need to run any scripts to generate it—the application is ready to use it out of the box.
 
-1. Run the database script:
-```bash
-python Database/mock_database.py
+**Using a Custom Database:**
+You can replace the mock database with your own custom database. However, please note the current limitations:
 
-```
+* **No API Access (Not Implemented):** There is currently no API access implemented to dynamically query or fetch the database. While future versions will automatically download Object IDs and coordinates from the PARSEC database to run local coordinate searches, you must currently provide a local file.
+* **Format Requirements:** Your custom database must be a `.parquet` file formatted identically to the mock database. It requires the following columns: `id`, `ra`, `dec`, and `otype`.
 
-
-2. Move the newly generated `astro_10k.parquet` file into a `Database/` folder within your project directory, as the GUI expects this path.
-
-**Option B: Use your own database**
-If you want to use a custom database, ensure it is formatted identically (requiring columns like `id`, `ra`, `dec`, and `otype`). You will need to update the source code to point to your custom file.
+**To implement a custom database:**
 
 1. Open `SearchAroundFanc.py`.
 2. Locate the `pd.read_parquet(...)` call (around line 34).
@@ -72,12 +69,11 @@ If you want to use a custom database, ensure it is formatted identically (requir
 
 ---
 
-## Run the application
+## How to Run the Application
+
+Once the virtual environment is activated and dependencies are installed, you can start the GUI by running:
 
 ```bash
 python main.py
 
 ```
-
----
-
