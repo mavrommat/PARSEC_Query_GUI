@@ -14,10 +14,14 @@ from CoordinateQueryEngine.ExecutionController import ExecutionController
 from DisplayOutput.ResultsWindow import ResultsWindow
 from PayloadAggregator import PayloadAggregator
 
+from Database.mock_database import create_mock_db
+
 def main():
     app = QApplication(sys.argv)
     window = MainWindow()
     window.resize(1800, 1000)
+
+    create_mock_db() # Create a mock database with objects around the sky. We will cahnge it to the PARSEC query
 
     run_ontology_extraction() # Comment it if the ontology is up to date and dont need process the concepts again
     

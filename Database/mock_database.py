@@ -1,7 +1,7 @@
 import pandas as pd
 from astroquery.simbad import Simbad
-
-class AstroCatalogPipeline:
+import os
+class mock_database:
     def __init__(self):
         self.simbad = Simbad()
 
@@ -61,8 +61,9 @@ class AstroCatalogPipeline:
         return df10k
 
 # Execution
-if __name__ == "__main__":
-    pipeline = AstroCatalogPipeline()
+def create_mock_db():
+    os.makedirs("Database", exist_ok=True) 
+    pipeline = mock_database()
 
     print("Fetching data from SIMBAD via TAP...")
     df_full = pipeline.build_full_catalog()
@@ -71,5 +72,12 @@ if __name__ == "__main__":
     df_10k = pipeline.build_10k(df_full)
 
     print(f"Saving 10k subset ({len(df_10k)} rows)...")
-    pipeline.save(df_10k, "astro_10k.parquet")
+    pipeline.save(df_10k, "Database/astro_10k.parquet")
     print("Done!")
+    
+    df = pd.read_parquet("Database/astro_10k.parquet")
+
+    # Export it to a CSV file in the same folder
+    df.to_csv("Database/astro_10k_readable.csv", index=False)
+
+    print("astro_10k_readable.csv has been created")
