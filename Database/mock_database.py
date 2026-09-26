@@ -62,6 +62,12 @@ class mock_database:
 
 # Execution
 def create_mock_db():
+    target_path = "Database/astro_10k.parquet"
+    
+    if os.path.exists(target_path):
+        print(f"{target_path} already exists. Skipping procedure.")
+        return
+
     os.makedirs("Database", exist_ok=True) 
     pipeline = mock_database()
 
@@ -72,12 +78,10 @@ def create_mock_db():
     df_10k = pipeline.build_10k(df_full)
 
     print(f"Saving 10k subset ({len(df_10k)} rows)...")
-    pipeline.save(df_10k, "Database/astro_10k.parquet")
+    pipeline.save(df_10k, target_path)
     print("Done!")
     
-    df = pd.read_parquet("Database/astro_10k.parquet")
+    df = pd.read_parquet(target_path)
 
-    # Export it to a CSV file in the same folder
     df.to_csv("Database/astro_10k_readable.csv", index=False)
-
     print("astro_10k_readable.csv has been created")
