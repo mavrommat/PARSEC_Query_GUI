@@ -156,7 +156,7 @@ class Ui_CoordinatesSearch(object):
         self.coord_search_title.setText(QCoreApplication.translate("CoordinatesSearch", u"Coordinates Search", None))
         self.coord_search_mode_selection_gb.setTitle("")
         self.coord_search_mode_selection_sub_gb.setTitle("")
-        self.B_coord_mode_search_around_object_specified_coords.setText(QCoreApplication.translate("CoordinatesSearch", u"Searching around an object/Specified coordinates", None))
+        self.B_coord_mode_search_around_object_specified_coords.setText(QCoreApplication.translate("CoordinatesSearch", u"Searching around an object / Specified coordinates", None))
         self.B_manual_coordinates.setText(QCoreApplication.translate("CoordinatesSearch", u"Manual Coordinates", None))
         self.B_draw_on_sky.setText(QCoreApplication.translate("CoordinatesSearch", u"Draw on Sky", None))
         self.placeholder_gb.setTitle("")

@@ -205,7 +205,7 @@ class Ui_SearchAround(object):
         self.label.setText(QCoreApplication.translate("SearchAroundAnObject", u"Search around an object / Specified coordinates", None))
         self.input_text_frames_shape_gb.setTitle("")
         self.input_text_gb.setTitle("")
-        self.coords_id_input.setPlaceholderText(QCoreApplication.translate("SearchAroundAnObject", u"Provide Identification (i.e. M32, ...)/Coordinates (i.e. 20 54 05.689 +37 01 17.38)", None))
+        self.coords_id_input.setPlaceholderText(QCoreApplication.translate("SearchAroundAnObject", u"Provide Identification (e.g. M32, ...) / Coordinates (e.g. 20 54 05.689 +37 01 17.38)", None))
         
         # ADDED: Button text
         self.B_resolved.setText(QCoreApplication.translate("SearchAroundAnObject", u"Resolve Input", None))

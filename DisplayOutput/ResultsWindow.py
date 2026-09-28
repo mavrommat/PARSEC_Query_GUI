@@ -6,7 +6,7 @@ from PySide6.QtGui import QShortcut, QKeySequence, QGuiApplication
 class ResultsWindow(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Query Results")
+        self.setWindowTitle("Query Results with mock database (later it will be moved to results panel)")
         self.resize(900, 600)
         
         self.layout = QVBoxLayout(self)
@@ -40,10 +40,10 @@ class ResultsWindow(QDialog):
             self.show()
             return
             
-        # For multiple areas at once -> combine the results 
+        # For multiple areas at once: combine the results 
         if len(filtered_results_list) > 1:
             final_df = pd.concat(filtered_results_list, ignore_index=True)
-            # Optional: drop duplicates if areas overlap
+            # drop duplicates if areas overlap
             final_df = final_df.drop_duplicates(subset=['ra', 'dec']) 
         else:
             final_df = filtered_results_list[0]
@@ -63,25 +63,25 @@ class ResultsWindow(QDialog):
         if not indexes:
             return
 
-        # Sort the selected cells by row, then by column
+        # Sort the selected cells by row then by column
         indexes.sort(key=lambda idx: (idx.row(), idx.column()))
 
         copy_text = ""
         current_row = indexes[0].row()
 
         for idx in indexes:
-            # If we've moved to a new row, add a newline
+            # If moved to a new row add a newline
             if idx.row() != current_row:
                 copy_text += "\n"
                 current_row = idx.row()
-            # If we are in the same row (but not the first item), add a tab
+            # If we are in the same row but not the first item add a tab
             elif idx != indexes[0]: 
                 copy_text += "\t"
             
             # Grab the raw text from the model
             copy_text += str(self.model.data(idx))
 
-        # Push the formatted text to the system clipboard
+        # text to the clipboard
         clipboard = QGuiApplication.clipboard()
         clipboard.setText(copy_text)
         

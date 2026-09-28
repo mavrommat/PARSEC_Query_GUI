@@ -9,7 +9,6 @@ from Results.ObjectOverviewFanc import ObjectOverviewWidget
 from Results.DisplayConcepts import AllMeasurementsWidget
 from ResultsController import ResultsController
 from ResultsProcessor import ResultsProcessor
-
 class MainWindow(QMainWindow):
 
     Database_query_signal = Signal(list, str)
@@ -143,10 +142,6 @@ class MainWindow(QMainWindow):
         self.results_processor.Processed_data_signal.connect(self.results_widget.receive_processed_data)
 
 
-        # 'B_execute_query' to start the process
-        #self.ui.B_execute_query.clicked.connect(self.load_json_results)
-        self.load_json_results()
-
     def SwitchQueryWidget(self, widget):
         """Adds a widget to the query stack if it doesn't exist, and brings it to the front."""
         if self.query_stack.indexOf(widget) == -1:
@@ -216,7 +211,7 @@ class MainWindow(QMainWindow):
                 QPushButton:hover { background-color: hsla(248,24%,60%, 200); }
             """)
 
-    def load_json_results(self, filename="test_results.json"):
+    def load_json_results(self, filename):
         if self.current_search_mode != "Object ID":
             print("Note: Currently only hardcoded to support 'Object ID' searches.")
             # return # Uncomment enforcing Object ID mode for later use

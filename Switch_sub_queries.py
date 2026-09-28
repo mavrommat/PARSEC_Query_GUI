@@ -80,7 +80,7 @@ class SwitchSubQueries:
         
         # --- STANDARD COORDINATES SWITCHING ---
         if self.current_main_query == "Coordinates" and \
-           SubQuery == "Searching around an object/Specified coordinates":
+           SubQuery == "Searching around an object / Specified coordinates":
             self.main_window.SwitchQueryWidget(self.AroundObject)
 
         elif self.current_main_query == "Coordinates" and \

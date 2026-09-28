@@ -86,6 +86,8 @@ class DrawOnSky(QWidget):
         
         # Local Background Web Server
         self.start_local_server()
+        # Ensure the server dies when this specific widget is destroyed
+        self.destroyed.connect(self.cleanup_server)
         
         # Browser to new local server
         map_url = f"http://localhost:{self.port}/aladin_map.html"
@@ -116,7 +118,7 @@ class DrawOnSky(QWidget):
         self.ui.Coordinates_Table.setRowCount(0) 
         
         self.browser.loadFinished.connect(lambda ok: self.sync_map_to_table() if ok else None) # sync the map after HTML finishes loading
-    
+        os.environ["QTWEBENGINE_CHROMIUM_FLAGS"] = "--log-level=3"
     def start_local_server(self):        
         directory = os.path.abspath("Coordinates")
         
@@ -129,7 +131,7 @@ class DrawOnSky(QWidget):
 
         # dynamic check of port availability 
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.bind(("", 0))
+            s.bind(("127.0.0.1", 0))
             self.port = s.getsockname()[1]
 
         # Spin up the server in a background thread (daemon=True ensures it dies when your app closes)
@@ -137,6 +139,12 @@ class DrawOnSky(QWidget):
         self.server_thread = threading.Thread(target=self.httpd.serve_forever, daemon=True)
         self.server_thread.start()
 
+    def cleanup_server(self):
+        if hasattr(self, 'httpd'):
+            # shutdown() blocks until the server stops, so we thread it to avoid freezing the UI
+            threading.Thread(target=self.httpd.shutdown).start()
+            self.httpd.server_close()
+            print("Local map server safely shut down.")
     # =========================================================
     # MAP DRAWING LOGIC
     # =========================================================
